@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Capstone — Hero explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,400;9..144,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700;800&family=Inter:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=Archivo:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --navy: #0c2939;
+    --teal: #008c7e;
+    --teal-ink: #007265; /* darkened for small text on light */
+    --gray: #d9dfe1;
+    --gold: #e2ab33;
+    --mist: #f2f5f6; /* light ground derived from gray */
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--mist); }
+  a { text-decoration: none; color: inherit; }
+  button { font: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
+
+  .concept { display: none; }
+  .concept.active { display: block; }
+
+  /* ============ switcher ============ */
+  .switcher {
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 4px; padding: 5px;
+    background: rgba(12, 41, 57, 0.92); backdrop-filter: blur(8px);
+    border-radius: 999px; z-index: 99;
+    box-shadow: 0 12px 32px rgba(12, 41, 57, 0.35);
+  }
+  .switcher button {
+    border: 0; background: transparent; color: rgba(255,255,255,0.65);
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.08em;
+    padding: 9px 16px; border-radius: 999px; transition: background .2s, color .2s;
+  }
+  .switcher button:hover { color: #fff; }
+  .switcher button.on { background: var(--gold); color: var(--navy); }
+
+  /* shared capstone mark */
+  .mark {
+    display: inline-block; width: 11px; height: 11px; background: var(--gold);
+    transform: rotate(45deg); flex: none;
+  }
+
+  /* ================================================================
+     CONCEPT 1 — THE KEYSTONE  (light · architectural · editorial)
+  ================================================================ */
+  .c1 { background: var(--white); color: var(--navy); font-family: "Public Sans", sans-serif; }
+
+  .c1 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+  }
+  .c1 .head-wrap { border-bottom: 1px solid var(--gray); }
+  .c1 .logo { display: flex; align-items: center; gap: 11px; font: 500 21px/1 "Fraunces", serif; letter-spacing: 0.01em; }
+  .c1 nav { display: flex; gap: 34px; }
+  .c1 nav a { font: 500 14px/1 "Public Sans", sans-serif; color: var(--navy); opacity: .8; transition: opacity .15s; }
+  .c1 nav a:hover { opacity: 1; }
+  .c1 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 3px;
+    font: 600 14px/1 "Public Sans", sans-serif; padding: 12px 22px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c1 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(226,171,51,.4); }
+
+  .c1 .hero {
+    max-width: 1240px; margin: 0 auto; padding: 90px 40px 70px;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
+    min-height: calc(100vh - 170px);
+  }
+  .c1 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal-ink);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
+  }
+  .c1 .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--teal); }
+  .c1 h1 {
+    font: 340 clamp(44px, 5.4vw, 76px)/1.04 "Fraunces", serif;
+    letter-spacing: -0.015em; margin-bottom: 26px;
+  }
+  .c1 h1 em { font-style: italic; font-weight: 400; color: var(--teal-ink); }
+  .c1 .sub { font: 400 17px/1.65 "Public Sans", sans-serif; color: rgba(12,41,57,.72); max-width: 480px; margin-bottom: 38px; }
+  .c1 .cta-row { display: flex; align-items: center; gap: 28px; }
+  .c1 .btn-lg { padding: 16px 30px; font-size: 15px; }
+  .c1 .link { font: 600 15px/1 "Public Sans", sans-serif; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 3px; }
+  .c1 .link:hover { border-bottom-width: 2px; }
+
+  .c1 .figure { position: relative; text-align: center; }
+  .c1 .figure svg { width: 100%; max-width: 460px; height: auto; }
+  .c1 .voussoir { fill: var(--white); stroke: var(--navy); stroke-width: 1.4; opacity: 0; transform: translateY(-10px); }
+  .c1 .voussoir.key { fill: var(--gold); stroke: var(--navy); transform: translateY(-26px); }
+  .c1 .drawn .voussoir { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .c1 .guide { stroke: var(--teal); stroke-width: 1; opacity: .35; stroke-dasharray: 3 5; }
+  .c1 .base { stroke: var(--navy); stroke-width: 1.4; }
+  .c1 .figcap {
+    margin-top: 18px; font: 400 12px/1.6 "IBM Plex Mono", monospace;
+    letter-spacing: 0.04em; color: var(--teal-ink);
+  }
+  .c1 .assurances {
+    border-top: 1px solid var(--gray);
+    max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+    display: flex; gap: 12px; justify-content: center;
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(12,41,57,.55);
+  }
+
+  /* ================================================================
+     CONCEPT 2 — THE LEDGER  (dark navy · actuarial precision)
+  ================================================================ */
+  .c2 {
+    background:
+      linear-gradient(rgba(0,140,126,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,140,126,0.055) 1px, transparent 1px),
+      var(--navy);
+    background-size: 52px 52px, 52px 52px, auto;
+    color: var(--white); font-family: "Inter", sans-serif;
+    min-height: 100vh;
+  }
+  .c2.active { display: flex; flex-direction: column; }
+  .c2 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1280px; width: 100%; margin: 0 auto; padding: 24px 40px;
+  }
+  .c2 .head-wrap { border-bottom: 1px solid rgba(0,140,126,.3); }
+  .c2 .logo { display: flex; align-items: center; gap: 12px; font: 800 17px/1 "Schibsted Grotesk", sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+  .c2 nav { display: flex; gap: 30px; }
+  .c2 nav a { font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.62); transition: color .15s; }
+  .c2 nav a:hover { color: var(--gold); }
+  .c2 .btn-outline {
+    background: transparent; color: var(--gold); border: 1px solid var(--gold); border-radius: 2px;
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 11px 20px; transition: background .15s, color .15s;
+  }
+  .c2 .btn-outline:hover { background: var(--gold); color: var(--navy); }
+
+  .c2 .hero { max-width: 1280px; width: 100%; margin: 0 auto; padding: 72px 40px 56px; flex: 1; }
+  .c2 .eyebrow {
+    font: 400 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 34px;
+  }
+  .c2 h1 {
+    font: 800 clamp(52px, 7.6vw, 108px)/0.98 "Schibsted Grotesk", sans-serif;
+    letter-spacing: -0.03em; margin-bottom: 30px;
+  }
+  .c2 h1 .dot { color: var(--gold); }
+  .c2 .sub { font: 400 17px/1.7 "Inter", sans-serif; color: rgba(255,255,255,.66); max-width: 540px; margin-bottom: 38px; }
+  .c2 .cta-row { display: flex; gap: 16px; }
+  .c2 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 1px solid var(--gold); border-radius: 2px;
+    font: 700 14px/1 "Schibsted Grotesk", sans-serif; letter-spacing: 0.02em;
+    padding: 16px 30px; transition: transform .15s, box-shadow .15s;
+  }
+  .c2 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(226,171,51,.3); }
+  .c2 .btn-ghost {
+    background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); border-radius: 2px;
+    font: 500 14px/1 "Schibsted Grotesk", sans-serif; padding: 16px 30px; transition: border-color .15s;
+  }
+  .c2 .btn-ghost:hover { border-color: #fff; }
+
+  .c2 .ledger {
+    max-width: 1280px; width: 100%; margin: 0 auto; padding: 0 40px 64px;
+  }
+  .c2 .ledger-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(0,140,126,.4); padding-bottom: 12px; margin-bottom: 0;
+    font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+  }
+  .c2 .rows { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .c2 .cell {
+    padding: 26px 24px 26px 0; border-bottom: 1px solid rgba(255,255,255,.12);
+    transition: background .2s; position: relative;
+  }
+  .c2 .cell + .cell { padding-left: 24px; border-left: 1px solid rgba(255,255,255,.1); }
+  .c2 .cell:hover { background: rgba(0,140,126,.09); }
+  .c2 .cell .tag { font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; color: var(--teal); text-transform: uppercase; display: block; margin-bottom: 10px; }
+  .c2 .cell .desc { font: 400 14px/1.55 "Inter", sans-serif; color: rgba(255,255,255,.6); }
+  .c2 .cell .arrow { position: absolute; top: 26px; right: 18px; color: var(--gold); opacity: 0; transition: opacity .2s, transform .2s; transform: translateX(-4px); font-size: 14px; }
+  .c2 .cell:hover .arrow { opacity: 1; transform: translateX(0); }
+
+  /* ================================================================
+     CONCEPT 3 — THE SEAL  (split panel · human brokerage)
+  ================================================================ */
+  .c3 { font-family: "Figtree", sans-serif; color: var(--navy); background: var(--white); }
+  .c3 .utility {
+    background: var(--teal); color: #fff;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 40px; font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.05em;
+  }
+  .c3 .utility a { border-bottom: 1px solid rgba(255,255,255,.4); padding-bottom: 1px; }
+  .c3 .utility a:hover { border-color: #fff; }
+  .c3 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px; background: var(--white); border-bottom: 1px solid var(--gray);
+  }
+  .c3 .logo { display: flex; align-items: center; gap: 11px; font: 800 20px/1 "Bricolage Grotesque", sans-serif; letter-spacing: -0.01em; }
+  .c3 nav { display: flex; gap: 32px; }
+  .c3 nav a { font: 500 14.5px/1 "Figtree", sans-serif; color: rgba(12,41,57,.78); transition: color .15s; }
+  .c3 nav a:hover { color: var(--teal-ink); }
+  .c3 .btn-navy {
+    background: var(--navy); color: var(--gold); border: 0; border-radius: 4px;
+    font: 600 14px/1 "Figtree", sans-serif; padding: 13px 24px; transition: transform .15s, box-shadow .15s;
+  }
+  .c3 .btn-navy:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(12,41,57,.25); }
+
+  .c3 .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; min-height: calc(100vh - 118px); position: relative; }
+  .c3 .panel-l { background: var(--mist); padding: clamp(48px, 8vw, 110px) clamp(32px, 5vw, 90px); display: flex; flex-direction: column; justify-content: center; }
+  .c3 .kicker { font: 600 13px/1 "Figtree", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-ink); margin-bottom: 24px; }
+  .c3 h1 {
+    font: 800 clamp(48px, 6.5vw, 92px)/1.0 "Bricolage Grotesque", sans-serif;
+    letter-spacing: -0.025em; margin-bottom: 28px;
+  }
+  .c3 h1 .accent { color: var(--teal-ink); }
+  .c3 .sub { font: 400 17.5px/1.65 "Figtree", sans-serif; color: rgba(12,41,57,.7); max-width: 460px; margin-bottom: 40px; }
+  .c3 .cta-row { display: flex; align-items: center; gap: 26px; }
+  .c3 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 4px;
+    font: 700 15.5px/1 "Figtree", sans-serif; padding: 17px 32px; transition: transform .15s, box-shadow .15s;
+  }
+  .c3 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(226,171,51,.45); }
+  .c3 .link { font: 600 15px/1 "Figtree", sans-serif; color: var(--navy); border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+
+  .c3 .panel-r {
+    background: var(--navy); display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .c3 .seal { width: min(66%, 380px); aspect-ratio: 1; position: relative; }
+  .c3 .seal svg { width: 100%; height: 100%; display: block; }
+  .c3 .ring-rotate { transform-origin: 260px 260px; animation: c3spin 48s linear infinite; }
+  @keyframes c3spin { to { transform: rotate(360deg); } }
+  .c3 .quote-card {
+    position: absolute; bottom: clamp(30px, 6vh, 70px); left: 57.5%; transform: translateX(-50%);
+    width: min(400px, 84vw); background: var(--white); border-radius: 6px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 24px 60px rgba(12,41,57,.28); padding: 26px 30px;
+  }
+  .c3 .quote-card p { font: 500 15.5px/1.55 "Figtree", sans-serif; color: var(--navy); margin-bottom: 12px; }
+  .c3 .quote-card cite { font: 400 13px/1 "IBM Plex Mono", monospace; font-style: normal; color: var(--teal-ink); letter-spacing: 0.03em; }
+
+  /* ================================================================
+     CONCEPT 4 — THE ARCADE  (light · centered · arch photo cards)
+  ================================================================ */
+  .c4 { background: var(--white); color: var(--navy); font-family: "Public Sans", sans-serif; }
+  .c4 .head-wrap { border-bottom: 1px solid var(--gray); background: var(--white); }
+  .c4 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+  }
+  .c4 .logo { display: flex; align-items: center; gap: 11px; font: 500 21px/1 "Fraunces", serif; }
+  .c4 nav { display: flex; gap: 34px; }
+  .c4 nav a { font: 500 14px/1 "Public Sans", sans-serif; color: var(--navy); opacity: .8; }
+  .c4 nav a:hover { opacity: 1; }
+  .c4 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 3px;
+    font: 600 14px/1 "Public Sans", sans-serif; padding: 12px 22px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c4 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(226,171,51,.4); }
+
+  .c4 .hero { text-align: center; padding: 84px 40px 150px; }
+  .c4 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal-ink); margin-bottom: 24px;
+  }
+  .c4 h1 {
+    font: 340 clamp(42px, 4.8vw, 68px)/1.06 "Fraunces", serif; letter-spacing: -0.015em;
+    max-width: 760px; margin: 0 auto 22px;
+  }
+  .c4 h1 em { font-style: italic; font-weight: 400; color: var(--teal-ink); }
+  .c4 .sub { font: 400 17px/1.65 "Public Sans", sans-serif; color: rgba(12,41,57,.7); max-width: 540px; margin: 0 auto; }
+
+  .c4 .band { background: var(--mist); padding: 0 40px 72px; }
+  .c4 .arcade {
+    max-width: 1240px; margin: 0 auto; display: grid;
+    grid-template-columns: repeat(4, 1fr); gap: 22px; align-items: end;
+    transform: translateY(-110px);
+  }
+  .c4 .arch-card {
+    position: relative; overflow: visible; display: block;
+    border-radius: 50% 50% 14px 14px / 34% 34% 14px 14px;
+  }
+  .c4 .arch-card .ph {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: inherit; box-shadow: 0 18px 44px rgba(12,41,57,.18);
+    transition: transform .25s ease;
+  }
+  .c4 .arch-card:hover .ph { transform: translateY(-6px); }
+  .c4 .arch-card:nth-child(1) { height: 320px; }
+  .c4 .arch-card:nth-child(2) { height: 396px; }
+  .c4 .arch-card:nth-child(3) { height: 348px; }
+  .c4 .arch-card:nth-child(4) { height: 420px; }
+  .c4 .arch-card.feature::before {
+    content: ""; position: absolute; inset: -12px -12px 12px -12px;
+    border: 1.5px solid var(--gold); border-radius: inherit; pointer-events: none;
+  }
+  .c4 .chip {
+    position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+    background: var(--white); border-radius: 999px; padding: 9px 18px;
+    display: flex; align-items: center; gap: 9px; white-space: nowrap;
+    font: 600 13.5px/1 "Public Sans", sans-serif; color: var(--navy);
+    box-shadow: 0 6px 18px rgba(12,41,57,.18);
+  }
+  .c4 .chip .mark { width: 8px; height: 8px; }
+  .c4 .band-foot {
+    max-width: 1240px; margin: -56px auto 0; display: flex; align-items: center;
+    justify-content: center; gap: 22px; text-align: center;
+  }
+  .c4 .band-foot p { font: 400 15px/1.6 "Public Sans", sans-serif; color: rgba(12,41,57,.65); }
+  .c4 .band-foot a { font: 600 15px/1 "Public Sans", sans-serif; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 2px; white-space: nowrap; }
+
+  /* ================================================================
+     CONCEPT 5 — THE CORNERSTONE  (light · keystone photo cut)
+  ================================================================ */
+  .c5 { background: var(--white); color: var(--navy); font-family: "Archivo", sans-serif; }
+  .c5 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1280px; margin: 0 auto; padding: 24px 40px;
+  }
+  .c5 .logo { display: flex; align-items: center; gap: 12px; font: 800 18px/1 "Archivo", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .c5 nav { display: flex; gap: 32px; }
+  .c5 nav a { font: 600 14px/1 "Archivo", sans-serif; color: rgba(12,41,57,.75); }
+  .c5 nav a:hover { color: var(--teal-ink); }
+  .c5 .btn-navy {
+    background: var(--navy); color: var(--gold); border: 0; border-radius: 3px;
+    font: 700 14px/1 "Archivo", sans-serif; padding: 13px 24px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c5 .btn-navy:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(12,41,57,.25); }
+
+  .c5 .hero {
+    max-width: 1280px; margin: 0 auto; padding: 76px 40px 0;
+    display: grid; grid-template-columns: 1fr 0.92fr; gap: 70px; align-items: start;
+  }
+  .c5 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal-ink); margin-bottom: 26px; display: flex; align-items: center; gap: 10px;
+  }
+  .c5 .eyebrow .mark { width: 8px; height: 8px; }
+  .c5 h1 {
+    font: 800 clamp(46px, 5.2vw, 78px)/1.02 "Archivo", sans-serif;
+    letter-spacing: -0.03em; margin-bottom: 28px;
+  }
+  .c5 h1 .accent { color: var(--teal-ink); }
+  .c5 .sub { font: 400 17px/1.65 "Public Sans", sans-serif; color: rgba(12,41,57,.7); max-width: 470px; margin-bottom: 40px; }
+  .c5 .cta-row { display: flex; align-items: center; gap: 26px; margin-bottom: 56px; }
+  .c5 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 3px;
+    font: 700 15px/1 "Archivo", sans-serif; padding: 17px 30px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c5 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(226,171,51,.4); }
+  .c5 .link { font: 700 15px/1 "Archivo", sans-serif; color: var(--navy); border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+
+  .c5 .cut-wrap { position: relative; z-index: 2; }
+  .c5 .cut-wrap .diamond {
+    position: absolute; top: -26px; right: 26px; width: 110px; height: 110px;
+    background: var(--gold); transform: rotate(45deg); z-index: 0;
+  }
+  .c5 .cut {
+    position: relative; z-index: 1; height: 470px;
+    clip-path: polygon(9% 0, 91% 0, 100% 100%, 0 100%);
+  }
+  .c5 .cut img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c5 .cut-cap {
+    position: relative; z-index: 1; margin-top: 14px; text-align: right;
+    font: 400 12px/1.6 "IBM Plex Mono", monospace; color: var(--teal-ink);
+  }
+
+  .c5 .band { background: var(--mist); margin-top: -120px; padding: 168px 40px 64px; }
+  .c5 .band-inner { max-width: 1280px; margin: 0 auto; }
+  .c5 .band-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--gray); padding-bottom: 14px; margin-bottom: 0;
+  }
+  .c5 .band-head .tag { font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(12,41,57,.5); }
+  .c5 .band-head a { font: 700 14px/1 "Archivo", sans-serif; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+  .c5 .cols { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .c5 .col { padding: 26px 26px 8px 0; }
+  .c5 .col + .col { border-left: 1px solid var(--gray); padding-left: 26px; }
+  .c5 .col .mark { width: 8px; height: 8px; display: block; margin-bottom: 14px; }
+  .c5 .col h3 { font: 700 16.5px/1.3 "Archivo", sans-serif; margin-bottom: 8px; }
+  .c5 .col p { font: 400 14px/1.6 "Public Sans", sans-serif; color: rgba(12,41,57,.62); margin-bottom: 12px; }
+  .c5 .col a { font: 600 13.5px/1 "Public Sans", sans-serif; color: var(--teal-ink); }
+  .c5 .col a:hover { color: var(--navy); }
+
+  /* ================================================================
+     CONCEPT 6 — THE COLLAGE  (light · pill cutouts · inline chip)
+  ================================================================ */
+  .c6 { background: var(--mist); color: var(--navy); font-family: "Figtree", sans-serif; }
+  .c6 .head-outer { padding: 20px 40px 0; }
+  .c6 .head {
+    max-width: 1200px; margin: 0 auto; background: var(--white);
+    border-radius: 999px; box-shadow: 0 8px 28px rgba(12,41,57,.09);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px 12px 28px;
+  }
+  .c6 .logo { display: flex; align-items: center; gap: 11px; font: 800 19px/1 "Bricolage Grotesque", sans-serif; }
+  .c6 nav { display: flex; gap: 30px; }
+  .c6 nav a { font: 500 14.5px/1 "Figtree", sans-serif; color: rgba(12,41,57,.75); }
+  .c6 nav a:hover { color: var(--teal-ink); }
+  .c6 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 999px;
+    font: 700 14.5px/1 "Figtree", sans-serif; padding: 13px 26px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c6 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(226,171,51,.4); }
+
+  .c6 .hero {
+    max-width: 1200px; margin: 0 auto; padding: 84px 40px 140px;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center;
+  }
+  .c6 .kicker { font: 600 13px/1 "Figtree", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-ink); margin-bottom: 22px; }
+  .c6 h1 {
+    font: 800 clamp(46px, 5.6vw, 84px)/1.04 "Bricolage Grotesque", sans-serif;
+    letter-spacing: -0.025em; margin-bottom: 26px;
+  }
+  .c6 h1 .word-chip {
+    display: inline-block; width: 1.85em; height: 0.72em; border-radius: 999px;
+    overflow: hidden; vertical-align: -4%; margin: 0 0.04em;
+  }
+  .c6 h1 .word-chip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c6 .sub { font: 400 17.5px/1.65 "Figtree", sans-serif; color: rgba(12,41,57,.7); max-width: 440px; margin-bottom: 38px; }
+  .c6 .cta-row { display: flex; align-items: center; gap: 24px; }
+  .c6 .btn-lg { padding: 17px 32px; font-size: 15.5px; }
+  .c6 .link { font: 600 15px/1 "Figtree", sans-serif; color: var(--navy); border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+
+  .c6 .collage { position: relative; height: 470px; z-index: 2; }
+  .c6 .capsule {
+    position: absolute; right: 28px; top: 0; width: min(64%, 300px); height: 440px;
+    border-radius: 999px; overflow: hidden; box-shadow: 0 24px 56px rgba(12,41,57,.2);
+  }
+  .c6 .capsule img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c6 .disc {
+    position: absolute; left: 4px; bottom: 46px; width: 150px; height: 150px;
+    border-radius: 50%; overflow: hidden; box-shadow: 0 16px 36px rgba(12,41,57,.2);
+    border: 5px solid var(--white);
+  }
+  .c6 .disc img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c6 .dot-gold { position: absolute; left: 62px; top: 46px; width: 58px; height: 58px; border-radius: 50%; background: var(--gold); }
+  .c6 .ring { position: absolute; right: -6px; bottom: 24px; width: 108px; height: 108px; border-radius: 50%; border: 1.5px solid var(--teal); }
+
+  .c6 .products { background: var(--white); border-radius: 44px 44px 0 0; padding: 64px 40px 84px; position: relative; }
+  .c6 .products-inner { max-width: 1200px; margin: 0 auto; }
+  .c6 .products-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 34px; }
+  .c6 .products-head h2 { font: 800 clamp(26px, 2.6vw, 36px)/1.1 "Bricolage Grotesque", sans-serif; letter-spacing: -0.02em; }
+  .c6 .products-head a { font: 600 15px/1 "Figtree", sans-serif; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+  .c6 .pills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .c6 .pill {
+    display: flex; align-items: center; gap: 14px;
+    border: 1px solid var(--gray); border-radius: 999px; padding: 10px 22px 10px 10px;
+    background: var(--white); transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .c6 .pill:hover { border-color: var(--teal); box-shadow: 0 10px 26px rgba(12,41,57,.1); transform: translateY(-2px); }
+  .c6 .pill .thumb { width: 54px; height: 54px; border-radius: 50%; overflow: hidden; flex: none; }
+  .c6 .pill .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c6 .pill .txt { flex: 1; }
+  .c6 .pill .txt strong { display: block; font: 700 15.5px/1.2 "Figtree", sans-serif; }
+  .c6 .pill .txt span { font: 400 12.5px/1.3 "Figtree", sans-serif; color: rgba(12,41,57,.55); }
+  .c6 .pill .arrow { color: var(--gold); font-size: 16px; transition: transform .2s; }
+  .c6 .pill:hover .arrow { transform: translateX(3px); }
+
+  /* ================================================================
+     CONCEPT 7 — THE EXCHANGE  (finance · market data · trading desk)
+  ================================================================ */
+  .c7 { background: var(--white); color: var(--navy); font-family: "Inter", sans-serif; }
+  .c7 .ticker {
+    background: var(--navy); color: rgba(255,255,255,.75);
+    display: flex; align-items: center; gap: 38px; padding: 9px 40px;
+    font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.08em;
+    white-space: nowrap; overflow: hidden;
+  }
+  .c7 .ticker .lbl { color: var(--gold); font-weight: 500; }
+  .c7 .ticker .up { color: #4cc4b8; }
+  .c7 .ticker .flat { color: rgba(255,255,255,.45); }
+  .c7 .head-wrap { border-bottom: 1px solid var(--gray); }
+  .c7 .head {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1280px; margin: 0 auto; padding: 20px 40px;
+  }
+  .c7 .logo { display: flex; align-items: baseline; gap: 12px; font: 800 19px/1 "Archivo", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+  .c7 .logo .mark { align-self: center; }
+  .c7 .re-tag { font: 500 9.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.28em; color: var(--teal-ink); }
+  .c7 nav { display: flex; gap: 30px; }
+  .c7 nav a { font: 500 14px/1 "Inter", sans-serif; color: rgba(12,41,57,.75); }
+  .c7 nav a:hover { color: var(--navy); }
+  .c7 .btn-navy {
+    background: var(--navy); color: var(--white); border: 0; border-radius: 3px;
+    font: 600 14px/1 "Inter", sans-serif; padding: 13px 24px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c7 .btn-navy:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(12,41,57,.25); }
+
+  .c7 .hero {
+    max-width: 1280px; margin: 0 auto; padding: 78px 40px 70px;
+    display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 72px; align-items: center;
+  }
+  .c7 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal-ink); margin-bottom: 26px;
+  }
+  .c7 h1 {
+    font: 800 clamp(42px, 4.6vw, 66px)/1.04 "Archivo", sans-serif;
+    letter-spacing: -0.025em; margin-bottom: 26px;
+  }
+  .c7 .sub { font: 400 16.5px/1.7 "Inter", sans-serif; color: rgba(12,41,57,.68); max-width: 470px; margin-bottom: 38px; }
+  .c7 .cta-row { display: flex; align-items: center; gap: 26px; }
+  .c7 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 3px;
+    font: 700 15px/1 "Archivo", sans-serif; padding: 16px 28px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c7 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(226,171,51,.4); }
+  .c7 .link { font: 600 14.5px/1 "Inter", sans-serif; color: var(--teal-ink); }
+  .c7 .link:hover { color: var(--navy); }
+
+  .c7 .panel {
+    border: 1px solid var(--gray); border-radius: 6px; background: var(--white);
+    box-shadow: 0 20px 50px rgba(12,41,57,.08); padding: 24px 26px 20px;
+  }
+  .c7 .panel-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.16em;
+    color: rgba(12,41,57,.55); text-transform: uppercase;
+    border-bottom: 1px solid var(--gray); padding-bottom: 14px; margin-bottom: 8px;
+  }
+  .c7 .panel svg { width: 100%; height: auto; display: block; }
+  .c7 .grid-line { stroke: var(--gray); stroke-width: 1; }
+  .c7 .axis-lbl { font: 400 10px "IBM Plex Mono", monospace; fill: rgba(12,41,57,.45); }
+  .c7 .area { fill: rgba(0,140,126,.08); }
+  .c7 .trend { fill: none; stroke: var(--teal); stroke-width: 2; }
+  .c7 .end-dot { fill: var(--gold); stroke: var(--white); stroke-width: 2; }
+  .c7 .end-lbl { font: 600 12px "IBM Plex Mono", monospace; fill: var(--navy); }
+
+  .c7 .stats { border-top: 1px solid var(--gray); }
+  .c7 .stats-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .c7 .stat { padding: 26px 28px 30px 0; }
+  .c7 .stat + .stat { border-left: 1px solid var(--gray); padding-left: 28px; }
+  .c7 .stat b { display: block; font: 700 30px/1 "Archivo", sans-serif; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .c7 .stat b i { font-style: normal; color: var(--teal-ink); }
+  .c7 .stat span { font: 500 11px/1.5 "IBM Plex Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(12,41,57,.55); }
+
+  /* ================================================================
+     CONCEPT 8 — THE REPORT  (annual-report cover · institutional serif)
+  ================================================================ */
+  .c8 { background: #f7f8f8; color: var(--navy); font-family: "Public Sans", sans-serif; }
+  .c8 .head {
+    max-width: 1200px; margin: 0 auto; padding: 26px 40px 18px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .c8 .logo { display: flex; align-items: baseline; gap: 12px; font: 500 22px/1 "Newsreader", serif; }
+  .c8 .logo .mark { align-self: center; }
+  .c8 .re-tag { font: 500 9.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.28em; color: var(--teal-ink); }
+  .c8 nav { display: flex; gap: 30px; }
+  .c8 nav a { font: 500 11.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(12,41,57,.6); }
+  .c8 nav a:hover { color: var(--navy); }
+  .c8 .contact { font: 500 11.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 3px; }
+  .c8 .rule { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .c8 .rule div { border-top: 3px solid var(--navy); border-bottom: 1px solid var(--navy); height: 6px; }
+
+  .c8 .hero { max-width: 1200px; margin: 0 auto; padding: 64px 40px 58px; }
+  .c8 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal-ink); margin-bottom: 30px;
+  }
+  .c8 h1 {
+    font: 400 clamp(48px, 6vw, 86px)/1.06 "Newsreader", serif;
+    letter-spacing: -0.015em; max-width: 900px; margin-bottom: 44px;
+  }
+  .c8 h1 em { font-style: italic; color: var(--teal-ink); }
+  .c8 .hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; }
+  .c8 .sub { font: 400 16.5px/1.7 "Public Sans", sans-serif; color: rgba(12,41,57,.68); max-width: 480px; }
+  .c8 .sub a { font-weight: 600; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+  .c8 .meta { text-align: right; font: 400 11.5px/2.1 "IBM Plex Mono", monospace; letter-spacing: 0.1em; color: rgba(12,41,57,.55); white-space: nowrap; }
+  .c8 .meta b { color: var(--navy); font-weight: 500; }
+
+  .c8 .photo { position: relative; border-top: 3px solid var(--gold); }
+  .c8 .photo img { width: 100%; height: 330px; object-fit: cover; display: block; filter: saturate(.72) contrast(1.02); }
+  .c8 .photo figcaption {
+    position: absolute; right: 40px; bottom: 16px;
+    font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.08em;
+    color: rgba(255,255,255,.85); background: rgba(12,41,57,.55); padding: 7px 12px; border-radius: 2px;
+  }
+
+  .c8 .pubs { background: var(--white); padding: 58px 40px 72px; }
+  .c8 .pubs-inner { max-width: 1200px; margin: 0 auto; }
+  .c8 .pubs-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; }
+  .c8 .pubs-head h2 { font: 500 26px/1.1 "Newsreader", serif; }
+  .c8 .pubs-head a { font: 500 11.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 3px; }
+  .c8 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+  .c8 .card { border-top: 3px solid var(--navy); box-shadow: 0 4px 0 -3px var(--navy); padding-top: 20px; }
+  .c8 .card .kind { font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-ink); display: block; margin-bottom: 12px; }
+  .c8 .card h3 { font: 500 23px/1.25 "Newsreader", serif; margin-bottom: 10px; }
+  .c8 .card p { font: 400 14px/1.65 "Public Sans", sans-serif; color: rgba(12,41,57,.62); margin-bottom: 16px; }
+  .c8 .card a { font: 500 11.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); }
+  .c8 .card a:hover { color: var(--teal-ink); }
+
+  /* ================================================================
+     CONCEPT 9 — THE GLOBAL BOOK  (wireframe globe · placement network)
+  ================================================================ */
+  .c9 { background: var(--white); color: var(--navy); font-family: "Inter", sans-serif; }
+  .c9 .head-wrap { border-bottom: 1px solid var(--gray); }
+  .c9 .head {
+    max-width: 1280px; margin: 0 auto; padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 30px;
+  }
+  .c9 .logo { display: flex; align-items: center; gap: 11px; font: 800 18px/1 "Schibsted Grotesk", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .c9 nav { display: flex; gap: 30px; flex: 1; justify-content: center; }
+  .c9 nav a { font: 500 14px/1 "Inter", sans-serif; color: rgba(12,41,57,.75); }
+  .c9 nav a:hover { color: var(--navy); }
+  .c9 .right { display: flex; align-items: center; gap: 22px; }
+  .c9 .locale { font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.14em; color: rgba(12,41,57,.55); }
+  .c9 .btn-navy {
+    background: var(--navy); color: var(--white); border: 0; border-radius: 3px;
+    font: 600 14px/1 "Inter", sans-serif; padding: 13px 22px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c9 .btn-navy:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(12,41,57,.25); }
+
+  .c9 .hero {
+    max-width: 1280px; margin: 0 auto; padding: 70px 40px 54px;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center;
+  }
+  .c9 .eyebrow {
+    font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal-ink); margin-bottom: 26px;
+  }
+  .c9 h1 {
+    font: 700 clamp(44px, 5vw, 72px)/1.04 "Schibsted Grotesk", sans-serif;
+    letter-spacing: -0.025em; margin-bottom: 26px;
+  }
+  .c9 h1 .accent { color: var(--teal-ink); }
+  .c9 .sub { font: 400 16.5px/1.7 "Inter", sans-serif; color: rgba(12,41,57,.68); max-width: 470px; margin-bottom: 38px; }
+  .c9 .cta-row { display: flex; align-items: center; gap: 26px; }
+  .c9 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 3px;
+    font: 700 15px/1 "Schibsted Grotesk", sans-serif; padding: 16px 28px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c9 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(226,171,51,.4); }
+  .c9 .link { font: 600 14.5px/1 "Inter", sans-serif; color: var(--navy); border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+
+  .c9 .globe-wrap { text-align: center; }
+  .c9 .globe-wrap svg { width: 100%; max-width: 440px; height: auto; }
+  .c9 .sphere { stroke: rgba(12,41,57,.5); stroke-width: 1.2; fill: none; }
+  .c9 .wire { stroke: rgba(12,41,57,.16); stroke-width: 1; fill: none; }
+  .c9 .route { stroke: var(--teal); stroke-width: 1.3; fill: none; stroke-dasharray: 4 5; animation: c9flow 2.6s linear infinite; }
+  @keyframes c9flow { to { stroke-dashoffset: -36; } }
+  .c9 .node { fill: var(--gold); stroke: var(--white); stroke-width: 1.5; }
+  .c9 .hub { fill: var(--navy); stroke: var(--gold); stroke-width: 2; }
+  .c9 .node-lbl { font: 500 10px "IBM Plex Mono", monospace; letter-spacing: 0.14em; fill: rgba(12,41,57,.6); }
+  .c9 .globe-cap { margin-top: 14px; font: 400 12px/1.6 "IBM Plex Mono", monospace; color: var(--teal-ink); }
+
+  .c9 .desks { border-top: 1px solid var(--gray); background: var(--mist); }
+  .c9 .desks-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 40px;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+  }
+  .c9 .desk { padding: 22px 24px 26px 0; }
+  .c9 .desk + .desk { border-left: 1px solid var(--gray); padding-left: 24px; }
+  .c9 .desk b { display: block; font: 700 15.5px/1 "Schibsted Grotesk", sans-serif; margin-bottom: 7px; }
+  .c9 .desk span { font: 400 10.5px/1.5 "IBM Plex Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(12,41,57,.55); }
+
+  /* ================================================================
+     CONCEPT 10 — THE SYNDICATE  (heritage · private client · letterpress)
+  ================================================================ */
+  .c10 { background: #f7f6f2; color: var(--navy); font-family: "Newsreader", serif; text-align: center; }
+  .c10 .top-line {
+    font: 600 10.5px/1 "Cormorant Garamond", serif; letter-spacing: 0.32em; text-transform: uppercase;
+    color: rgba(12,41,57,.55); padding: 11px 20px;
+    border-bottom: 1px solid rgba(12,41,57,.15);
+  }
+  .c10 .head { padding: 30px 40px 0; }
+  .c10 .crest { margin: 0 auto 14px; display: block; }
+  .c10 .wordmark { font: 600 31px/1 "Cormorant Garamond", serif; letter-spacing: 0.14em; text-transform: uppercase; }
+  .c10 .subtitle { font: 500 10px/1 "Cormorant Garamond", serif; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(12,41,57,.5); margin-top: 10px; }
+  .c10 nav { display: flex; justify-content: center; gap: 40px; padding: 24px 0 20px; }
+  .c10 nav a { font: 600 12.5px/1 "Cormorant Garamond", serif; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(12,41,57,.75); }
+  .c10 nav a:hover { color: var(--navy); }
+  .c10 .double-hair { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(12,41,57,.35); position: relative; }
+  .c10 .double-hair::after { content: ""; display: block; border-top: 1px solid rgba(12,41,57,.35); margin-top: 3px; }
+
+  .c10 .hero { max-width: 860px; margin: 0 auto; padding: 66px 40px 56px; }
+  .c10 .ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 34px; }
+  .c10 .ornament::before, .c10 .ornament::after { content: ""; width: 70px; height: 1px; background: var(--gold); }
+  .c10 .ornament .mark { width: 7px; height: 7px; }
+  .c10 h1 { font: 500 clamp(42px, 5vw, 72px)/1.12 "Cormorant Garamond", serif; letter-spacing: 0.005em; margin-bottom: 26px; }
+  .c10 h1 em { font-style: italic; font-weight: 400; color: var(--teal-ink); }
+  .c10 .sub { font: 400 17.5px/1.75 "Newsreader", serif; color: rgba(12,41,57,.72); max-width: 560px; margin: 0 auto 42px; }
+  .c10 .cta-row { display: flex; justify-content: center; align-items: center; gap: 30px; }
+  .c10 .btn-outline {
+    background: transparent; color: var(--navy); border: 1px solid var(--navy);
+    font: 600 12.5px/1 "Cormorant Garamond", serif; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 17px 36px; transition: background .2s, color .2s;
+  }
+  .c10 .btn-outline:hover { background: var(--navy); color: #f7f6f2; }
+  .c10 .link { font: 600 12.5px/1 "Cormorant Garamond", serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 4px; }
+
+  .c10 .lines { padding: 0 40px 64px; }
+  .c10 .lines-inner {
+    display: flex; justify-content: center; align-items: center; gap: 26px; flex-wrap: wrap;
+    font: 600 11.5px/1 "Cormorant Garamond", serif; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(12,41,57,.62);
+  }
+  .c10 .lines-inner .mark { width: 6px; height: 6px; opacity: .85; }
+
+  /* ================================================================
+     CONCEPT 11 — THE PLATFORM  (insurtech · product-led · floating UI)
+  ================================================================ */
+  .c11 {
+    background:
+      radial-gradient(900px 520px at 78% 4%, rgba(0,140,126,.13), transparent 62%),
+      linear-gradient(#f2f8f7, var(--white) 68%);
+    color: var(--navy); font-family: "Figtree", sans-serif;
+  }
+  .c11 .head {
+    max-width: 1240px; margin: 0 auto; padding: 24px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 30px;
+  }
+  .c11 .logo { display: flex; align-items: center; gap: 11px; font: 800 20px/1 "Bricolage Grotesque", sans-serif; }
+  .c11 nav { display: flex; gap: 30px; }
+  .c11 nav a { font: 500 15px/1 "Figtree", sans-serif; color: rgba(12,41,57,.75); }
+  .c11 nav a:hover { color: var(--navy); }
+  .c11 .right { display: flex; align-items: center; gap: 24px; }
+  .c11 .signin { font: 600 14.5px/1 "Figtree", sans-serif; color: var(--navy); }
+  .c11 .btn-gold {
+    background: var(--gold); color: var(--navy); border: 0; border-radius: 10px;
+    font: 700 15px/1 "Figtree", sans-serif; padding: 13px 24px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .c11 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(226,171,51,.4); }
+
+  .c11 .hero {
+    max-width: 1240px; margin: 0 auto; padding: 64px 40px 80px;
+    display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 56px; align-items: center;
+  }
+  .c11 .badge {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--white); border: 1px solid var(--gray); border-radius: 999px;
+    font: 600 12.5px/1 "Figtree", sans-serif; color: rgba(12,41,57,.75);
+    padding: 8px 16px; margin-bottom: 26px;
+  }
+  .c11 .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .c11 h1 { font: 800 clamp(44px, 5.2vw, 76px)/1.02 "Bricolage Grotesque", sans-serif; letter-spacing: -0.025em; margin-bottom: 24px; }
+  .c11 h1 .accent { color: var(--teal-ink); }
+  .c11 .sub { font: 400 17.5px/1.65 "Figtree", sans-serif; color: rgba(12,41,57,.68); max-width: 440px; margin-bottom: 36px; }
+  .c11 .cta-row { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+  .c11 .btn-lg { padding: 17px 30px; font-size: 16px; }
+  .c11 .btn-ghost {
+    background: var(--white); color: var(--navy); border: 1px solid var(--gray); border-radius: 10px;
+    font: 600 15.5px/1 "Figtree", sans-serif; padding: 16px 28px; transition: border-color .15s;
+  }
+  .c11 .btn-ghost:hover { border-color: var(--navy); }
+  .c11 .trust { font: 500 13.5px/1.5 "Figtree", sans-serif; color: rgba(12,41,57,.55); }
+
+  .c11 .stack { position: relative; height: 470px; }
+  .c11 .ui-card { position: absolute; background: var(--white); box-shadow: 0 24px 60px rgba(12,41,57,.14); }
+  .c11 .card-main { left: 0; top: 44px; width: 344px; border-radius: 18px; padding: 22px 24px; z-index: 2; }
+  .c11 .card-main .cm-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .c11 .card-main .cm-head b { font: 700 17px/1 "Figtree", sans-serif; }
+  .c11 .chipd { font: 600 10px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em; color: var(--teal-ink); background: rgba(0,140,126,.1); border-radius: 999px; padding: 5px 10px; }
+  .c11 .row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid #edf1f2; }
+  .c11 .row .nm b { display: block; font: 600 14.5px/1.3 "Figtree", sans-serif; }
+  .c11 .row .nm span { font: 400 12px/1.3 "Figtree", sans-serif; color: rgba(12,41,57,.5); }
+  .c11 .tgl { width: 40px; height: 22px; border-radius: 999px; background: var(--gray); position: relative; flex: none; transition: background .2s; }
+  .c11 .tgl::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--white); box-shadow: 0 1px 3px rgba(12,41,57,.3); transition: left .2s; }
+  .c11 .tgl.on { background: var(--teal); }
+  .c11 .tgl.on::after { left: 20px; }
+  .c11 .cm-foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf1f2; padding-top: 16px; margin-top: 4px; }
+  .c11 .cm-foot .prem span { display: block; font: 500 11px/1 "Figtree", sans-serif; color: rgba(12,41,57,.5); margin-bottom: 5px; }
+  .c11 .cm-foot .prem b { font: 800 25px/1 "Bricolage Grotesque", sans-serif; }
+  .c11 .cm-foot .prem b i { font-style: normal; font-size: 14px; color: rgba(12,41,57,.5); }
+  .c11 .btn-sm { background: var(--gold); color: var(--navy); border: 0; border-radius: 9px; font: 700 13.5px/1 "Figtree", sans-serif; padding: 12px 18px; }
+  .c11 .card-cert { right: 6px; top: 0; border-radius: 14px; padding: 14px 18px; transform: rotate(3deg); z-index: 1; display: flex; align-items: center; gap: 12px; }
+  .c11 .tick { width: 26px; height: 26px; border-radius: 50%; background: rgba(0,140,126,.12); color: var(--teal-ink); font: 700 14px/26px "Figtree", sans-serif; text-align: center; flex: none; }
+  .c11 .card-cert b { display: block; font: 700 14px/1.2 "Figtree", sans-serif; }
+  .c11 .card-cert span { font: 400 11px/1.2 "IBM Plex Mono", monospace; color: rgba(12,41,57,.5); }
+  .c11 .card-chat { right: 0; bottom: 34px; width: 272px; border-radius: 16px; padding: 16px 18px; transform: rotate(-2deg); z-index: 3; display: flex; gap: 12px; }
+  .c11 .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--gold); color: var(--navy); font: 700 14px/34px "Figtree", sans-serif; text-align: center; flex: none; }
+  .c11 .card-chat b { display: block; font: 700 13px/1.3 "Figtree", sans-serif; margin-bottom: 3px; }
+  .c11 .card-chat p { font: 400 13.5px/1.45 "Figtree", sans-serif; color: rgba(12,41,57,.75); }
+
+  .c11 .carriers { border-top: 1px solid var(--gray); background: var(--white); padding: 26px 40px 34px; text-align: center; }
+  .c11 .carriers .tag { font: 500 10.5px/1 "IBM Plex Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(12,41,57,.45); display: block; margin-bottom: 18px; }
+  .c11 .carriers .names { display: flex; justify-content: center; gap: 44px; flex-wrap: wrap; font: 700 16px/1 "Archivo", sans-serif; letter-spacing: 0.06em; color: rgba(12,41,57,.32); }
+
+  /* ================================================================
+     CONCEPT 12 — THE POSTER  (swiss grid · type as image)
+  ================================================================ */
+  .c12 { background: var(--white); color: var(--navy); font-family: "Inter", sans-serif; position: relative; overflow: hidden; }
+  .c12 .gridlines { position: absolute; inset: 0; pointer-events: none; }
+  .c12 .gridlines i { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(12,41,57,.07); }
+  .c12 .margin-note {
+    position: absolute; font: 400 10px/1 "IBM Plex Mono", monospace; letter-spacing: 0.22em;
+    color: rgba(12,41,57,.4); white-space: nowrap;
+  }
+  .c12 .note-l { left: 13px; top: 34%; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .c12 .note-r { right: 13px; top: 30%; writing-mode: vertical-rl; }
+  .c12 .head {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 40px; border-bottom: 1px solid var(--navy);
+  }
+  .c12 .logo { display: flex; align-items: center; gap: 11px; font: 800 17px/1 "Archivo", sans-serif; letter-spacing: 0.1em; }
+  .c12 nav { display: flex; gap: 26px; }
+  .c12 nav a { font: 400 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em; color: rgba(12,41,57,.65); }
+  .c12 nav a:hover { color: var(--navy); }
+  .c12 .quote-link { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: 0.12em; color: var(--navy); border-bottom: 1px solid var(--gold); padding-bottom: 3px; }
+
+  .c12 .hero { position: relative; padding: 76px 40px 64px; }
+  .c12 h1 {
+    font: 800 clamp(64px, 10.6vw, 176px)/0.94 "Archivo", sans-serif;
+    letter-spacing: -0.04em; text-transform: uppercase;
+  }
+  .c12 h1 .keystone {
+    display: inline-block; width: 0.4em; height: 0.34em;
+    background: var(--gold); margin-left: 0.05em;
+    clip-path: polygon(0 0, 100% 0, 78% 100%, 22% 100%);
+  }
+  .c12 .hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; margin-top: 48px; }
+  .c12 .spec { font: 400 11px/2 "IBM Plex Mono", monospace; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(12,41,57,.5); }
+  .c12 .hero-row p.lede { font: 400 16.5px/1.7 "Inter", sans-serif; color: rgba(12,41,57,.72); max-width: 430px; }
+  .c12 .lede a { font-weight: 600; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+
+  .c12 .index { position: relative; border-top: 1px solid var(--navy); display: grid; grid-template-columns: repeat(4, 1fr); }
+  .c12 .idx {
+    display: flex; align-items: baseline; gap: 14px; padding: 26px 28px 30px;
+    transition: background .2s, color .2s;
+  }
+  .c12 .idx + .idx { border-left: 1px solid rgba(12,41,57,.2); }
+  .c12 .idx .no { font: 500 11px/1 "IBM Plex Mono", monospace; color: var(--teal-ink); transition: color .2s; }
+  .c12 .idx b { font: 700 17px/1.2 "Archivo", sans-serif; letter-spacing: 0.02em; text-transform: uppercase; flex: 1; }
+  .c12 .idx .arr { font-size: 15px; color: var(--gold); }
+  .c12 .idx:hover { background: var(--navy); color: var(--white); }
+  .c12 .idx:hover .no { color: var(--gold); }
+
+  /* ============ responsive ============ */
+  @media (max-width: 940px) {
+    .c1 nav, .c2 nav, .c3 nav { display: none; }
+    .c1 .hero { grid-template-columns: 1fr; padding-top: 56px; gap: 48px; min-height: 0; }
+    .c2 .rows { grid-template-columns: 1fr 1fr; }
+    .c2 .cell + .cell { border-left: 0; padding-left: 0; }
+    .c2 .cell:nth-child(even) { border-left: 1px solid rgba(255,255,255,.1); padding-left: 24px; }
+    .c3 .hero { grid-template-columns: 1fr; min-height: 0; }
+    .c3 .panel-r { min-height: 420px; padding: 60px 0 120px; }
+    .c3 .quote-card { left: 50%; bottom: 26px; }
+    .c1 .assurances { flex-wrap: wrap; text-align: center; }
+    .c4 nav, .c5 nav, .c6 nav { display: none; }
+    .c4 .arcade { grid-template-columns: 1fr 1fr; transform: translateY(-70px); }
+    .c4 .band-foot { margin-top: -16px; flex-direction: column; }
+    .c4 .hero { padding-bottom: 110px; }
+    .c5 .hero { grid-template-columns: 1fr; gap: 48px; }
+    .c5 .cut { height: 380px; }
+    .c5 .cols { grid-template-columns: 1fr 1fr; }
+    .c5 .col + .col { border-left: 0; padding-left: 0; }
+    .c5 .col:nth-child(even) { border-left: 1px solid var(--gray); padding-left: 26px; }
+    .c6 .hero { grid-template-columns: 1fr; padding-bottom: 90px; }
+    .c6 .collage { height: 420px; }
+    .c6 .capsule { right: 50%; transform: translateX(50%); }
+    .c6 .pills { grid-template-columns: 1fr; }
+    .c7 nav, .c8 nav, .c9 nav { display: none; }
+    .c7 .hero, .c9 .hero { grid-template-columns: 1fr; gap: 48px; }
+    .c7 .stats-inner, .c9 .desks-inner { grid-template-columns: 1fr 1fr; }
+    .c7 .stat + .stat, .c9 .desk + .desk { border-left: 0; padding-left: 0; }
+    .c7 .stat:nth-child(even) { border-left: 1px solid var(--gray); padding-left: 28px; }
+    .c9 .desk:nth-child(even) { border-left: 1px solid var(--gray); padding-left: 24px; }
+    .c7 .ticker { gap: 22px; }
+    .c8 .hero-row { flex-direction: column; align-items: flex-start; gap: 26px; }
+    .c8 .meta { text-align: left; }
+    .c8 .cards { grid-template-columns: 1fr; }
+    .c10 nav { flex-wrap: wrap; gap: 18px 28px; padding: 20px 24px; }
+    .c11 nav { display: none; }
+    .c11 .hero { grid-template-columns: 1fr; gap: 48px; }
+    .c11 .stack { height: 520px; max-width: 420px; margin: 0 auto; }
+    .c12 nav { display: none; }
+    .c12 .hero-row { flex-direction: column; align-items: flex-start; gap: 26px; }
+    .c12 .index { grid-template-columns: 1fr 1fr; }
+    .c12 .idx + .idx { border-left: 0; }
+    .c12 .idx:nth-child(even) { border-left: 1px solid rgba(12,41,57,.2); }
+    .c12 .idx:nth-child(n+3) { border-top: 1px solid rgba(12,41,57,.2); }
+    .c12 .margin-note { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c1 .voussoir, .c1 .drawn .voussoir { transition: none; opacity: 1; transform: none; }
+    .c3 .ring-rotate { animation: none; }
+    .c9 .route { animation: none; }
+    * { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CONCEPT 1 : THE KEYSTONE ============ -->
+<section class="concept c1 active" id="concept-1" aria-label="Concept 1 — The Keystone">
+  <div class="head-wrap">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+      <nav aria-label="Main">
+        <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+      </nav>
+      <button class="btn-gold">Get a quote</button>
+    </header>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Independent insurance brokerage</p>
+      <h1>Coverage that holds <em>everything</em> together.</h1>
+      <p class="sub">
+        Capstone places commercial and personal lines with A-rated carriers —
+        and stays at the table when it's time to claim.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold btn-lg">Get a quote</button>
+        <a class="link" href="#">Explore coverage →</a>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <svg id="arch" viewBox="0 0 420 300" role="img" aria-label="Line drawing of a stone arch with a gold capstone at its center"></svg>
+      <figcaption class="figcap">Fig. 01 — the capstone carries the load,<br />so nothing else has to.</figcaption>
+    </figure>
+  </div>
+
+  <div class="assurances">
+    <span>A-rated carriers</span><span aria-hidden="true">·</span>
+    <span>Claims advocacy</span><span aria-hidden="true">·</span>
+    <span>40+ specialty lines</span><span aria-hidden="true">·</span>
+    <span>Licensed nationwide</span>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 2 : THE LEDGER ============ -->
+<section class="concept c2" id="concept-2" aria-label="Concept 2 — The Ledger">
+  <div class="head-wrap">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+      <nav aria-label="Main">
+        <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+      </nav>
+      <button class="btn-outline">Start a quote</button>
+    </header>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Capstone — independent brokerage</p>
+    <h1>Risk,<br />accounted for<span class="dot">.</span></h1>
+    <p class="sub">
+      We read the fine print for a living. Every policy we place is priced,
+      negotiated, and documented — line by line.
+    </p>
+    <div class="cta-row">
+      <button class="btn-gold">Start a quote</button>
+      <button class="btn-ghost">Speak to a broker</button>
+    </div>
+  </div>
+
+  <div class="ledger">
+    <div class="ledger-head">
+      <span>Schedule of coverage</span>
+      <span>Reviewed annually</span>
+    </div>
+    <div class="rows">
+      <a class="cell" href="#">
+        <span class="tag">Property</span>
+        <span class="desc">Buildings, stock &amp; equipment</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="cell" href="#">
+        <span class="tag">Liability</span>
+        <span class="desc">General, professional &amp; product</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="cell" href="#">
+        <span class="tag">Fleet</span>
+        <span class="desc">Commercial auto &amp; transit</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="cell" href="#">
+        <span class="tag">Cyber</span>
+        <span class="desc">Data, downtime &amp; recovery</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 3 : THE SEAL ============ -->
+<section class="concept c3" id="concept-3" aria-label="Concept 3 — The Seal">
+  <div class="utility">
+    <span>Mon–Fri 8–6 &nbsp;·&nbsp; (555) 010-0100</span>
+    <a href="#">Client portal</a>
+  </div>
+  <header class="head">
+    <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+    <nav aria-label="Main">
+      <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+    </nav>
+    <button class="btn-navy">Request a quote</button>
+  </header>
+
+  <div class="hero">
+    <div class="panel-l">
+      <p class="kicker">Every market. One broker.</p>
+      <h1>Brokered,<br /><span class="accent">not sold.</span></h1>
+      <p class="sub">
+        We shop your risk across every carrier we represent — and hand you
+        the offer we'd take ourselves.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold">Request a quote</button>
+        <a class="link" href="#">How brokering works</a>
+      </div>
+    </div>
+
+    <div class="panel-r">
+      <div class="seal" role="img" aria-label="Rotating gold seal reading Capstone Insurance Brokers">
+        <svg viewBox="0 0 520 520">
+          <defs>
+            <path id="sealCircle" d="M 260 70 A 190 190 0 1 1 259.9 70" fill="none" />
+          </defs>
+          <circle cx="260" cy="260" r="238" fill="none" stroke="#e2ab33" stroke-width="1" opacity="0.35" />
+          <circle cx="260" cy="260" r="150" fill="none" stroke="#e2ab33" stroke-width="1.5" opacity="0.6" />
+          <g class="ring-rotate">
+            <text font-family="'IBM Plex Mono', monospace" font-size="19" letter-spacing="7.5" fill="#e2ab33">
+              <textPath href="#sealCircle">CAPSTONE&#160;·&#160;INSURANCE&#160;BROKERS&#160;·&#160;LICENSED&#160;&amp;&#160;INDEPENDENT&#160;·</textPath>
+            </text>
+          </g>
+          <!-- keystone glyph -->
+          <path d="M 224 226 L 296 226 L 282 288 L 238 288 Z" fill="#e2ab33" />
+          <text x="260" y="322" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="13" letter-spacing="4" fill="rgba(255,255,255,0.65)">SINCE 2001</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <p>"They renegotiated our renewal in a week — same coverage, better terms."</p>
+      <cite>— Operations Director, manufacturing client</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 4 : THE ARCADE ============ -->
+<section class="concept c4" id="concept-4" aria-label="Concept 4 — The Arcade">
+  <div class="head-wrap">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+      <nav aria-label="Main">
+        <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+      </nav>
+      <button class="btn-gold">Get a quote</button>
+    </header>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Independent insurance brokerage</p>
+    <h1>Cover the life <em>you've built.</em></h1>
+    <p class="sub">
+      Home, auto, business, life — one broker who knows the whole picture,
+      and every policy placed with A-rated carriers.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="arcade">
+      <a class="arch-card" href="#">
+        <img class="ph" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="A modern house at dusk" />
+        <span class="chip"><span class="mark"></span>Home &amp; property</span>
+      </a>
+      <a class="arch-card feature" href="#">
+        <img class="ph" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=80" alt="A car on an open road" />
+        <span class="chip"><span class="mark"></span>Auto &amp; fleet</span>
+      </a>
+      <a class="arch-card" href="#">
+        <img class="ph" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="A bright office interior" />
+        <span class="chip"><span class="mark"></span>Business</span>
+      </a>
+      <a class="arch-card" href="#">
+        <img class="ph" src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=700&q=80" alt="A family together outdoors" />
+        <span class="chip"><span class="mark"></span>Life &amp; health</span>
+      </a>
+    </div>
+    <div class="band-foot">
+      <p>Four lines, one broker — reviewed together, renewed together.</p>
+      <a href="#">All coverage →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 5 : THE CORNERSTONE ============ -->
+<section class="concept c5" id="concept-5" aria-label="Concept 5 — The Cornerstone">
+  <header class="head">
+    <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+    <nav aria-label="Main">
+      <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+    </nav>
+    <button class="btn-navy">Get a quote</button>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow"><span class="mark"></span>Commercial &amp; personal lines</p>
+      <h1>Solid ground for <span class="accent">whatever comes.</span></h1>
+      <p class="sub">
+        Capstone shops your risk across the market and negotiates the terms —
+        so the year ahead is already accounted for.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold">Get a quote</button>
+        <a class="link" href="#">Talk to a broker</a>
+      </div>
+    </div>
+
+    <div class="cut-wrap">
+      <div class="diamond" aria-hidden="true"></div>
+      <div class="cut">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Looking up at a skyscraper facade" />
+      </div>
+      <p class="cut-cap">The view from a well-placed policy.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-inner">
+      <div class="band-head">
+        <span class="tag">Coverage lines</span>
+        <a href="#">All products →</a>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <span class="mark"></span>
+          <h3>Home &amp; property</h3>
+          <p>Buildings, contents &amp; everything attached to them.</p>
+          <a href="#">Explore →</a>
+        </div>
+        <div class="col">
+          <span class="mark"></span>
+          <h3>Auto &amp; fleet</h3>
+          <p>Personal vehicles to commercial fleets, insured as one.</p>
+          <a href="#">Explore →</a>
+        </div>
+        <div class="col">
+          <span class="mark"></span>
+          <h3>Business liability</h3>
+          <p>General, professional &amp; product — negotiated line by line.</p>
+          <a href="#">Explore →</a>
+        </div>
+        <div class="col">
+          <span class="mark"></span>
+          <h3>Life &amp; health</h3>
+          <p>Coverage that follows the people, not just the assets.</p>
+          <a href="#">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 6 : THE COLLAGE ============ -->
+<section class="concept c6" id="concept-6" aria-label="Concept 6 — The Collage">
+  <div class="head-outer">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+      <nav aria-label="Main">
+        <a href="#">Coverage</a><a href="#">Industries</a><a href="#">Claims</a><a href="#">About</a>
+      </nav>
+      <button class="btn-gold">Get a quote</button>
+    </header>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="kicker">Insurance brokerage</p>
+      <h1>Cover <span class="word-chip"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=500&q=80" alt="" /></span> what you love.</h1>
+      <p class="sub">
+        Plain-terms policies for homes, cars, businesses and the people in them —
+        brokered by humans who pick up the phone.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold btn-lg">Get a quote</button>
+        <a class="link" href="#">How it works</a>
+      </div>
+    </div>
+
+    <div class="collage" role="img" aria-label="Photo collage of a broker meeting and a working team">
+      <div class="dot-gold" aria-hidden="true"></div>
+      <div class="capsule"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80" alt="" /></div>
+      <div class="disc"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=500&q=80" alt="" /></div>
+      <div class="ring" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="products">
+    <div class="products-inner">
+      <div class="products-head">
+        <h2>Pick a line, we'll do the shopping.</h2>
+        <a href="#">All coverage →</a>
+      </div>
+      <div class="pills">
+        <a class="pill" href="#">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=300&q=80" alt="" /></span>
+          <span class="txt"><strong>Home</strong><span>Property &amp; contents</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="pill" href="#">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=300&q=80" alt="" /></span>
+          <span class="txt"><strong>Auto</strong><span>Cars &amp; fleets</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="pill" href="#">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=80" alt="" /></span>
+          <span class="txt"><strong>Business</strong><span>Liability &amp; more</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="pill" href="#">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=300&q=80" alt="" /></span>
+          <span class="txt"><strong>Life</strong><span>People &amp; health</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 7 : THE EXCHANGE ============ -->
+<section class="concept c7" id="concept-7" aria-label="Concept 7 — The Exchange">
+  <div class="ticker" aria-hidden="true">
+    <span class="lbl">MARKET PULSE — JUL 2026</span>
+    <span>PROPERTY CAT <span class="up">▲ 2.4%</span></span>
+    <span>CASUALTY <span class="flat">— FLAT</span></span>
+    <span>SPECIALTY <span class="up">▲ 1.8%</span></span>
+    <span>CYBER <span class="up">▲ 6.1%</span></span>
+    <span>RETRO <span class="flat">— FIRM</span></span>
+  </div>
+  <div class="head-wrap">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone <span class="re-tag">REINSURANCE</span></a>
+      <nav aria-label="Main">
+        <a href="#">Solutions</a><a href="#">Analytics</a><a href="#">Markets</a><a href="#">Insights</a>
+      </nav>
+      <button class="btn-navy">Speak with our team</button>
+    </header>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Treaty &amp; facultative reinsurance</p>
+      <h1>Capacity, placed with conviction.</h1>
+      <p class="sub">
+        Capstone structures, models and places reinsurance programs across
+        forty-plus markets — with terms that hold when the market doesn't.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold">Speak with our team</button>
+        <a class="link" href="#">View market capabilities →</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <span>Capacity placed — treaty &amp; fac</span>
+        <span>FY19–FY25</span>
+      </div>
+      <svg viewBox="0 0 520 260" role="img" aria-label="Line chart of capacity placed rising from 2019 to 2025">
+        <line class="grid-line" x1="40" y1="70" x2="490" y2="70" />
+        <line class="grid-line" x1="40" y1="110" x2="490" y2="110" />
+        <line class="grid-line" x1="40" y1="150" x2="490" y2="150" />
+        <line class="grid-line" x1="40" y1="190" x2="490" y2="190" />
+        <line class="grid-line" x1="40" y1="230" x2="490" y2="230" />
+        <path class="area" d="M 40 200 L 115 192 L 190 170 L 265 160 L 340 128 L 415 104 L 490 72 L 490 230 L 40 230 Z" />
+        <path class="trend" d="M 40 200 L 115 192 L 190 170 L 265 160 L 340 128 L 415 104 L 490 72" />
+        <circle class="end-dot" cx="490" cy="72" r="5" />
+        <text class="end-lbl" x="496" y="56" text-anchor="end">$2.4bn</text>
+        <text class="axis-lbl" x="40" y="252" text-anchor="middle">FY19</text>
+        <text class="axis-lbl" x="190" y="252" text-anchor="middle">FY21</text>
+        <text class="axis-lbl" x="340" y="252" text-anchor="middle">FY23</text>
+        <text class="axis-lbl" x="490" y="252" text-anchor="middle">FY25</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat"><b>$2.4<i>bn</i></b><span>Premium placed, FY25</span></div>
+      <div class="stat"><b>40<i>+</i></b><span>Markets accessed</span></div>
+      <div class="stat"><b>98<i>%</i></b><span>Client retention</span></div>
+      <div class="stat"><b>1,200<i>+</i></b><span>Treaties in force</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 8 : THE REPORT ============ -->
+<section class="concept c8" id="concept-8" aria-label="Concept 8 — The Report">
+  <header class="head">
+    <a class="logo" href="#"><span class="mark"></span>Capstone <span class="re-tag">REINSURANCE</span></a>
+    <nav aria-label="Main">
+      <a href="#">Solutions</a><a href="#">Analytics</a><a href="#">Insights</a><a href="#">About</a>
+    </nav>
+    <a class="contact" href="#">Contact →</a>
+  </header>
+  <div class="rule"><div></div></div>
+
+  <div class="hero">
+    <p class="eyebrow">Capstone Reinsurance — market review, H1 2026</p>
+    <h1>The market turns.<br /><em>Discipline holds.</em></h1>
+    <div class="hero-row">
+      <p class="sub">
+        Capstone advises cedents and carriers through every cycle — placement,
+        analytics and claims advocacy under one roof.
+        <a href="#">Read the H1 review →</a>
+      </p>
+      <div class="meta">
+        VOL. 12 — H1 2026<br />
+        PLACED PREMIUM <b>$2.4BN</b><br />
+        MARKETS <b>40+</b><br />
+        RETENTION <b>98%</b>
+      </div>
+    </div>
+  </div>
+
+  <figure class="photo">
+    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1600&q=80" alt="Aerial view of a city at dusk" />
+    <figcaption>Assets under advice, from above.</figcaption>
+  </figure>
+
+  <div class="pubs">
+    <div class="pubs-inner">
+      <div class="pubs-head">
+        <h2>Latest publications</h2>
+        <a href="#">All insights →</a>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="kind">Market report</span>
+          <h3>Renewal Outlook 2027</h3>
+          <p>Where capacity firms, softens and walks away — desk by desk.</p>
+          <a href="#">Download PDF ↓</a>
+        </div>
+        <div class="card">
+          <span class="kind">Analytics brief</span>
+          <h3>Cat Capacity Review</h3>
+          <p>Modelled loss trends across peak zones, quarter over quarter.</p>
+          <a href="#">Download PDF ↓</a>
+        </div>
+        <div class="card">
+          <span class="kind">White paper</span>
+          <h3>Casualty, Re-priced</h3>
+          <p>Social inflation and the long tail: placing liability in 2026.</p>
+          <a href="#">Download PDF ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 9 : THE GLOBAL BOOK ============ -->
+<section class="concept c9" id="concept-9" aria-label="Concept 9 — The Global Book">
+  <div class="head-wrap">
+    <header class="head">
+      <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+      <nav aria-label="Main">
+        <a href="#">Solutions</a><a href="#">Markets</a><a href="#">Analytics</a><a href="#">Insights</a>
+      </nav>
+      <div class="right">
+        <span class="locale">EN — GLOBAL</span>
+        <button class="btn-navy">Start a conversation</button>
+      </div>
+    </header>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Reinsurance broking &amp; analytics</p>
+      <h1>Risk is global. <span class="accent">Placement is personal.</span></h1>
+      <p class="sub">
+        Treaty and facultative placement across London, Bermuda, Zurich and
+        Singapore — one desk that knows your book, every market that matters.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold">Start a conversation</button>
+        <a class="link" href="#">Our markets</a>
+      </div>
+    </div>
+
+    <figure class="globe-wrap">
+      <svg viewBox="0 0 480 420" role="img" aria-label="Wireframe globe with placement routes between office locations">
+        <defs><clipPath id="globeClip"><circle cx="240" cy="200" r="160" /></clipPath></defs>
+        <circle class="sphere" cx="240" cy="200" r="160" />
+        <ellipse class="wire" cx="240" cy="200" rx="122" ry="160" />
+        <ellipse class="wire" cx="240" cy="200" rx="64" ry="160" />
+        <line class="wire" x1="240" y1="40" x2="240" y2="360" />
+        <g clip-path="url(#globeClip)">
+          <line class="wire" x1="80" y1="120" x2="400" y2="120" />
+          <line class="wire" x1="80" y1="160" x2="400" y2="160" />
+          <line class="wire" x1="80" y1="200" x2="400" y2="200" />
+          <line class="wire" x1="80" y1="240" x2="400" y2="240" />
+          <line class="wire" x1="80" y1="280" x2="400" y2="280" />
+        </g>
+        <path class="route" d="M 222 130 Q 160 120 128 168" />
+        <path class="route" d="M 222 130 Q 170 160 158 214" />
+        <path class="route" d="M 222 130 Q 240 138 250 160" />
+        <path class="route" d="M 222 130 Q 300 160 334 244" />
+        <circle class="node" cx="128" cy="168" r="4.5" />
+        <circle class="node" cx="158" cy="214" r="4.5" />
+        <circle class="node" cx="250" cy="160" r="4.5" />
+        <circle class="node" cx="334" cy="244" r="4.5" />
+        <circle class="hub" cx="222" cy="130" r="6" />
+        <text class="node-lbl" x="210" y="116">LON</text>
+        <text class="node-lbl" x="96" y="160">NYC</text>
+        <text class="node-lbl" x="126" y="228">BMU</text>
+        <text class="node-lbl" x="262" y="156">ZRH</text>
+        <text class="node-lbl" x="346" y="252">SGP</text>
+      </svg>
+      <figcaption class="globe-cap">Fig. 02 — placement routes, FY 2025.</figcaption>
+    </figure>
+  </div>
+
+  <div class="desks">
+    <div class="desks-inner">
+      <div class="desk"><b>London</b><span>52 markets</span></div>
+      <div class="desk"><b>Bermuda</b><span>18 markets</span></div>
+      <div class="desk"><b>Zurich</b><span>14 markets</span></div>
+      <div class="desk"><b>Singapore</b><span>21 markets</span></div>
+      <div class="desk"><b>New York</b><span>26 markets</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 10 : THE SYNDICATE ============ -->
+<section class="concept c10" id="concept-10" aria-label="Concept 10 — The Syndicate">
+  <div class="top-line">Est. MMI — London · Bermuda · Zurich</div>
+  <header class="head">
+    <svg class="crest" width="58" height="58" viewBox="0 0 58 58" role="img" aria-label="Capstone crest">
+      <circle cx="29" cy="29" r="27" fill="none" stroke="#0c2939" stroke-width="1.2" />
+      <circle cx="29" cy="29" r="22.5" fill="none" stroke="#0c2939" stroke-width="0.8" stroke-dasharray="1.5 3" />
+      <path d="M 20 23 L 38 23 L 34.5 36 L 23.5 36 Z" fill="#e2ab33" />
+      <rect x="27.4" y="4.2" width="3.2" height="3.2" transform="rotate(45 29 5.8)" fill="#e2ab33" />
+      <rect x="27.4" y="50.6" width="3.2" height="3.2" transform="rotate(45 29 52.2)" fill="#e2ab33" />
+    </svg>
+    <div class="wordmark">Capstone</div>
+    <div class="subtitle">Insurance &amp; Reinsurance Brokers</div>
+    <nav aria-label="Main">
+      <a href="#">Private clients</a><a href="#">Specialty</a><a href="#">Claims</a><a href="#">The firm</a><a href="#">Contact</a>
+    </nav>
+    <div class="double-hair"></div>
+  </header>
+
+  <div class="hero">
+    <div class="ornament"><span class="mark"></span></div>
+    <h1>Assurance, in the <em>oldest sense</em> of the word.</h1>
+    <p class="sub">
+      Capstone acts for families, fleets and firms whose affairs deserve a
+      standing relationship — not a call centre. Introductions are made
+      personally, and kept for generations.
+    </p>
+    <div class="cta-row">
+      <button class="btn-outline">Request an introduction</button>
+      <a class="link" href="#">The services</a>
+    </div>
+  </div>
+
+  <div class="lines">
+    <div class="lines-inner">
+      <span>Private clients</span><span class="mark"></span>
+      <span>Specialty lines</span><span class="mark"></span>
+      <span>Marine &amp; fine art</span><span class="mark"></span>
+      <span>Estates &amp; aviation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 11 : THE PLATFORM ============ -->
+<section class="concept c11" id="concept-11" aria-label="Concept 11 — The Platform">
+  <header class="head">
+    <a class="logo" href="#"><span class="mark"></span>Capstone</a>
+    <nav aria-label="Main">
+      <a href="#">Coverage</a><a href="#">Pricing</a><a href="#">Claims</a><a href="#">Resources</a>
+    </nav>
+    <div class="right">
+      <a class="signin" href="#">Sign in</a>
+      <button class="btn-gold">Get covered</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="badge">New — instant certificates of insurance</span>
+      <h1>Insurance that <span class="accent">keeps up.</span></h1>
+      <p class="sub">
+        Quote, bind and manage business coverage online — with a named broker
+        one message away when it matters.
+      </p>
+      <div class="cta-row">
+        <button class="btn-gold btn-lg">Get covered</button>
+        <button class="btn-ghost">Book a demo</button>
+      </div>
+      <p class="trust">Backed by A-rated carriers · 2,400+ businesses covered</p>
+    </div>
+
+    <div class="stack" role="img" aria-label="Product interface showing a quote builder, an issued certificate and a broker message">
+      <div class="ui-card card-cert">
+        <span class="tick">✓</span>
+        <div><b>Certificate issued</b><span>COI-2481 · just now</span></div>
+      </div>
+      <div class="ui-card card-main">
+        <div class="cm-head"><b>Quote builder</b><span class="chipd">DRAFT</span></div>
+        <div class="row">
+          <div class="nm"><b>General liability</b><span>$2M per occurrence</span></div>
+          <div class="tgl on" aria-hidden="true"></div>
+        </div>
+        <div class="row">
+          <div class="nm"><b>Cyber &amp; data</b><span>Breach response included</span></div>
+          <div class="tgl on" aria-hidden="true"></div>
+        </div>
+        <div class="row">
+          <div class="nm"><b>Commercial property</b><span>Add when you're ready</span></div>
+          <div class="tgl" aria-hidden="true"></div>
+        </div>
+        <div class="cm-foot">
+          <div class="prem"><span>Estimated premium</span><b>$412<i>/mo</i></b></div>
+          <button class="btn-sm">Bind coverage</button>
+        </div>
+      </div>
+      <div class="ui-card card-chat">
+        <span class="avatar">A</span>
+        <div>
+          <b>Ana — your broker</b>
+          <p>Renewal's ready — 12% under last year, same limits.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carriers">
+    <span class="tag">Backed by A-rated carriers</span>
+    <div class="names">
+      <span>ALPINE RE</span><span>MERIDIAN</span><span>NORTHGATE</span><span>ATLAS SPECIALTY</span><span>HELVETIA MUTUAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT 12 : THE POSTER ============ -->
+<section class="concept c12" id="concept-12" aria-label="Concept 12 — The Poster">
+  <div class="gridlines" aria-hidden="true">
+    <i style="left:20%"></i><i style="left:40%"></i><i style="left:60%"></i><i style="left:80%"></i>
+  </div>
+  <span class="margin-note note-l">CAPSTONE — INDEPENDENT BROKERAGE, MMXXVI</span>
+  <span class="margin-note note-r">FIG. 03 — TYPE AS STRUCTURE</span>
+
+  <header class="head">
+    <a class="logo" href="#"><span class="mark"></span>CAPSTONE</a>
+    <nav aria-label="Main">
+      <a href="#">01 COVERAGE</a><a href="#">02 INDUSTRIES</a><a href="#">03 CLAIMS</a><a href="#">04 CONTACT</a>
+    </nav>
+    <a class="quote-link" href="#">GET A QUOTE ↗</a>
+  </header>
+
+  <div class="hero">
+    <h1>Insurance,<br />understood<span class="keystone" aria-hidden="true"></span></h1>
+    <div class="hero-row">
+      <div class="spec">
+        Independent brokerage<br />
+        Commercial &amp; personal lines<br />
+        Placed with A-rated carriers
+      </div>
+      <p class="lede">
+        Every policy read line by line, priced against the market, and
+        explained in words you'd actually use.
+        <a href="#">Get a quote ↗</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="index">
+    <a class="idx" href="#"><span class="no">01</span><b>Coverage</b><span class="arr">→</span></a>
+    <a class="idx" href="#"><span class="no">02</span><b>Industries</b><span class="arr">→</span></a>
+    <a class="idx" href="#"><span class="no">03</span><b>Claims</b><span class="arr">→</span></a>
+    <a class="idx" href="#"><span class="no">04</span><b>Contact</b><span class="arr">→</span></a>
+  </div>
+</section>
+
+<!-- ============ switcher ============ -->
+<div class="switcher" role="tablist" aria-label="Concept switcher">
+  <button class="on" data-target="concept-1" role="tab" aria-selected="true">01 KEYSTONE</button>
+  <button data-target="concept-2" role="tab" aria-selected="false">02 LEDGER</button>
+  <button data-target="concept-3" role="tab" aria-selected="false">03 SEAL</button>
+  <button data-target="concept-4" role="tab" aria-selected="false">04 ARCADE</button>
+  <button data-target="concept-5" role="tab" aria-selected="false">05 STONE</button>
+  <button data-target="concept-6" role="tab" aria-selected="false">06 COLLAGE</button>
+  <button data-target="concept-7" role="tab" aria-selected="false">07 EXCHANGE</button>
+  <button data-target="concept-8" role="tab" aria-selected="false">08 REPORT</button>
+  <button data-target="concept-9" role="tab" aria-selected="false">09 GLOBAL</button>
+  <button data-target="concept-10" role="tab" aria-selected="false">10 SYNDICATE</button>
+  <button data-target="concept-11" role="tab" aria-selected="false">11 PLATFORM</button>
+  <button data-target="concept-12" role="tab" aria-selected="false">12 POSTER</button>
+</div>
+
+<script>
+  // ---- concept switcher ----
+  const buttons = document.querySelectorAll('.switcher button');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => { b.classList.remove('on'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('on');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.concept').forEach((c) => c.classList.remove('active'));
+      document.getElementById(btn.dataset.target).classList.add('active');
+      window.scrollTo(0, 0);
+      if (btn.dataset.target === 'concept-1') runArch();
+    });
+  });
+
+  // ---- concept 1: generate + animate the arch ----
+  const svg = document.getElementById('arch');
+  const NS = 'http://www.w3.org/2000/svg';
+  const cx = 210, cy = 262, r1 = 118, r2 = 182, SEGS = 7, GAP = 1.6;
+
+  function polar(r, deg) {
+    const a = (deg * Math.PI) / 180;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+  function voussoirPath(a1, a2) {
+    const [x1, y1] = polar(r2, a1), [x2, y2] = polar(r2, a2);
+    const [x3, y3] = polar(r1, a2), [x4, y4] = polar(r1, a1);
+    return `M ${x1} ${y1} A ${r2} ${r2} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${r1} ${r1} 0 0 0 ${x4} ${y4} Z`;
+  }
+
+  // guides: plumb line + baseline + ticks
+  function el(name, attrs) {
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  svg.appendChild(el('line', { x1: cx, y1: 30, x2: cx, y2: cy + 8, class: 'guide' }));
+  svg.appendChild(el('line', { x1: cx - r2 - 20, y1: cy, x2: cx + r2 + 20, y2: cy, class: 'base' }));
+  [-r2, -r1, r1, r2].forEach((r) => {
+    svg.appendChild(el('line', { x1: cx + r, y1: cy, x2: cx + r, y2: cy + 10, class: 'base' }));
+  });
+
+  const span = 180 / SEGS;
+  const order = [0, 6, 1, 5, 2, 4, 3]; // outside-in, keystone last
+  const paths = [];
+  for (let i = 0; i < SEGS; i++) {
+    const a1 = 180 + i * span + (i === 0 ? 0 : GAP / 2);
+    const a2 = 180 + (i + 1) * span - (i === SEGS - 1 ? 0 : GAP / 2);
+    const p = el('path', { d: voussoirPath(a1, a2), class: 'voussoir' + (i === 3 ? ' key' : '') });
+    p.style.transitionDelay = `${order.indexOf(i) * 0.14 + (i === 3 ? 0.15 : 0)}s`;
+    svg.appendChild(p);
+    paths.push(p);
+  }
+
+  function runArch() {
+    const hero = svg.closest('.hero');
+    hero.classList.remove('drawn');
+    // force reflow so the transition restarts from the initial state
+    void svg.getBoundingClientRect();
+    hero.classList.add('drawn');
+  }
+  runArch();
+</script>
+</body>
+</html>

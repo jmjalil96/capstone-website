@@ -1,0 +1,396 @@
+.products {
+  --prod-navy: #0c2939;
+  --prod-teal-ink: #007265;
+  --prod-gray: #d9dfe1;
+  --prod-gold: #e2ab33;
+  --prod-white: #ffffff;
+
+  padding: 40px 64px 96px;
+  color: var(--prod-navy);
+  background: var(--prod-white);
+  font-family: 'Figtree', sans-serif;
+}
+
+.products :focus-visible {
+  outline: 2px solid var(--prod-navy);
+  outline-offset: 4px;
+}
+
+/* Sits beside the hero photo's 150px bleed; capped width keeps the copy
+   clear of the photo wedge on the right. */
+.products__intro {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  max-width: 620px;
+  padding-bottom: 22px;
+}
+
+.products__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: var(--prod-teal-ink);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.products__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  background: var(--prod-gold);
+  content: '';
+}
+
+.products__title {
+  margin: 0;
+  font: 700 clamp(28px, 3vw, 36px) / 1.1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.products__lede {
+  max-width: 540px;
+  margin: 0;
+  color: #44565f;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.products__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.products__clip-defs {
+  position: absolute;
+}
+
+/* Card frame: the back face sits in normal flow, so the card takes the
+   height of its list and can't overflow. */
+.cover-card {
+  position: relative;
+  perspective: 1500px;
+}
+
+.cover-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 640ms cubic-bezier(0.3, 0.7, 0.25, 1);
+}
+
+.cover-card--flipped .cover-card__inner {
+  transform: rotateY(180deg);
+}
+
+.cover-card__face {
+  overflow: hidden;
+  border: 1px solid var(--prod-gray);
+  border-radius: 10px;
+  background: var(--prod-white);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.cover-card__front {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.cover-card__back {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  padding: 22px 26px;
+  transform: rotateY(180deg);
+}
+
+.cover-card__photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56%;
+  clip-path: url('#card-photo-seam');
+}
+
+.cover-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+@media (hover: hover) {
+  .cover-card__front:hover .cover-card__photo img {
+    transform: scale(1.03);
+  }
+}
+
+.cover-card__foot {
+  position: absolute;
+  right: 26px;
+  bottom: 22px;
+  left: 26px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cover-card__titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.cover-card__eyebrow {
+  margin: 0;
+  color: var(--prod-teal-ink);
+  font: 500 11px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.cover-card__name {
+  margin: 0;
+  color: var(--prod-navy);
+  font: 800 clamp(28px, 2.6vw, 34px) / 1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.cover-card__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border: 0;
+  color: var(--prod-navy);
+  background: none;
+  font: 600 14px/1 'Figtree', sans-serif;
+  cursor: pointer;
+}
+
+.cover-card__chip {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--prod-navy);
+  background: var(--prod-gold);
+  transition: transform 160ms ease;
+}
+
+.cover-card__open:hover .cover-card__chip {
+  transform: translateX(4px);
+}
+
+.cover-card__list {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  align-content: center;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cover-card__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  transition: background-color 150ms ease;
+}
+
+.cover-card__item:hover {
+  background: #f2f6f5;
+}
+
+.cover-card__ico {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--prod-teal-ink);
+  background: rgba(0, 114, 101, 0.09);
+}
+
+.cover-card__ico svg {
+  width: 21px;
+  height: 21px;
+}
+
+.cover-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cover-card__what {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.cover-card__how {
+  color: #5b6b74;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.cover-card__more {
+  padding: 0;
+}
+
+.cover-card__more a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border: 1px dashed rgba(0, 114, 101, 0.45);
+  border-radius: 12px;
+  color: var(--prod-teal-ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cover-card__more a:hover {
+  background: #f2f6f5;
+}
+
+.cover-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cover-card__cta {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 4px;
+  color: var(--prod-navy);
+  background: var(--prod-gold);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.cover-card__cta:hover {
+  transform: translateY(-2px);
+}
+
+.cover-card__close {
+  min-height: 46px;
+  padding: 0 16px;
+  border: 0;
+  color: var(--prod-navy);
+  background: none;
+  font: 600 14px/1 'Figtree', sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .products {
+    padding: 32px 28px 72px;
+  }
+
+  /* The hero photo's bleed shrinks to 90px at this width. */
+  .products__intro {
+    min-height: 90px;
+  }
+
+  .products__cards {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .products {
+    padding: 12px 20px 56px;
+  }
+
+  .products__intro {
+    min-height: 0;
+    padding: 10px 0 20px;
+  }
+
+  .products__cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cover-card__back {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .cover-card__photo {
+    height: 62%;
+  }
+
+  .cover-card__list {
+    gap: 2px 8px;
+  }
+
+  .cover-card__item {
+    padding: 8px 6px;
+  }
+
+  .cover-card__more a {
+    padding: 8px 6px;
+  }
+
+  .cover-card__ico {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .cover-card__ico svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cover-card__what {
+    font-size: 14px;
+  }
+
+  .cover-card__how {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-card__inner,
+  .cover-card__photo img,
+  .cover-card__chip,
+  .cover-card__cta {
+    transition: none;
+  }
+}
