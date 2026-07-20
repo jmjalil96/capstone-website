@@ -60,7 +60,7 @@ function Footer() {
                 <a href="#coverage">Personas</a>
               </li>
               <li>
-                <a href="#process">Patrimonio</a>
+                <a href="#coverage">Empresas</a>
               </li>
               <li>
                 <a href="#quote">Cotización</a>

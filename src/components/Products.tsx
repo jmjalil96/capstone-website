@@ -103,6 +103,17 @@ const icons = {
       <path d="m9.6 13.6 1.8 1.8 3-3.1" />
     </CoverageIcon>
   ),
+  persona: (
+    <CoverageIcon>
+      <circle cx="12" cy="8" r="3.2" />
+      <path d="M5.5 19.2a6.5 6.5 0 0 1 13 0" />
+    </CoverageIcon>
+  ),
+  incendio: (
+    <CoverageIcon>
+      <path d="M12 4.5c1.3 2.3 4.9 4.7 4.9 8.4a4.9 4.9 0 0 1-9.8 0c0-1.4.5-2.7 1.4-3.9.3 1 .9 1.8 1.8 2.2-.4-2.5.2-4.9 1.7-6.7z" />
+    </CoverageIcon>
+  ),
   plus: (
     <CoverageIcon>
       <path d="M12 5v14M5 12h14" />
@@ -113,47 +124,59 @@ const icons = {
 const cards: CardData[] = [
   {
     id: 'personas',
-    eyebrow: 'Para tu salud y tu familia',
+    eyebrow: 'Para ti y tu familia',
     title: 'Personas',
     photo:
       'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1200',
     coverages: [
-      { icon: icons.auto, name: 'Medicina', detail: 'Medicamentos en una red exclusiva' },
-      { icon: icons.hogar, name: 'Maternidad', detail: 'Del chequeo prenatal al parto' },
-      { icon: icons.vida, name: 'Vida', detail: 'Opciones flexibles y personalizadas' },
-      { icon: icons.salud, name: 'Asistencia médica', detail: 'Protección completa para tu salud' },
       {
-        icon: icons.viajes,
-        name: 'Atención internacional',
-        detail: 'Hospitales de primer nivel en el mundo',
+        icon: icons.salud,
+        name: 'Asistencia médica',
+        detail: 'Consultas, medicinas y hospitalización',
       },
+      { icon: icons.vida, name: 'Vida', detail: 'El futuro de los tuyos, protegido' },
+      {
+        icon: icons.persona,
+        name: 'Accidentes personales',
+        detail: 'Respaldo económico ante imprevistos',
+      },
+      { icon: icons.auto, name: 'Vehículos', detail: 'Tu auto ante choques, robo o daños' },
+      { icon: icons.hogar, name: 'Hogar', detail: 'Tu casa y todo lo que hay en ella' },
     ],
-    moreLabel: '¿Trasplantes u otra cobertura? Pregúntanos',
+    moreLabel: '¿Viaje u otra cobertura? Pregúntanos',
     ctaLabel: 'Cotiza aquí',
     ctaHref: '#quote',
   },
   {
-    id: 'patrimonio',
-    eyebrow: 'Para tu hogar, auto y empresa',
-    title: 'Patrimonio',
+    id: 'empresas',
+    eyebrow: 'Para tu negocio y tu equipo',
+    title: 'Empresas',
     photo:
       'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=1200',
     coverages: [
-      { icon: icons.comercios, name: 'Ramos técnicos', detail: 'La continuidad de tus operaciones' },
-      { icon: icons.flota, name: 'Auto', detail: 'Tu vehículo, ante daños o pérdida' },
-      { icon: icons.responsabilidad, name: 'Robo', detail: 'Tu patrimonio, ante robo o asalto' },
       {
-        icon: icons.riesgos,
-        name: 'Incendio',
-        detail: 'Tus bienes, incluso ante desastres naturales',
+        icon: icons.incendio,
+        name: 'Incendio y aliadas',
+        detail: 'Tus activos, incluso ante desastres naturales',
       },
       {
-        icon: icons.caucion,
+        icon: icons.riesgos,
+        name: 'Ramos técnicos',
+        detail: 'Maquinaria, montaje y equipo electrónico',
+      },
+      { icon: icons.flota, name: 'Transporte', detail: 'Tu mercadería por tierra, mar o aire' },
+      {
+        icon: icons.responsabilidad,
         name: 'Responsabilidad civil',
         detail: 'Respaldo ante daños a terceros',
       },
+      {
+        icon: icons.caucion,
+        name: 'Fianzas',
+        detail: 'Cumplimiento de contrato y anticipos',
+      },
     ],
-    moreLabel: '¿Transporte de mercadería u otro riesgo? Pregúntanos',
+    moreLabel: '¿Flota vehicular u otro riesgo? Pregúntanos',
     ctaLabel: 'Cotiza por WhatsApp',
     ctaHref: 'https://wa.me/message/XM5YAG5TH4IEA1',
   },
