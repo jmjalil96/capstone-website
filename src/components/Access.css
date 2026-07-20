@@ -1,0 +1,552 @@
+.access {
+  --access-navy: #0c2939;
+  --access-navy-lift: #123449;
+  --access-gold: #e2ab33;
+  --access-white: #ffffff;
+  --access-teal-ink: #007265;
+  --access-border: #d9dfe1;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--access-navy);
+  background: var(--access-white);
+  font-family: 'Figtree', sans-serif;
+}
+
+/* La ventanilla: dos mostradores. El de la izquierda lleva la foto bajo
+   tinta navy y el borde curvo del hero — no una cuña recta sino la misma
+   línea que recorta la foto de portada. */
+.access__aside {
+  position: relative;
+  overflow: hidden;
+  color: var(--access-white);
+  background:
+    radial-gradient(120% 90% at 22% 12%, var(--access-navy-lift), transparent 58%),
+    var(--access-navy);
+  clip-path: url('#access-curve');
+}
+
+.access__media {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.access__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  filter: saturate(0.72);
+}
+
+/* Tinta navy sobre la foto: espesa donde vive el texto, más liviana
+   hacia la curva; un pie oscuro para que la estampa inferior respire. */
+.access__media::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(12, 41, 57, 0.9), rgba(12, 41, 57, 0) 40%),
+    linear-gradient(112deg, rgba(12, 41, 57, 0.98) 30%, rgba(12, 41, 57, 0.92) 62%, rgba(12, 41, 57, 0.74) 100%);
+  content: '';
+}
+
+.access__aside-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  /* Espacio a la derecha para que el texto libre el entalle de la curva. */
+  padding: 56px 132px 52px 60px;
+}
+
+.access__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--access-white);
+  font: 800 22px/1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.access__brand-mark {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  transform: rotate(45deg);
+  background: var(--access-gold);
+}
+
+/* El bloque-tesis del mostrador: sube al centro óptico, no al matemático. */
+.access__lede {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.access__aside-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 20px;
+  color: var(--access-gold);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.access__aside-eyebrow::before {
+  width: 26px;
+  height: 2px;
+  background: var(--access-gold);
+  content: '';
+}
+
+.access__aside-title {
+  margin: 0;
+  font: 600 clamp(30px, 3.4vw, 44px) / 1.12 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.access__aside-note {
+  max-width: 340px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Leyenda al pie, en versalitas de máquina: la firma del papel. */
+.access__stamp {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font: 500 11px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.access__clip-defs {
+  position: absolute;
+}
+
+.access__panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 40px;
+}
+
+.access__card {
+  width: 100%;
+  max-width: 424px;
+}
+
+.access__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  color: #5b6b74;
+  font: 600 13px/1 'Figtree', sans-serif;
+  text-decoration: none;
+}
+
+.access__back:hover {
+  color: var(--access-teal-ink);
+}
+
+.access__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: var(--access-teal-ink);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.access__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  background: var(--access-gold);
+  content: '';
+}
+
+.access__title {
+  margin: 16px 0 0;
+  font: 700 clamp(30px, 4vw, 40px) / 1.08 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.access__title:focus {
+  outline: none;
+}
+
+.access__form {
+  margin: 30px 0 0;
+}
+
+/* El selector de portal: dos fichas lado a lado. La elegida se voltea a
+   navy con el rombo dorado — sello estampado, no un tinte que se lava. */
+.access__realm {
+  margin: 0 0 28px;
+  padding: 0;
+  border: 0;
+}
+
+.access__legend {
+  padding: 0;
+  margin: 0 0 12px;
+  color: #5b6b74;
+  font: 500 11px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.access__realm-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.access__realm-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 15px 14px;
+  border: 1px solid var(--access-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.access__realm-option:hover {
+  border-color: #9fb0ba;
+  transform: translateY(-1px);
+}
+
+.access__realm-option--on {
+  border-color: var(--access-navy);
+  color: var(--access-white);
+  background: var(--access-navy);
+}
+
+/* El input real vive fuera de pantalla; la ficha es su etiqueta visible,
+   así el grupo sigue siendo un radiogroup navegable por teclado. */
+.access__realm-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.access__realm-mark {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  margin: 3px 0 0 2px;
+  transform: rotate(45deg);
+  border: 1.5px solid #b3bec4;
+  background: transparent;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.access__realm-option--on .access__realm-mark {
+  border-color: var(--access-gold);
+  background: var(--access-gold);
+}
+
+.access__realm-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.access__realm-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.access__realm-hint {
+  color: #5b6b74;
+  font-size: 12.5px;
+  line-height: 1.4;
+  transition: color 150ms ease;
+}
+
+.access__realm-option--on .access__realm-hint {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.access__field + .access__field {
+  margin-top: 20px;
+}
+
+.access__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Rail input: sólo el subrayado, igual que en el formulario de cotización. */
+.access__input {
+  width: 100%;
+  padding: 0 2px 9px;
+  border: 0;
+  border-bottom: 2px solid var(--access-border);
+  border-radius: 0;
+  color: var(--access-navy);
+  background: transparent;
+  font: 500 16px/1.4 'Figtree', sans-serif;
+  transition: border-color 150ms ease;
+}
+
+.access__input::placeholder {
+  color: #97a3a9;
+}
+
+.access__input:focus {
+  border-bottom-color: var(--access-teal-ink);
+  outline: none;
+}
+
+.access__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+/* El botón ancla la ficha a lo ancho; la flecha empujada al borde,
+   como en los botones del hero. */
+.access__cta {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--access-navy);
+  background: var(--access-gold);
+  font: 700 14px/1 'Figtree', sans-serif;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.access__cta:hover {
+  transform: translateY(-2px);
+}
+
+.access__cta:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.access__arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: translate 160ms ease;
+}
+
+.access__cta:hover .access__arrow {
+  translate: 4px 0;
+}
+
+.access__help {
+  align-self: center;
+  color: var(--access-teal-ink);
+  font: 600 13px/1.4 'Figtree', sans-serif;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.access__help:hover {
+  border-bottom-color: currentColor;
+}
+
+.access__feedback {
+  margin: 20px 0 0;
+  padding: 11px 14px;
+  border-left: 3px solid #b4232a;
+  border-radius: 0 6px 6px 0;
+  color: #9c1f26;
+  background: #fbf0f0;
+  font: 500 12.5px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* Línea de confianza: el candado y una nota corta, en la tipografía de
+   dato del sitio — cierra la ficha sin levantar la voz. */
+.access__secure {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 40px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--access-border);
+  color: #7a8890;
+  font: 500 11.5px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+.access__secure svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--access-teal-ink);
+}
+
+.access :focus-visible {
+  outline: 2px solid var(--access-navy);
+  outline-offset: 4px;
+}
+
+/* En el mostrador navy el foco navy se pierde; que sea dorado. */
+.access__aside :focus-visible {
+  outline: 2px solid var(--access-gold);
+  outline-offset: 4px;
+}
+
+.access__realm-option:has(input:focus-visible) {
+  outline: 2px solid var(--access-navy);
+  outline-offset: 3px;
+}
+
+/* La página entra como se abre una ventanilla: la ficha sube apenas y
+   la foto respira igual que en el hero. */
+@media (prefers-reduced-motion: no-preference) {
+  .access__card {
+    animation: access-rise 560ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .access__aside-inner {
+    animation: access-fade 700ms ease-out both;
+  }
+
+  .access__media img {
+    animation: access-drift 6s ease-out both;
+  }
+}
+
+@keyframes access-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes access-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes access-drift {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 880px) {
+  .access {
+    grid-template-columns: 1fr;
+  }
+
+  /* En vertical la curva pasa al pie de la banda: el mismo trazo, girado
+     al eje de una página que se lee de arriba abajo. */
+  .access__aside {
+    clip-path: url('#access-curve-mobile');
+  }
+
+  .access__aside-inner {
+    min-height: 0;
+    padding: 40px 32px 64px;
+    gap: 30px;
+  }
+
+  .access__lede {
+    margin: 0;
+  }
+
+  .access__aside-title {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+
+  .access__aside-note {
+    display: none;
+  }
+
+  .access__stamp {
+    display: none;
+  }
+
+  .access__panel {
+    padding: 40px 32px 56px;
+  }
+
+  .access__card {
+    max-width: 100%;
+  }
+
+  .access__back {
+    margin-bottom: 26px;
+  }
+}
+
+@media (max-width: 460px) {
+  .access__realm-options {
+    grid-template-columns: 1fr;
+  }
+
+  .access__realm-option {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 15px;
+  }
+
+  .access__realm-mark {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .access__cta,
+  .access__arrow,
+  .access__realm-option,
+  .access__realm-mark {
+    transition: none;
+  }
+}

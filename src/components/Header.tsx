@@ -69,10 +69,7 @@ function Header() {
             </a>
           </span>
 
-          <a
-            className="utility-bar__link utility-bar__portal"
-            href="https://creatorapp.zoho.com/juanmario_jalilbrokers/jbcorpo"
-          >
+          <a className="utility-bar__link utility-bar__portal" href="#acceso">
             Acceso
           </a>
         </div>
