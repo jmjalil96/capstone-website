@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import './Products.css'
 
 type Coverage = {
@@ -16,6 +17,7 @@ type CardData = {
   coverages: Coverage[]
   moreLabel: string
   ctaLabel: string
+  ctaHref: string
 }
 
 function CoverageIcon({ children }: { children: ReactNode }) {
@@ -111,39 +113,49 @@ const icons = {
 const cards: CardData[] = [
   {
     id: 'personas',
-    eyebrow: 'Para tu vida',
+    eyebrow: 'Para tu salud y tu familia',
     title: 'Personas',
     photo:
       'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1200',
     coverages: [
-      { icon: icons.auto, name: 'Auto', detail: 'Todo riesgo o terceros' },
-      { icon: icons.hogar, name: 'Hogar', detail: 'Incendio, robo y cristales' },
-      { icon: icons.vida, name: 'Vida', detail: 'Individual y con ahorro' },
-      { icon: icons.salud, name: 'Salud', detail: 'Accidentes personales' },
-      { icon: icons.viajes, name: 'Viajes', detail: 'Asistencia al viajero' },
+      { icon: icons.auto, name: 'Medicina', detail: 'Medicamentos en una red exclusiva' },
+      { icon: icons.hogar, name: 'Maternidad', detail: 'Del chequeo prenatal al parto' },
+      { icon: icons.vida, name: 'Vida', detail: 'Opciones flexibles y personalizadas' },
+      { icon: icons.salud, name: 'Asistencia médica', detail: 'Protección completa para tu salud' },
+      {
+        icon: icons.viajes,
+        name: 'Atención internacional',
+        detail: 'Hospitales de primer nivel en el mundo',
+      },
     ],
-    moreLabel: '¿Otra cobertura? Preguntanos',
-    ctaLabel: 'Pedir cotización',
+    moreLabel: '¿Trasplantes u otra cobertura? Pregúntanos',
+    ctaLabel: 'Cotiza aquí',
+    ctaHref: '#quote',
   },
   {
-    id: 'empresas',
-    eyebrow: 'Para tu negocio',
-    title: 'Empresas',
+    id: 'patrimonio',
+    eyebrow: 'Para tu hogar, auto y empresa',
+    title: 'Patrimonio',
     photo:
       'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=1200',
     coverages: [
-      { icon: icons.comercios, name: 'Pyme y comercios', detail: 'Multicobertura integral' },
-      { icon: icons.flota, name: 'Flota vehicular', detail: 'Autos y utilitarios' },
+      { icon: icons.comercios, name: 'Ramos técnicos', detail: 'La continuidad de tus operaciones' },
+      { icon: icons.flota, name: 'Auto', detail: 'Tu vehículo, ante daños o pérdida' },
+      { icon: icons.responsabilidad, name: 'Robo', detail: 'Tu patrimonio, ante robo o asalto' },
       {
-        icon: icons.responsabilidad,
-        name: 'Responsabilidad civil',
-        detail: 'Profesional y de operaciones',
+        icon: icons.riesgos,
+        name: 'Incendio',
+        detail: 'Tus bienes, incluso ante desastres naturales',
       },
-      { icon: icons.riesgos, name: 'Riesgos del trabajo', detail: 'ART para tu equipo' },
-      { icon: icons.caucion, name: 'Caución', detail: 'Garantías de contrato' },
+      {
+        icon: icons.caucion,
+        name: 'Responsabilidad civil',
+        detail: 'Respaldo ante daños a terceros',
+      },
     ],
-    moreLabel: '¿Un riesgo específico? Preguntanos',
-    ctaLabel: 'Hablar con un asesor',
+    moreLabel: '¿Transporte de mercadería u otro riesgo? Pregúntanos',
+    ctaLabel: 'Cotiza por WhatsApp',
+    ctaHref: 'https://wa.me/message/XM5YAG5TH4IEA1',
   },
 ]
 
@@ -186,7 +198,7 @@ function CoverCard({ card }: { card: CardData }) {
               type="button"
               aria-expanded={isFlipped}
             >
-              Ver coberturas{' '}
+              Ver seguros{' '}
               <span className="cover-card__chip" aria-hidden="true">
                 →
               </span>
@@ -209,7 +221,7 @@ function CoverCard({ card }: { card: CardData }) {
               </li>
             ))}
             <li className="cover-card__item cover-card__more">
-              <a href="#contact">
+              <a href="#quote">
                 <span className="cover-card__ico" aria-hidden="true">
                   {icons.plus}
                 </span>
@@ -218,7 +230,7 @@ function CoverCard({ card }: { card: CardData }) {
             </li>
           </ul>
           <div className="cover-card__actions">
-            <a className="cover-card__cta" href="#quote">
+            <a className="cover-card__cta" href={card.ctaHref}>
               {card.ctaLabel}
             </a>
             <button className="cover-card__close" type="button" onClick={close}>
@@ -232,21 +244,28 @@ function CoverCard({ card }: { card: CardData }) {
 }
 
 function Products() {
-  return (
-    <section className="products" lang="es" aria-label="Coberturas">
-      <div className="products__intro">
-        <p className="products__eyebrow">Coberturas</p>
-        <h2 className="products__title">Dos maneras de empezar.</h2>
-        <p className="products__lede">
-          Elige tu perfil y da vuelta la tarjeta: ahí están las coberturas que comparamos y
-          cotizamos por ti.
-        </p>
-      </div>
+  const sectionRef = useRef<HTMLElement>(null)
 
-      <div className="products__cards">
-        {cards.map((card) => (
-          <CoverCard key={card.id} card={card} />
-        ))}
+  /* Solo un momento narrativo acá: las dos puertas aparecen al llegar. */
+  useReveal(sectionRef, '.cover-card')
+
+  return (
+    <section className="products" id="coverage" aria-label="Coberturas" ref={sectionRef}>
+      <div className="shell">
+        <div className="products__intro">
+          <p className="products__eyebrow">Seguros</p>
+          <h2 className="products__title">Un seguro para cada necesidad.</h2>
+          <p className="products__lede">
+            Una solución para cada problema: elige tu perfil y da vuelta la tarjeta para ver los
+            seguros que cotizamos por ti.
+          </p>
+        </div>
+
+        <div className="products__cards">
+          {cards.map((card) => (
+            <CoverCard key={card.id} card={card} />
+          ))}
+        </div>
       </div>
 
       <svg

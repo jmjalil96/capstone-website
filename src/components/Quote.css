@@ -1,0 +1,321 @@
+.quote-section {
+  --quote-navy: #0c2939;
+  --quote-gold: #e2ab33;
+  --quote-white: #ffffff;
+  --quote-teal-ink: #007265;
+  --quote-border: #d9dfe1;
+
+  overflow: hidden;
+  /* [F8] 88/96 en lugar de 88/110: mismo fondo que el resto. */
+  padding-block: 88px 96px;
+  color: var(--quote-navy);
+  background: var(--quote-white);
+  font-family: 'Figtree', sans-serif;
+}
+
+/* [F6] El shell es el ancla del sello: relative acá, no en la sección. */
+.quote-section__shell {
+  position: relative;
+}
+
+.quote-section__inner {
+  max-width: 920px;
+}
+
+.quote-section__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: var(--quote-teal-ink);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.quote-section__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  background: var(--quote-gold);
+  content: '';
+}
+
+.quote-section__form {
+  margin: 0;
+}
+
+/* La frase: el paso 01 hecho sección. En blanco lee como formulario
+   impreso — la oración en tinta navy, los espacios subrayados son tu
+   parte (tinta teal, la de los enlaces); el dorado queda para el botón. */
+.quote-section__sentence {
+  margin: 26px 0 0;
+  font: 700 clamp(30px, 4.4vw, 50px) / 1.42 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.quote-section__input {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0 2px 4px;
+  border: 0;
+  border-bottom: 3px solid var(--quote-border);
+  border-radius: 0;
+  color: var(--quote-teal-ink);
+  background: transparent;
+  font: inherit;
+}
+
+.quote-section__input::placeholder {
+  /* Light enough to read as "unfilled", dark enough for AA (4.8:1). */
+  color: #66757e;
+}
+
+/* The darkened underline is the focus indicator on these rail inputs. */
+.quote-section__input:focus {
+  border-bottom-color: var(--quote-teal-ink);
+  outline: none;
+}
+
+.quote-section__select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* Un botón, no un select: el texto es un nodo real, así que el ancho es
+   intrínseco — imposible recortar la última letra. */
+.quote-section__select-button {
+  padding-right: 0.9em;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Em-sized caret: keeps its weight against the display type at any clamp. */
+.quote-section__select-wrap::after {
+  position: absolute;
+  right: 0.1em;
+  bottom: 0.3em;
+  border: 0.16em solid transparent;
+  border-top: 0.2em solid var(--quote-teal-ink);
+  content: '';
+  pointer-events: none;
+  transition: transform 150ms ease;
+}
+
+.quote-section__select-wrap.open::after {
+  transform: translateY(-0.1em) rotate(180deg);
+}
+
+/* La lista: papel sobre papel — misma carta que las tarjetas y el menú
+   móvil (borde gris, radio 10, sombra hacia abajo). Spans, no ul/li:
+   dentro de un <p> solo puede vivir contenido de frase. */
+.quote-section__options {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 12px);
+  left: 0;
+  display: block;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--quote-border);
+  border-radius: 10px;
+  background: var(--quote-white);
+  box-shadow: 0 26px 34px -20px rgba(12, 41, 57, 0.35);
+  font: 600 17px/1.2 'Figtree', sans-serif;
+  letter-spacing: normal;
+}
+
+.quote-section__options[hidden] {
+  display: none;
+}
+
+.quote-section__options [role='option'] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--quote-navy);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* El rombo — la marca — señala la opción elegida; las demás llevan un
+   hueco del mismo tamaño para que el texto alinee. */
+.quote-section__options [role='option']::before {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  transform: rotate(45deg);
+  background: transparent;
+  content: '';
+}
+
+.quote-section__options [role='option'][aria-selected='true']::before {
+  background: var(--quote-gold);
+}
+
+.quote-section__options [role='option']:hover,
+.quote-section__options [role='option']:focus {
+  color: var(--quote-teal-ink);
+  background: #f2f6f5;
+  outline: none;
+}
+
+.quote-section__input--name {
+  width: 10ch;
+}
+
+.quote-section__input--phone {
+  width: 12ch;
+}
+
+.quote-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.quote-section__cta {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--quote-navy);
+  background: var(--quote-gold);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.quote-section__cta:hover {
+  transform: translateY(-2px);
+}
+
+/* La flecha del botón apunta el camino. */
+.quote-section__arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: translate 160ms ease;
+}
+
+.quote-section__cta:hover .quote-section__arrow {
+  translate: 4px 0;
+}
+
+/* Secundario en claro: contorno navy sobre papel. */
+.quote-section__alt {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid rgba(12, 41, 57, 0.4);
+  border-radius: 4px;
+  color: var(--quote-navy);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.quote-section__alt:hover {
+  transform: translateY(-2px);
+  color: var(--quote-white);
+  background: var(--quote-navy);
+}
+
+.quote-section__note {
+  margin: 24px 0 0;
+  color: #5b6b74;
+  font: 500 12px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Gold focus fails on white. */
+.quote-section :focus-visible {
+  outline: 2px solid var(--quote-navy);
+  outline-offset: 4px;
+}
+
+/* Contrapeso del vacío a la derecha en pantallas anchas: rombos
+   concéntricos en línea de lápiz — la marca, en clave de sello.
+   [F6] right: var(--gutter) sobre el shell: la punta rotada queda
+   dentro del riel de contenido en todo ancho, sin rebanarse. */
+.quote-section__mark {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 0;
+  display: none;
+  width: clamp(220px, 20vw, 300px);
+  aspect-ratio: 1;
+  border: 1px solid var(--quote-border);
+  pointer-events: none;
+  transform: rotate(45deg);
+}
+
+.quote-section__mark::before {
+  position: absolute;
+  inset: 24%;
+  border: 1px solid var(--quote-border);
+  content: '';
+}
+
+.quote-section__mark::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  background: var(--quote-gold);
+  content: '';
+}
+
+@media (min-width: 1200px) {
+  .quote-section__mark {
+    display: block;
+  }
+}
+
+@media (max-width: 980px) {
+  .quote-section {
+    padding-block: 72px 80px;
+  }
+}
+
+@media (max-width: 720px) {
+  .quote-section {
+    padding-block: 48px 64px;
+  }
+
+  .quote-section__sentence {
+    margin-top: 18px;
+    font-size: clamp(27px, 8vw, 34px);
+  }
+
+  .quote-section__actions {
+    margin-top: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-section__cta,
+  .quote-section__alt,
+  .quote-section__arrow,
+  .quote-section__select-wrap::after {
+    transition: none;
+  }
+}

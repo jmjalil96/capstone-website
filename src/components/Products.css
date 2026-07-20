@@ -5,7 +5,7 @@
   --prod-gold: #e2ab33;
   --prod-white: #ffffff;
 
-  padding: 40px 64px 96px;
+  padding-block: 40px 96px;
   color: var(--prod-navy);
   background: var(--prod-white);
   font-family: 'Figtree', sans-serif;
@@ -118,7 +118,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 56%;
+  /* Pinned to the foot, not a percentage: the photo eats whatever height
+     the back face dictates, so no dead white band opens up between them. */
+  height: calc(100% - 136px);
   clip-path: url('#card-photo-seam');
 }
 
@@ -132,6 +134,13 @@
 @media (hover: hover) {
   .cover-card__front:hover .cover-card__photo img {
     transform: scale(1.03);
+  }
+}
+
+/* La tarjeta insinúa su giro al pasar el mouse. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .cover-card:not(.cover-card--flipped):hover .cover-card__inner {
+    transform: rotateY(6deg);
   }
 }
 
@@ -317,7 +326,7 @@
 
 @media (max-width: 980px) {
   .products {
-    padding: 32px 28px 72px;
+    padding-block: 32px 72px;
   }
 
   /* The hero photo's bleed shrinks to 90px at this width. */
@@ -330,9 +339,18 @@
   }
 }
 
+/* [F5] La ventana angosta de dos columnas: con tarjetas de ~330-410px la
+   lista de dos columnas deja textos de 58-80px que envuelven a tres
+   líneas. Una columna respira. */
+@media (min-width: 721px) and (max-width: 900px) {
+  .cover-card__list {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 720px) {
   .products {
-    padding: 12px 20px 56px;
+    padding-block: 12px 56px;
   }
 
   .products__intro {
@@ -351,7 +369,7 @@
   }
 
   .cover-card__photo {
-    height: 62%;
+    height: calc(100% - 118px);
   }
 
   .cover-card__list {

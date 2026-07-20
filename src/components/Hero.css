@@ -11,29 +11,35 @@
   font-family: 'Figtree', sans-serif;
 }
 
-.insurance-hero__content {
+.insurance-hero__shell {
   position: relative;
   z-index: 2;
-  width: 50%;
-  max-width: 760px;
-  padding: clamp(72px, 8vw, 112px) 40px 92px;
 }
 
+.insurance-hero__content {
+  width: 55%;
+  max-width: 680px;
+  /* [F8] 96 abajo, como el resto de las secciones. */
+  padding-block: clamp(72px, 8vw, 112px) 96px;
+}
+
+/* [F7] El eyebrow del kit: 0.2em, regla dorada de 2px, gap 14. */
 .insurance-hero__eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin: 0 0 24px;
   color: var(--hero-gold);
   font: 500 12px/1 'IBM Plex Mono', monospace;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .insurance-hero__eyebrow::before {
   width: 26px;
-  height: 1px;
-  background: currentColor;
+  height: 2px;
+  flex: none;
+  background: var(--hero-gold);
   content: '';
 }
 
@@ -103,9 +109,15 @@
   background: var(--hero-white);
 }
 
+/* La flecha del botón apunta el camino. */
 .insurance-hero__button span {
   font-size: 18px;
   line-height: 1;
+  transition: translate 160ms ease;
+}
+
+.insurance-hero__button:hover span {
+  translate: 4px 0;
 }
 
 .insurance-hero__media {
@@ -146,6 +158,23 @@
   display: none;
 }
 
+/* La foto respira al cargar: de 1.06 a 1, seis segundos. */
+@media (prefers-reduced-motion: no-preference) {
+  .insurance-hero__media img {
+    animation: hero-drift 6s ease-out both;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 980px) {
   .insurance-hero {
     min-height: 0;
@@ -153,7 +182,7 @@
 
   .insurance-hero__content {
     width: 66%;
-    padding: 72px 28px 70px;
+    padding-block: 72px 70px;
   }
 
   .insurance-hero__lede {
@@ -180,7 +209,7 @@
   .insurance-hero__content {
     width: 100%;
     max-width: none;
-    padding: 36px 20px 18px;
+    padding-block: 36px 18px;
   }
 
   .insurance-hero__eyebrow {
@@ -189,8 +218,7 @@
   }
 
   .insurance-hero__eyebrow::before {
-    flex: none;
-    margin-top: 8px;
+    margin-top: 5px;
   }
 
   .insurance-hero__title {
@@ -246,7 +274,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .insurance-hero__button {
+  .insurance-hero__button,
+  .insurance-hero__button span {
     transition: none;
   }
 }
