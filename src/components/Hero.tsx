@@ -1,12 +1,14 @@
 import './Hero.css'
 
-const heroPhotoBase = 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf'
+/* Fotos en el repo, no en Unsplash: el sitio no depende de un CDN ajeno. */
+import hero800 from '../assets/hero-800.webp'
+import hero1200 from '../assets/hero-1200.webp'
+import hero1600 from '../assets/hero-1600.webp'
+import hero2400 from '../assets/hero-2400.webp'
 
-const heroImageUrl = `${heroPhotoBase}?auto=format&fit=crop&q=85&w=1600`
+const heroImageUrl = hero1600
 
-const heroImageSrcSet = [800, 1200, 1600, 2400]
-  .map((width) => `${heroPhotoBase}?auto=format&fit=crop&q=85&w=${width} ${width}w`)
-  .join(', ')
+const heroImageSrcSet = `${hero800} 800w, ${hero1200} 1200w, ${hero1600} 1600w, ${hero2400} 2400w`
 
 function Hero() {
   return (

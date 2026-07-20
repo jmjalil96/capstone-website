@@ -3,6 +3,10 @@ import type { ReactNode } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import './Products.css'
 
+/* Fotos en el repo, no en Unsplash: el sitio no depende de un CDN ajeno. */
+import personasPhoto from '../assets/personas-1200.webp'
+import empresasPhoto from '../assets/empresas-1200.webp'
+
 type Coverage = {
   icon: ReactNode
   name: string
@@ -126,8 +130,7 @@ const cards: CardData[] = [
     id: 'personas',
     eyebrow: 'Para ti y tu familia',
     title: 'Personas',
-    photo:
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1200',
+    photo: personasPhoto,
     coverages: [
       {
         icon: icons.salud,
@@ -151,8 +154,7 @@ const cards: CardData[] = [
     id: 'empresas',
     eyebrow: 'Para tu negocio y tu equipo',
     title: 'Empresas',
-    photo:
-      'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=1200',
+    photo: empresasPhoto,
     coverages: [
       {
         icon: icons.incendio,

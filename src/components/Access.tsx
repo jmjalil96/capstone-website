@@ -4,15 +4,16 @@ import { createSession } from '../lib/portalSession'
 import type { Realm } from '../lib/portalSession'
 import './Access.css'
 
+/* Foto en el repo, no en Unsplash; bajo la tinta navy no hace falta
+   más resolución que 1200. */
+import aside700 from '../assets/acceso-700.webp'
+import aside1200 from '../assets/acceso-1200.webp'
+
 type Status = 'idle' | 'checking' | 'error'
 
-const asidePhotoBase = 'https://images.unsplash.com/photo-1556761175-b413da4baf72'
+const asideImageUrl = aside1200
 
-const asideImageUrl = `${asidePhotoBase}?auto=format&fit=crop&q=80&w=1200`
-
-const asideImageSrcSet = [700, 1200, 1800]
-  .map((width) => `${asidePhotoBase}?auto=format&fit=crop&q=80&w=${width} ${width}w`)
-  .join(', ')
+const asideImageSrcSet = `${aside700} 700w, ${aside1200} 1200w`
 
 const realms: { id: Realm; label: string; hint: string; userLabel: string; userHint: string }[] = [
   {
