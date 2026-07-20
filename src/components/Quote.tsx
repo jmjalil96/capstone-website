@@ -76,6 +76,9 @@ function Quote() {
       const response = await fetch(LEADS_URL, {
         method: 'POST',
         body: JSON.stringify(payload),
+        /* Si Apps Script se cuelga, a los 15s cae al mensaje de error
+           en vez de dejar el botón en "Enviando…" para siempre. */
+        signal: AbortSignal.timeout(15000),
       })
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       setSentName(payload.name)

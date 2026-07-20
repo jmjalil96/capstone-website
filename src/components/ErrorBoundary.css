@@ -1,0 +1,88 @@
+/* La pantalla de emergencia habla el idioma de la casa: navy, rombo
+   dorado y los mismos botones del hero — nada de blanco anónimo. */
+.app-fallback {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  color: #ffffff;
+  background: #0c2939;
+  font-family: 'Figtree', sans-serif;
+  text-align: center;
+}
+
+.app-fallback__mark {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 28px;
+  transform: rotate(45deg);
+  background: #e2ab33;
+}
+
+.app-fallback__title {
+  max-width: 520px;
+  margin: 0 0 14px;
+  font: 800 clamp(28px, 5vw, 40px) / 1.1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.app-fallback__note {
+  max-width: 440px;
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.app-fallback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.app-fallback__reload,
+.app-fallback__whatsapp {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.app-fallback__reload:hover,
+.app-fallback__whatsapp:hover {
+  transform: translateY(-2px);
+}
+
+.app-fallback__reload {
+  color: #0c2939;
+  background: #e2ab33;
+}
+
+.app-fallback__whatsapp {
+  border-color: rgba(255, 255, 255, 0.48);
+  color: #ffffff;
+  background: transparent;
+}
+
+.app-fallback :focus-visible {
+  outline: 2px solid #e2ab33;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-fallback__reload,
+  .app-fallback__whatsapp {
+    transition: none;
+  }
+}

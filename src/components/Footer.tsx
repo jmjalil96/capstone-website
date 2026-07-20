@@ -66,9 +66,7 @@ function Footer() {
                 <a href="#quote">Cotización</a>
               </li>
               <li>
-                <a href="https://creatorapp.zoho.com/juanmario_jalilbrokers/portal-jb-agentes">
-                  Portal agente
-                </a>
+                <a href="#acceso">Portal agente</a>
               </li>
             </ul>
           </nav>
