@@ -208,7 +208,9 @@
 .cover-card__list {
   display: grid;
   flex: 1;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0,…): las columnas pueden bajar de su min-content y el texto
+     quiebra — sin esto la carta desborda el shell en 375. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 4px 12px;
   align-content: center;
   margin: 12px 0 0;

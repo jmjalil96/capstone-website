@@ -170,6 +170,10 @@
   width: 12ch;
 }
 
+.quote-section__input--email {
+  width: 20ch;
+}
+
 .quote-section__actions {
   display: flex;
   flex-wrap: wrap;
@@ -198,6 +202,12 @@
 
 .quote-section__cta:hover {
   transform: translateY(-2px);
+}
+
+.quote-section__cta:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
 }
 
 /* La flecha del botón apunta el camino. */
@@ -242,6 +252,28 @@
   color: #5b6b74;
   font: 500 12px/1.5 'IBM Plex Mono', monospace;
   letter-spacing: 0.04em;
+}
+
+/* Trampa antibots: fuera de pantalla, nunca display:none — los bots
+   que esquivan campos ocultos por display igual marcan este. */
+.quote-section__botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quote-section__feedback {
+  margin: 18px 0 0;
+  font: 500 12px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Rojo con AA sobre blanco (5.9:1). */
+.quote-section__feedback--error {
+  color: #b4232a;
 }
 
 /* Gold focus fails on white. */
