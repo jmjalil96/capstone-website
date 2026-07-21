@@ -231,11 +231,10 @@
 }
 
 .process-section__badge-sep {
-  width: 7px;
+  width: 9px;
   height: 7px;
   flex: none;
-  transform: rotate(45deg);
-  background: var(--process-gold);
+  fill: var(--process-gold);
 }
 
 /* On desktop the tracks dissolve so the capsule lays out badges directly;
@@ -253,8 +252,8 @@
   position: absolute;
 }
 
-/* [F4] En la ventana donde la cápsula envuelve a dos filas, los rombos
-   separadores desaparecen: sin rombo colgante a fin de fila. */
+/* [F4] En la ventana donde la cápsula envuelve a dos filas, las piedras
+   separadoras desaparecen: sin piedra colgante a fin de fila. */
 @media (min-width: 981px) and (max-width: 1199px) {
   .process-section__badge-sep {
     display: none;

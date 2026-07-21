@@ -67,19 +67,14 @@
 .access__brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  color: var(--access-white);
-  font: 800 22px/1 'Bricolage Grotesque', sans-serif;
-  letter-spacing: -0.01em;
   text-decoration: none;
 }
 
-.access__brand-mark {
-  width: 12px;
-  height: 12px;
-  flex: none;
-  transform: rotate(45deg);
-  background: var(--access-gold);
+.access__brand-img {
+  display: block;
+  height: 30px;
+  width: auto;
+  color: var(--access-white);
 }
 
 /* El bloque-tesis del mostrador: sube al centro óptico, no al matemático. */
@@ -192,7 +187,8 @@
 }
 
 /* El selector de portal: dos fichas lado a lado. La elegida se voltea a
-   navy con el rombo dorado — sello estampado, no un tinte que se lava. */
+   navy con la piedra clave dorada — sello estampado, no un tinte que se
+   lava. */
 .access__realm {
   margin: 0 0 28px;
   padding: 0;
@@ -252,21 +248,22 @@
 }
 
 .access__realm-mark {
-  width: 9px;
+  width: 12px;
   height: 9px;
   flex: none;
-  margin: 3px 0 0 2px;
-  transform: rotate(45deg);
-  border: 1.5px solid #b3bec4;
-  background: transparent;
+  margin: 3px 0 0 1px;
+  fill: transparent;
+  stroke: #b3bec4;
+  stroke-width: 7;
+  stroke-linejoin: round;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    fill 150ms ease,
+    stroke 150ms ease;
 }
 
 .access__realm-option--on .access__realm-mark {
-  border-color: var(--access-gold);
-  background: var(--access-gold);
+  stroke: var(--access-gold);
+  fill: var(--access-gold);
 }
 
 .access__realm-text {

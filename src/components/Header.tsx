@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { CapstoneLogo } from './CapstoneLogo'
 import './Header.css'
 
 const navigationItems = [
@@ -14,13 +15,13 @@ function Header() {
 
   const closeMenu = () => setIsMenuOpen(false)
 
-  /* Scrollspy: el rombo sigue el scroll, no solo el clic. La franja
-     central del viewport decide qué sección "es" en cada momento. */
+  /* Scrollspy: la piedra clave sigue el scroll, no solo el clic. La
+     franja central del viewport decide qué sección "es" en cada momento. */
   useEffect(() => {
     const sections = ['coverage', 'process', 'quote']
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
-    /* Sin id: pasar por el hero apaga el rombo. */
+    /* Sin id: pasar por el hero apaga la piedra. */
     const hero = document.querySelector<HTMLElement>('.insurance-hero')
 
     const spy = new IntersectionObserver(
@@ -78,8 +79,7 @@ function Header() {
       <div className="primary-header">
         <div className="shell primary-header__inner">
           <a className="brand" href="#top" aria-label="Capstone — inicio">
-            <span className="brand__mark" aria-hidden="true" />
-            <span className="brand__name">Capstone</span>
+            <CapstoneLogo className="brand__logo" />
           </a>
 
           <nav className="desktop-navigation" aria-label="Navegación principal">

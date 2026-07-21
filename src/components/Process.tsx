@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import KeystoneMark from './KeystoneMark'
 import './Process.css'
 
 const steps = [
@@ -45,23 +46,20 @@ function BadgeItems() {
         </svg>
         Más de 30 años de experiencia
       </span>
-      <span className="process-section__badge-sep" aria-hidden="true" />
+      <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
         <strong>+3000</strong> pólizas activas
       </span>
-      <span className="process-section__badge-sep" aria-hidden="true" />
+      <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
         <strong>+30</strong> aseguradoras aliadas
       </span>
-      <span className="process-section__badge-sep" aria-hidden="true" />
+      <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
         <strong>+1.5MM</strong> reembolsos 2022
       </span>
       {/* Trailing separator closes the marquee loop; desktop hides it. */}
-      <span
-        className="process-section__badge-sep process-section__badge-sep--loop"
-        aria-hidden="true"
-      />
+      <KeystoneMark className="process-section__badge-sep process-section__badge-sep--loop" />
     </>
   )
 }

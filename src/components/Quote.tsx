@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { FormEvent, KeyboardEvent } from 'react'
+import { ArchMark } from './CapstoneLogo'
 import './Quote.css'
 
 const insurables = ['mi salud', 'mi familia', 'mi auto', 'mi casa', 'mi empresa', 'otra cosa']
@@ -227,7 +228,7 @@ function Quote() {
           )}
         </div>
 
-        <div className="quote-section__mark" aria-hidden="true" />
+        <ArchMark className="quote-section__mark" keyClassName="quote-section__mark-key" />
       </div>
     </section>
   )

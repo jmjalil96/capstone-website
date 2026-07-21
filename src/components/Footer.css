@@ -108,19 +108,14 @@
 .site-footer__logo {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  color: var(--footer-white);
-  font: 800 20px/1 'Bricolage Grotesque', sans-serif;
-  letter-spacing: -0.01em;
   text-decoration: none;
 }
 
-.site-footer__logo-mark {
-  width: 11px;
-  height: 11px;
-  flex: none;
-  transform: rotate(45deg);
-  background: var(--footer-gold);
+.site-footer__logo-img {
+  display: block;
+  height: 26px;
+  width: auto;
+  color: var(--footer-white);
 }
 
 .site-footer__pitch {
@@ -187,16 +182,29 @@
 }
 
 /* El membrete: el wordmark gigante recortado por el borde inferior,
-   como sello en relieve al pie de la carta. */
+   como sello en relieve al pie de la carta. Un solo ancho gobierna el
+   recorte: asoma el 60% de la altura del wordmark (aspecto 207/1094). */
 .site-footer__word {
-  height: 0.68em;
+  --word-w: clamp(460px, 92vw, 1250px);
+  --word-h: calc(var(--word-w) * (207 / 1094));
+
+  display: flex;
+  justify-content: center;
+  height: calc(var(--word-h) * 0.6);
   overflow: hidden;
-  color: rgba(255, 255, 255, 0.07);
-  font: 800 clamp(92px, 16.5vw, 250px) / 0.86 'Bricolage Grotesque', sans-serif;
-  letter-spacing: -0.03em;
-  text-align: center;
+  opacity: 0.07;
   user-select: none;
-  white-space: nowrap;
+}
+
+/* Alto explícito: como flex item, un height auto se estiraría al alto
+   del contenedor (y con el height de atributo quedaría letterbox). */
+.site-footer__word svg {
+  display: block;
+  width: var(--word-w);
+  height: var(--word-h);
+  max-width: none;
+  flex: none;
+  color: var(--footer-white);
 }
 
 .site-footer :focus-visible {

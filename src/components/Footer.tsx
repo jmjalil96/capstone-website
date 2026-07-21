@@ -1,3 +1,4 @@
+import { CapstoneLogo, CapstoneWordmark } from './CapstoneLogo'
 import './Footer.css'
 
 /* Aseguradoras aliadas reales (capstone.com.ec) en tratamientos
@@ -43,9 +44,8 @@ function Footer() {
       <div className="shell site-footer__body">
         <div className="site-footer__columns">
           <div className="site-footer__brand">
-            <a className="site-footer__logo" href="#top">
-              <span className="site-footer__logo-mark" aria-hidden="true" />
-              Capstone
+            <a className="site-footer__logo" href="#top" aria-label="Capstone — inicio">
+              <CapstoneLogo className="site-footer__logo-img" />
             </a>
             <p className="site-footer__pitch">
               Broker de seguros. Nuestra visión es inspirar y desafiar la industria de seguros: un
@@ -100,7 +100,7 @@ function Footer() {
       </div>
 
       <div className="site-footer__word" aria-hidden="true">
-        Capstone
+        <CapstoneWordmark />
       </div>
     </footer>
   )

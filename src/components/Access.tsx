@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { createSession } from '../lib/portalSession'
 import type { Realm } from '../lib/portalSession'
+import { CapstoneLogo } from './CapstoneLogo'
+import KeystoneMark from './KeystoneMark'
 import './Access.css'
 
 /* Foto en el repo, no en Unsplash; bajo la tinta navy no hace falta
@@ -76,9 +78,8 @@ function Access() {
         </div>
 
         <div className="access__aside-inner">
-          <a className="access__brand" href="#top">
-            <span className="access__brand-mark" aria-hidden="true" />
-            Capstone
+          <a className="access__brand" href="#top" aria-label="Capstone — inicio">
+            <CapstoneLogo className="access__brand-img" />
           </a>
 
           <div className="access__lede">
@@ -142,7 +143,7 @@ function Access() {
                         if (status === 'error') setStatus('idle')
                       }}
                     />
-                    <span className="access__realm-mark" aria-hidden="true" />
+                    <KeystoneMark className="access__realm-mark" />
                     <span className="access__realm-text">
                       <span className="access__realm-name">{option.label}</span>
                       <span className="access__realm-hint">{option.hint}</span>

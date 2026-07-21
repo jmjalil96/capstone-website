@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
+import { ArchMark } from './CapstoneLogo'
 import './ErrorBoundary.css'
 
 type Props = { children: ReactNode }
@@ -23,7 +24,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     return (
       <div className="app-fallback" role="alert">
-        <span className="app-fallback__mark" aria-hidden="true" />
+        <ArchMark className="app-fallback__mark" keyClassName="app-fallback__mark-key" />
         <h1 className="app-fallback__title">Algo salió mal de nuestro lado.</h1>
         <p className="app-fallback__note">
           Recarga la página para intentar de nuevo. Si sigue fallando, escríbenos y te atendemos

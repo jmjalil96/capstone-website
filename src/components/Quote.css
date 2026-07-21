@@ -140,14 +140,15 @@
   white-space: nowrap;
 }
 
-/* El rombo — la marca — señala la opción elegida; las demás llevan un
-   hueco del mismo tamaño para que el texto alinee. */
+/* La piedra clave — la marca — señala la opción elegida; las demás
+   llevan un hueco del mismo tamaño para que el texto alinee. */
 .quote-section__options [role='option']::before {
-  width: 7px;
+  width: 9px;
   height: 7px;
   flex: none;
-  transform: rotate(45deg);
   background: transparent;
+  -webkit-mask: var(--keystone-mask) center / contain no-repeat;
+  mask: var(--keystone-mask) center / contain no-repeat;
   content: '';
 }
 
@@ -282,38 +283,27 @@
   outline-offset: 4px;
 }
 
-/* Contrapeso del vacío a la derecha en pantallas anchas: rombos
-   concéntricos en línea de lápiz — la marca, en clave de sello.
-   [F6] right: var(--gutter) sobre el shell: la punta rotada queda
-   dentro del riel de contenido en todo ancho, sin rebanarse. */
+/* Contrapeso del vacío a la derecha en pantallas anchas: el arco del
+   logo en línea de lápiz — la marca, en clave de sello — con la piedra
+   clave en su dorado. [F6] right: var(--gutter) sobre el shell: el
+   sello queda dentro del riel de contenido en todo ancho, sin
+   rebanarse. */
 .quote-section__mark {
   position: absolute;
   right: var(--gutter);
   bottom: 0;
   display: none;
   width: clamp(220px, 20vw, 300px);
-  aspect-ratio: 1;
-  border: 1px solid var(--quote-border);
+  height: auto;
   pointer-events: none;
-  transform: rotate(45deg);
+  fill: none;
+  stroke: var(--quote-border);
+  stroke-width: 3;
+  stroke-linejoin: round;
 }
 
-.quote-section__mark::before {
-  position: absolute;
-  inset: 24%;
-  border: 1px solid var(--quote-border);
-  content: '';
-}
-
-.quote-section__mark::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  margin: -7px 0 0 -7px;
-  background: var(--quote-gold);
-  content: '';
+.quote-section__mark-key {
+  stroke: var(--quote-gold);
 }
 
 @media (min-width: 1200px) {

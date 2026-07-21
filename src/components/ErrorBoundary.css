@@ -1,5 +1,6 @@
-/* La pantalla de emergencia habla el idioma de la casa: navy, rombo
-   dorado y los mismos botones del hero — nada de blanco anónimo. */
+/* La pantalla de emergencia habla el idioma de la casa: navy, el
+   símbolo de la marca y los mismos botones del hero — nada de blanco
+   anónimo. */
 .app-fallback {
   display: flex;
   min-height: 100vh;
@@ -14,11 +15,14 @@
 }
 
 .app-fallback__mark {
-  width: 18px;
-  height: 18px;
+  width: 52px;
+  height: auto;
   margin-bottom: 28px;
-  transform: rotate(45deg);
-  background: #e2ab33;
+  fill: #ffffff;
+}
+
+.app-fallback__mark-key {
+  fill: #e2ab33;
 }
 
 .app-fallback__title {

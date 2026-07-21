@@ -86,26 +86,14 @@
   display: inline-flex;
   align-items: center;
   justify-self: start;
-  gap: 11px;
-  color: var(--header-navy);
   text-decoration: none;
 }
 
-.brand__mark {
-  width: 11px;
-  height: 11px;
-  flex: 0 0 auto;
-  transform: rotate(45deg);
-  background: var(--header-gold);
-}
-
-.brand__name {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  /* La marca manda: un punto más que la navegación. */
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.01em;
+.brand__logo {
+  display: block;
+  height: 28px;
+  width: auto;
+  color: var(--header-navy);
 }
 
 .desktop-navigation {
@@ -130,18 +118,21 @@
   position: relative;
 }
 
-/* El rombo — la marca — señala dónde estás parado. Al hacer clic se
-   queda (.active): entra con un pequeño rebote y acompaña el viaje. */
+/* La piedra clave — la pieza dorada del arco — señala dónde estás
+   parado. Al hacer clic se queda (.active): entra con un pequeño rebote
+   y acompaña el viaje. */
 .desktop-navigation a::after {
   position: absolute;
-  bottom: -9px;
+  bottom: -10px;
   left: 50%;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 6px;
   background: var(--header-gold);
   content: '';
   opacity: 0;
-  transform: translateX(-50%) rotate(45deg) scale(0.5);
+  transform: translateX(-50%) scale(0.5);
+  -webkit-mask: var(--keystone-mask) center / contain no-repeat;
+  mask: var(--keystone-mask) center / contain no-repeat;
   transition:
     opacity 150ms ease,
     transform 240ms cubic-bezier(0.34, 1.8, 0.64, 1);
@@ -151,7 +142,7 @@
 .desktop-navigation a:focus-visible::after,
 .desktop-navigation a.active::after {
   opacity: 1;
-  transform: translateX(-50%) rotate(45deg) scale(1);
+  transform: translateX(-50%) scale(1);
 }
 
 .primary-header__actions {
@@ -193,10 +184,6 @@
 @media (max-width: 940px) {
   .primary-header__inner {
     padding-block: 14px;
-  }
-
-  .brand__name {
-    font-size: 20px;
   }
 
   .desktop-navigation {
@@ -334,6 +321,14 @@
 
   .quote-link__compact {
     display: inline;
+  }
+}
+
+/* A 28px el wordmark mide ~196px y ya no cabe junto a las acciones por
+   debajo de ~342px (el reset img { max-width: 100% } lo aplastaría). */
+@media (max-width: 360px) {
+  .brand__logo {
+    height: 24px;
   }
 }
 
