@@ -13,7 +13,7 @@ const steps = [
     number: '02',
     title: 'Comparamos el mercado por ti',
     description:
-      'Cotizamos tu riesgo con nuestras más de 30 aseguradoras aliadas y te mostramos opciones reales.',
+      'Cotizamos tu riesgo con nuestras más de 35 aseguradoras aliadas y te mostramos opciones reales.',
   },
   {
     number: '03',
@@ -44,19 +44,19 @@ function BadgeItems() {
           <path d="M12 4.2 18.5 6.5v4.9c0 4-2.6 6.8-6.5 7.9-3.9-1.1-6.5-3.9-6.5-7.9V6.5z" />
           <path d="m9.4 11.8 1.9 1.9 3.3-3.4" />
         </svg>
-        Más de 30 años de experiencia
+        Más de 35 años de experiencia
       </span>
       <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
-        <strong>+3000</strong> pólizas activas
+        <strong>+3700</strong> pólizas activas
       </span>
       <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
-        <strong>+30</strong> aseguradoras aliadas
+        <strong>+35</strong> aseguradoras aliadas
       </span>
       <KeystoneMark className="process-section__badge-sep" />
       <span className="process-section__badge">
-        <strong>+1.5MM</strong> reembolsos 2022
+        <strong>+5MM</strong> siniestros pagados en 2025
       </span>
       {/* Trailing separator closes the marquee loop; desktop hides it. */}
       <KeystoneMark className="process-section__badge-sep process-section__badge-sep--loop" />
@@ -158,10 +158,10 @@ function Process() {
                 </a>
                 <p className="process-section__note">
                   <span className="process-section__note-long">
-                    Más de 30 años de experiencia en la industria de seguros.
+                    Más de 35 años de experiencia en la industria de seguros.
                   </span>
                   <span className="process-section__note-short">
-                    Más de 30 años de experiencia.
+                    Más de 35 años de experiencia.
                   </span>
                 </p>
               </div>

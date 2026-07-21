@@ -42,7 +42,9 @@
   align-items: center;
   gap: 70px;
   padding-right: 70px;
-  animation: footer-marquee 60s linear infinite;
+  /* ~22 nombres por pista (antes 6): duración proporcional para
+     mantener la misma velocidad de desplazamiento en px/s. */
+  animation: footer-marquee 220s linear infinite;
 }
 
 .site-footer__strip:hover .site-footer__track {
@@ -57,32 +59,33 @@
   white-space: nowrap;
 }
 
-.site-footer__insurer--bmi {
+/* Seis tratamientos genéricos que rotan por índice (--s1…--s6). */
+.site-footer__insurer--s1 {
   font: 700 15px 'Figtree', sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.site-footer__insurer--saludsa {
+.site-footer__insurer--s2 {
   font: 800 21px 'Bricolage Grotesque', sans-serif;
   letter-spacing: -0.02em;
 }
 
-.site-footer__insurer--chubb {
+.site-footer__insurer--s3 {
   font: 600 15px 'Figtree', sans-serif;
   letter-spacing: 0.34em;
   text-transform: uppercase;
 }
 
-.site-footer__insurer--asisken {
+.site-footer__insurer--s4 {
   font: 600 19px 'Bricolage Grotesque', sans-serif;
 }
 
-.site-footer__insurer--generali {
+.site-footer__insurer--s5 {
   font: italic 700 18px 'Figtree', sans-serif;
 }
 
-.site-footer__insurer--mapfre {
+.site-footer__insurer--s6 {
   font: 700 14px 'Figtree', sans-serif;
   letter-spacing: 0.18em;
   text-transform: uppercase;

@@ -20,7 +20,7 @@ function Hero() {
             La nueva era de los seguros.
           </h1>
           <p className="insurance-hero__lede">
-            Una solución para cada problema, un seguro para cada necesidad. Más de 30 años de
+            Una solución para cada problema, un seguro para cada necesidad. Más de 35 años de
             experiencia creando soluciones personalizadas, con tecnología y compromiso.
           </p>
           <div className="insurance-hero__actions">

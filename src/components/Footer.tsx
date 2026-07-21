@@ -1,15 +1,32 @@
 import { CapstoneLogo, CapstoneWordmark } from './CapstoneLogo'
 import './Footer.css'
 
-/* Aseguradoras aliadas reales (capstone.com.ec) en tratamientos
-   tipográficos genéricos variados — sugieren logos sin imitar marcas. */
+/* Aseguradoras aliadas: las aseguradoras del país con más de US$20MM
+   de prima neta (SCVS 2025) más las prepagadas aliadas. Tratamientos
+   tipográficos genéricos en rotación — sugieren logos sin imitar
+   marcas; cada nombre conserva el mismo tratamiento en ambas pistas. */
 const insurers = [
-  { variant: 'bmi', name: 'BMI' },
-  { variant: 'saludsa', name: 'Saludsa' },
-  { variant: 'chubb', name: 'Chubb' },
-  { variant: 'asisken', name: 'Asisken' },
-  { variant: 'generali', name: 'Generali' },
-  { variant: 'mapfre', name: 'MAPFRE' },
+  'Equisuiza',
+  'Seguros Pichincha',
+  'Chubb',
+  'Zurich',
+  'Latina Seguros',
+  'Hispana de Seguros',
+  'Aseguradora del Sur',
+  'AIG Metropolitana',
+  'Sweaden',
+  'MAPFRE',
+  'Atlántida Seguros',
+  'Seguros Alianza',
+  'Seguros Unidos',
+  'Seguros Cóndor',
+  'Generali',
+  'BMI',
+  'Pan American Life',
+  'BUPA',
+  'Vaz Seguros',
+  'Saludsa',
+  'Asisken',
 ]
 
 /* Doubled so a single track always outspans the viewport (no loop gap). */
@@ -18,12 +35,12 @@ const trackMarks = [...insurers, ...insurers]
 function LogoTrack({ hidden = false }: { hidden?: boolean }) {
   return (
     <div className="site-footer__track" aria-hidden={hidden || undefined}>
-      {trackMarks.map((insurer, index) => (
+      {trackMarks.map((name, index) => (
         <span
-          key={`${insurer.variant}-${index}`}
-          className={`site-footer__insurer site-footer__insurer--${insurer.variant}`}
+          key={`${name}-${index}`}
+          className={`site-footer__insurer site-footer__insurer--s${((index % insurers.length) % 6) + 1}`}
         >
-          {insurer.name}
+          {name}
         </span>
       ))}
     </div>
@@ -66,7 +83,7 @@ function Footer() {
                 <a href="#quote">Cotización</a>
               </li>
               <li>
-                <a href="#acceso">Portal agente</a>
+                <a href="#acceso">Acceso</a>
               </li>
             </ul>
           </nav>
