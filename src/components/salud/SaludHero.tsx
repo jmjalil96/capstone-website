@@ -1,8 +1,13 @@
 import './SaludHero.css'
 
-/* Foto provisional: se reemplaza por la foto de salud aprobada
-   (salud-800/1200/1600.webp) manteniendo el mismo srcSet. */
-import saludPhoto from '../../assets/personas-1200.webp'
+/* Fotos en el repo, no en Unsplash: el sitio no depende de un CDN ajeno. */
+import salud800 from '../../assets/salud-800.webp'
+import salud1200 from '../../assets/salud-1200.webp'
+import salud1600 from '../../assets/salud-1600.webp'
+
+const saludPhoto = salud1600
+
+const saludPhotoSrcSet = `${salud800} 800w, ${salud1200} 1200w, ${salud1600} 1600w`
 
 function SaludHero() {
   return (
@@ -33,11 +38,22 @@ function SaludHero() {
       </div>
 
       <div className="salud-hero__media salud-hero__media--desktop" aria-hidden="true">
-        <img src={saludPhoto} sizes="(max-width: 720px) 100vw, 64vw" fetchPriority="high" alt="" />
+        <img
+          src={saludPhoto}
+          srcSet={saludPhotoSrcSet}
+          sizes="(max-width: 720px) 100vw, 64vw"
+          fetchPriority="high"
+          alt=""
+        />
       </div>
 
       <div className="salud-hero__media salud-hero__media--mobile" aria-hidden="true">
-        <img src={saludPhoto} sizes="(max-width: 720px) 100vw, 64vw" alt="" />
+        <img
+          src={saludPhoto}
+          srcSet={saludPhotoSrcSet}
+          sizes="(max-width: 720px) 100vw, 64vw"
+          alt=""
+        />
       </div>
 
       <svg
