@@ -4,4 +4,8 @@
     <loc>https://capstone.com.ec/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://capstone.com.ec/seguro-de-salud/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

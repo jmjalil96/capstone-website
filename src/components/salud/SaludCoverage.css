@@ -1,0 +1,180 @@
+.salud-coverage {
+  --salud-navy: #0c2939;
+  --salud-gold: #e2ab33;
+  --salud-teal-ink: #007265;
+  --salud-border: #d9dfe1;
+
+  padding-block: 0 96px;
+  color: var(--salud-navy);
+  background: #ffffff;
+  font-family: 'Figtree', sans-serif;
+}
+
+/* La firma: rieles grises de margen a margen, el latido en dorado.
+   Misma gramática que las costuras del home, en clave de salud. */
+.salud-coverage__pulse {
+  display: flex;
+  align-items: center;
+  padding-block: 44px 0;
+}
+
+.salud-coverage__pulse::before,
+.salud-coverage__pulse::after {
+  height: 2px;
+  flex: 1;
+  background: var(--salud-border);
+  content: '';
+}
+
+.salud-coverage__pulse svg {
+  width: 160px;
+  height: 40px;
+  flex: none;
+}
+
+.salud-coverage__trace {
+  fill: none;
+  stroke: var(--salud-gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Se dibuja una vez al entrar en vista; sin motion queda ya trazado. */
+@media (prefers-reduced-motion: no-preference) {
+  .salud-coverage__trace {
+    stroke-dasharray: 210;
+    stroke-dashoffset: 210;
+    transition: stroke-dashoffset 1300ms ease 150ms;
+  }
+
+  .salud-coverage__pulse.is-live .salud-coverage__trace {
+    stroke-dashoffset: 0;
+  }
+}
+
+.salud-coverage__intro {
+  max-width: 720px;
+  padding-block: 40px 14px;
+}
+
+.salud-coverage__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 16px;
+  color: var(--salud-teal-ink);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.salud-coverage__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  flex: none;
+  background: var(--salud-gold);
+  content: '';
+}
+
+.salud-coverage__title {
+  margin: 0 0 14px;
+  font: 700 clamp(28px, 3vw, 36px) / 1.1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.salud-coverage__lede {
+  margin: 0;
+  color: #44565f;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.salud-coverage__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 44px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.salud-coverage__item {
+  display: flex;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid var(--salud-border);
+}
+
+.salud-coverage__ico {
+  flex: none;
+}
+
+.salud-coverage__ico svg {
+  width: 26px;
+  height: 26px;
+  color: var(--salud-teal-ink);
+}
+
+.salud-coverage__text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.salud-coverage__what {
+  font: 700 18px/1.25 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.salud-coverage__how {
+  color: #5b6b74;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.salud-coverage__note {
+  margin: 26px 0 0;
+  color: #5b6b74;
+  font: 500 12px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 980px) {
+  .salud-coverage {
+    padding-block: 0 80px;
+  }
+
+  .salud-coverage__pulse {
+    padding-block: 32px 0;
+  }
+
+  .salud-coverage__intro {
+    padding-block: 32px 12px;
+  }
+
+  .salud-coverage__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .salud-coverage {
+    padding-block: 0 64px;
+  }
+
+  .salud-coverage__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .salud-coverage__item {
+    padding: 18px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salud-coverage__trace {
+    transition: none;
+  }
+}

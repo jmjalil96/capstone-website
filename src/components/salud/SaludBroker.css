@@ -1,0 +1,259 @@
+.salud-broker {
+  --broker-navy: #0c2939;
+  --broker-gold: #e2ab33;
+  --broker-white: #ffffff;
+
+  color: var(--broker-white);
+  background: var(--broker-white);
+  font-family: 'Figtree', sans-serif;
+}
+
+.salud-broker__seam {
+  height: clamp(56px, 9vw, 110px);
+  margin-bottom: -1px;
+  background: var(--broker-navy);
+  clip-path: url('#salud-broker-seam');
+}
+
+.salud-broker__body {
+  padding-block: 30px 96px;
+  background: var(--broker-navy);
+}
+
+.salud-broker__grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) 1.4fr;
+  gap: 24px 72px;
+}
+
+.salud-broker__aside {
+  align-self: start;
+}
+
+.salud-broker__head {
+  display: flex;
+  max-width: 620px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.salud-broker__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: #7fd1c5;
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.salud-broker__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  background: var(--broker-gold);
+  content: '';
+}
+
+.salud-broker__title {
+  margin: 0;
+  font: 700 clamp(28px, 3vw, 36px) / 1.1 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.salud-broker__lede {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.salud-broker__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+}
+
+.salud-broker__cta {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--broker-navy);
+  background: var(--broker-gold);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.salud-broker__cta:hover {
+  transform: translateY(-2px);
+}
+
+.salud-broker__cta:focus-visible {
+  outline: 2px solid var(--broker-gold);
+  outline-offset: 4px;
+}
+
+.salud-broker__note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font: 500 12px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.salud-broker__ledger {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.salud-broker__step {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  align-items: start;
+  gap: 24px;
+  padding: 30px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.salud-broker__step:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.salud-broker__number {
+  color: rgba(255, 255, 255, 0.16);
+  font: 800 62px/0.9 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.salud-broker__step--key .salud-broker__number {
+  color: var(--broker-gold);
+}
+
+.salud-broker__step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.salud-broker__step-titles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.salud-broker__step h3 {
+  margin: 0;
+  font: 700 21px/1.2 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.salud-broker__step-text > p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.salud-broker__tag {
+  padding: 5px 10px;
+  border: 1px solid rgba(226, 171, 51, 0.5);
+  border-radius: 999px;
+  color: var(--broker-gold);
+  font: 500 10.5px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.salud-broker__clip-defs {
+  position: absolute;
+}
+
+@media (max-width: 980px) {
+  .salud-broker__body {
+    padding-block: 24px 72px;
+  }
+
+  .salud-broker__grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Una columna: el aside se disuelve para que el CTA baje tras los
+     pasos — primero el argumento, después la acción. */
+  .salud-broker__aside {
+    display: contents;
+  }
+
+  .salud-broker__head {
+    order: 1;
+  }
+
+  .salud-broker__ledger {
+    order: 2;
+  }
+
+  .salud-broker__cta-group {
+    order: 3;
+    margin-top: 34px;
+  }
+
+  .salud-broker__step {
+    grid-template-columns: 84px 1fr;
+  }
+
+  .salud-broker__number {
+    font-size: 48px;
+  }
+
+  .salud-broker__step h3 {
+    font-size: 19px;
+  }
+
+  .salud-broker__step-text > p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  .salud-broker__body {
+    padding-block: 18px 56px;
+  }
+
+  .salud-broker__title {
+    font-size: 26px;
+  }
+
+  /* Sin descripciones en móvil: los títulos se explican solos. */
+  .salud-broker__step-text > p {
+    display: none;
+  }
+
+  .salud-broker__step {
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 0;
+  }
+
+  .salud-broker__number {
+    font-size: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salud-broker__cta {
+    transition: none;
+  }
+}

@@ -47,7 +47,11 @@ function LogoTrack({ hidden = false }: { hidden?: boolean }) {
   )
 }
 
-function Footer() {
+function Footer({ isLanding = false }: { isLanding?: boolean }) {
+  /* En una landing, las secciones del home viven en "/"; #quote sí
+     existe en la propia página. */
+  const homePrefix = isLanding ? '/' : ''
+
   return (
     <footer className="site-footer">
       <div className="site-footer__band">
@@ -74,16 +78,16 @@ function Footer() {
             <p className="site-footer__heading">Secciones</p>
             <ul className="site-footer__list">
               <li>
-                <a href="#coverage">Personas</a>
+                <a href={`${homePrefix}#coverage`}>Personas</a>
               </li>
               <li>
-                <a href="#coverage">Empresas</a>
+                <a href={`${homePrefix}#coverage`}>Empresas</a>
               </li>
               <li>
                 <a href="#quote">Cotización</a>
               </li>
               <li>
-                <a href="#acceso">Acceso</a>
+                <a href={`${homePrefix}#acceso`}>Acceso</a>
               </li>
             </ul>
           </nav>
