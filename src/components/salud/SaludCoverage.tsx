@@ -1,7 +1,11 @@
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { useReveal } from '../../hooks/useReveal'
+import KeystoneMark from '../KeystoneMark'
 import './SaludCoverage.css'
+
+/* Solo las aliadas de salud del listado del footer — nada inventado. */
+const healthInsurers = ['Saludsa', 'BMI', 'BUPA', 'Pan American Life', 'Asisken']
 
 function CoverageIcon({ children }: { children: ReactNode }) {
   return (
@@ -139,6 +143,20 @@ function SaludCoverage() {
             </li>
           ))}
         </ul>
+
+        {/* La fila que cierra el libro mayor: la prueba de "comparamos
+            por ti" son las aseguradoras con las que cotizamos. */}
+        <div className="salud-coverage__carriers">
+          <p className="salud-coverage__carriers-label">Cotizamos tu salud con</p>
+          <ul className="salud-coverage__carriers-row" aria-label="Aseguradoras de salud aliadas">
+            {healthInsurers.map((name) => (
+              <li className="salud-coverage__carrier" key={name}>
+                <KeystoneMark className="salud-coverage__mark" />
+                <span className="salud-coverage__carrier-name">{name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <p className="salud-coverage__note">
           ¿Buscas algo puntual — ambulatorio, dental, visión? Pregúntanos al cotizar.

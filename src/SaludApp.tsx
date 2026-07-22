@@ -3,7 +3,6 @@ import Footer from './components/Footer'
 import Quote from './components/Quote'
 import SaludHero from './components/salud/SaludHero'
 import SaludCoverage from './components/salud/SaludCoverage'
-import SaludInsurers from './components/salud/SaludInsurers'
 import SaludFaq from './components/salud/SaludFaq'
 
 /* Landing /seguro-de-salud/: entrada propia con <head> estático para
@@ -15,7 +14,6 @@ function SaludApp() {
       <main>
         <SaludHero />
         <SaludCoverage />
-        <SaludInsurers />
         <SaludFaq />
         <Quote />
       </main>

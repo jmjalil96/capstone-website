@@ -133,8 +133,56 @@
   line-height: 1.5;
 }
 
+/* Última fila del libro mayor: mismo filete que los ítems, con las
+   aliadas como contenido. En desktop cabe en una sola línea. */
+.salud-coverage__carriers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 32px;
+  padding-top: 26px;
+  border-top: 1px solid var(--salud-border);
+}
+
+.salud-coverage__carriers-label {
+  margin: 0;
+  color: #5b6b74;
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.salud-coverage__carriers-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.salud-coverage__carrier {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.salud-coverage__carrier-name {
+  font: 700 20px/1.2 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.salud-coverage__mark {
+  width: 10px;
+  height: 8px;
+  flex: none;
+  fill: var(--salud-gold);
+}
+
 .salud-coverage__note {
-  margin: 26px 0 0;
+  margin: 30px 0 0;
   color: #5b6b74;
   font: 500 12px/1.5 'IBM Plex Mono', monospace;
   letter-spacing: 0.04em;
@@ -170,6 +218,15 @@
 
   .salud-coverage__item {
     padding: 18px 0;
+  }
+
+  .salud-coverage__carriers {
+    padding-top: 20px;
+    gap: 12px 24px;
+  }
+
+  .salud-coverage__carrier-name {
+    font-size: 18px;
   }
 }
 
