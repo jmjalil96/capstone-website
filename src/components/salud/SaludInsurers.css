@@ -24,7 +24,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 14px 0;
+  gap: 14px 36px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -33,6 +33,7 @@
 .salud-insurers__item {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
 }
 
 .salud-insurers__name {
@@ -41,11 +42,10 @@
   white-space: nowrap;
 }
 
-.salud-insurers__sep {
-  width: 9px;
-  height: 7px;
+.salud-insurers__mark {
+  width: 11px;
+  height: 8px;
   flex: none;
-  margin-inline: 22px;
   fill: var(--salud-gold);
 }
 
@@ -54,7 +54,11 @@
     padding-block: 28px;
   }
 
-  .salud-insurers__sep {
-    margin-inline: 14px;
+  .salud-insurers__row {
+    gap: 12px 24px;
+  }
+
+  .salud-insurers__item {
+    gap: 8px;
   }
 }

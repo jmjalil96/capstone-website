@@ -9,10 +9,12 @@ function SaludInsurers() {
     <section className="salud-insurers" aria-label="Aseguradoras de salud aliadas">
       <div className="shell">
         <p className="salud-insurers__label">Cotizamos tu salud con</p>
+        {/* Piedra clave como prefijo de cada nombre, no como separador:
+            así ninguna línea envuelta arranca con una marca huérfana. */}
         <ul className="salud-insurers__row">
-          {healthInsurers.map((name, index) => (
+          {healthInsurers.map((name) => (
             <li className="salud-insurers__item" key={name}>
-              {index > 0 && <KeystoneMark className="salud-insurers__sep" />}
+              <KeystoneMark className="salud-insurers__mark" />
               <span className="salud-insurers__name">{name}</span>
             </li>
           ))}
