@@ -97,7 +97,7 @@
 
 .site-footer__columns {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 48px;
 }
 
@@ -225,7 +225,7 @@
   }
 
   .site-footer__columns {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .site-footer__brand {

@@ -74,6 +74,16 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
             </p>
           </div>
 
+          {/* Una landing por ramo: esta columna crece con cada página nueva. */}
+          <nav aria-label="Seguros">
+            <p className="site-footer__heading">Seguros</p>
+            <ul className="site-footer__list">
+              <li>
+                <a href="/seguro-de-salud/">Seguro de salud</a>
+              </li>
+            </ul>
+          </nav>
+
           <nav aria-label="Secciones">
             <p className="site-footer__heading">Secciones</p>
             <ul className="site-footer__list">
@@ -82,9 +92,6 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
               </li>
               <li>
                 <a href={`${homePrefix}#coverage`}>Empresas</a>
-              </li>
-              <li>
-                <a href="/seguro-de-salud/">Seguro de salud</a>
               </li>
               <li>
                 <a href="#quote">Cotización</a>
