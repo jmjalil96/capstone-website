@@ -84,6 +84,9 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
                 <a href={`${homePrefix}#coverage`}>Empresas</a>
               </li>
               <li>
+                <a href="/seguro-de-salud/">Seguro de salud</a>
+              </li>
+              <li>
                 <a href="#quote">Cotización</a>
               </li>
               <li>

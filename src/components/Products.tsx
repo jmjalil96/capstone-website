@@ -11,6 +11,8 @@ type Coverage = {
   icon: ReactNode
   name: string
   detail: string
+  /* Con landing propia: el ítem se vuelve enlace a esa página. */
+  href?: string
 }
 
 type CardData = {
@@ -136,6 +138,7 @@ const cards: CardData[] = [
         icon: icons.salud,
         name: 'Asistencia médica',
         detail: 'Consultas, medicinas y hospitalización',
+        href: '/seguro-de-salud/',
       },
       { icon: icons.vida, name: 'Vida', detail: 'El futuro de los tuyos, protegido' },
       {
@@ -234,17 +237,35 @@ function CoverCard({ card }: { card: CardData }) {
         <div className="cover-card__face cover-card__back" inert={!isFlipped}>
           <p className="cover-card__eyebrow">{card.title}</p>
           <ul className="cover-card__list">
-            {card.coverages.map((coverage) => (
-              <li className="cover-card__item" key={coverage.name}>
-                <span className="cover-card__ico" aria-hidden="true">
-                  {coverage.icon}
-                </span>
-                <span className="cover-card__text">
-                  <span className="cover-card__what">{coverage.name}</span>
-                  <span className="cover-card__how">{coverage.detail}</span>
-                </span>
-              </li>
-            ))}
+            {card.coverages.map((coverage) => {
+              const body = (
+                <>
+                  <span className="cover-card__ico" aria-hidden="true">
+                    {coverage.icon}
+                  </span>
+                  <span className="cover-card__text">
+                    <span className="cover-card__what">
+                      {coverage.name}
+                      {coverage.href && (
+                        <span className="cover-card__go" aria-hidden="true">
+                          →
+                        </span>
+                      )}
+                    </span>
+                    <span className="cover-card__how">{coverage.detail}</span>
+                  </span>
+                </>
+              )
+              return coverage.href ? (
+                <li className="cover-card__item cover-card__item--link" key={coverage.name}>
+                  <a href={coverage.href}>{body}</a>
+                </li>
+              ) : (
+                <li className="cover-card__item" key={coverage.name}>
+                  {body}
+                </li>
+              )
+            })}
             <li className="cover-card__item cover-card__more">
               <a href="#quote">
                 <span className="cover-card__ico" aria-hidden="true">

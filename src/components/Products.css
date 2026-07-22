@@ -231,6 +231,35 @@
   background: #f2f6f5;
 }
 
+/* Ítem con landing propia: toda la fila es enlace; la flecha teal
+   distingue "página" de "dato". El compound selector gana a los
+   overrides de .cover-card__item en las media queries. */
+.cover-card__item.cover-card__item--link {
+  padding: 0;
+}
+
+.cover-card__item--link > a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cover-card__go {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--prod-teal-ink);
+  transition: translate 150ms ease;
+}
+
+.cover-card__item--link:hover .cover-card__go {
+  translate: 3px 0;
+}
+
 .cover-card__ico {
   display: grid;
   width: 40px;
@@ -386,6 +415,10 @@
     padding: 8px 6px;
   }
 
+  .cover-card__item--link > a {
+    padding: 8px 6px;
+  }
+
   .cover-card__ico {
     width: 34px;
     height: 34px;
@@ -410,6 +443,7 @@
   .cover-card__inner,
   .cover-card__photo img,
   .cover-card__chip,
+  .cover-card__go,
   .cover-card__cta {
     transition: none;
   }

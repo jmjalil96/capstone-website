@@ -1,3 +1,4 @@
+import KeystoneMark from '../KeystoneMark'
 import './SaludHero.css'
 
 /* Fotos en el repo, no en Unsplash: el sitio no depende de un CDN ajeno. */
@@ -37,41 +38,21 @@ function SaludHero() {
         </div>
       </div>
 
-      <div className="salud-hero__media salud-hero__media--desktop" aria-hidden="true">
-        <img
-          src={saludPhoto}
-          srcSet={saludPhotoSrcSet}
-          sizes="(max-width: 720px) 100vw, 64vw"
-          fetchPriority="high"
-          alt=""
-        />
+      {/* El arco del logo, a escala de ventana: la foto vive dentro de la
+          silueta de la marca y la piedra clave dorada la corona. El borde
+          inferior queda plano para que el pulso lo recorra limpio. */}
+      <div className="salud-hero__arch" aria-hidden="true">
+        <KeystoneMark className="salud-hero__keystone" />
+        <div className="salud-hero__window">
+          <img
+            src={saludPhoto}
+            srcSet={saludPhotoSrcSet}
+            sizes="(max-width: 720px) 82vw, 38vw"
+            fetchPriority="high"
+            alt=""
+          />
+        </div>
       </div>
-
-      <div className="salud-hero__media salud-hero__media--mobile" aria-hidden="true">
-        <img
-          src={saludPhoto}
-          srcSet={saludPhotoSrcSet}
-          sizes="(max-width: 720px) 100vw, 64vw"
-          alt=""
-        />
-      </div>
-
-      <svg
-        className="salud-hero__clip-defs"
-        width="0"
-        height="0"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <defs>
-          <clipPath id="salud-photo-curve" clipPathUnits="objectBoundingBox">
-            <path d="M 0.70556 0 H 1 V 1 L 0.53889 0.565 Q 0.42389 0.456 0.53889 0.27 Z" />
-          </clipPath>
-          <clipPath id="salud-photo-curve-mobile" clipPathUnits="objectBoundingBox">
-            <path d="M 0 0.24 L 0.5 0.09 Q 0.8 0 0.95 0 H 1 V 1 H 0.95 Q 0.8 1 0.5 0.955 L 0 0.88 Z" />
-          </clipPath>
-        </defs>
-      </svg>
     </section>
   )
 }

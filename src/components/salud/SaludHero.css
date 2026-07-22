@@ -120,49 +120,48 @@
   translate: 4px 0;
 }
 
-.salud-hero__media {
+/* La ventana-arco: borde derecho alineado con el shell (mismo cálculo
+   que su padding-inline), base plana sobre el borde del hero. */
+.salud-hero__arch {
+  position: absolute;
+  z-index: 1;
+  top: clamp(64px, 8vw, 96px);
+  bottom: 0;
+  right: max(var(--gutter), calc((100vw - 1280px) / 2));
+  width: min(38vw, 520px);
   pointer-events: none;
 }
 
-/* A diferencia del home, la foto no invade la sección siguiente:
-   el borde inferior queda plano para que el pulso lo recorra limpio. */
-.salud-hero__media--desktop {
+/* La piedra clave corona el arco, a caballo del borde — ~10% del ancho
+   del arco, como en el logo. */
+.salud-hero__keystone {
   position: absolute;
-  z-index: 1;
-  top: 0;
-  right: 0;
+  z-index: 2;
+  top: -17px;
+  left: 50%;
+  width: 48px;
+  translate: -50% 0;
+  fill: var(--hero-gold);
+}
+
+/* Radio "infinito" en las esquinas superiores = medio punto exacto
+   mientras la altura supere la mitad del ancho (siempre, aquí). */
+.salud-hero__window {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 999px 999px 0 0;
+}
+
+.salud-hero__window img {
   width: 100%;
   height: 100%;
-  clip-path: url('#salud-photo-curve');
-}
-
-.salud-hero__media--desktop img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 64%;
-  height: 100%;
   object-fit: cover;
-}
-
-.salud-hero__media--desktop::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(12, 41, 57, 0.45) 36%, rgba(12, 41, 57, 0) 58%);
-  content: '';
-}
-
-.salud-hero__clip-defs {
-  position: absolute;
-}
-
-.salud-hero__media--mobile {
-  display: none;
+  object-position: 58% 32%;
 }
 
 /* La foto respira al cargar: de 1.06 a 1, seis segundos. */
 @media (prefers-reduced-motion: no-preference) {
-  .salud-hero__media img {
+  .salud-hero__window img {
     animation: salud-hero-drift 6s ease-out both;
   }
 }
@@ -183,7 +182,7 @@
   }
 
   .salud-hero__content {
-    width: 66%;
+    width: 58%;
     padding-block: 64px 64px;
   }
 
@@ -191,8 +190,14 @@
     max-width: 460px;
   }
 
-  .salud-hero__media--desktop {
-    width: 80%;
+  .salud-hero__arch {
+    top: 56px;
+    width: min(34vw, 400px);
+  }
+
+  .salud-hero__keystone {
+    width: 38px;
+    top: -14px;
   }
 }
 
@@ -200,17 +205,12 @@
   .salud-hero {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(
-      180deg,
-      var(--hero-navy) calc(100% - min(12vw, 52.8px)),
-      rgba(12, 41, 57, 0) calc(100% - min(12vw, 52.8px))
-    );
   }
 
   .salud-hero__content {
     width: 100%;
     max-width: none;
-    padding-block: 36px 18px;
+    padding-block: 36px 10px;
   }
 
   .salud-hero__eyebrow {
@@ -233,33 +233,13 @@
     margin-bottom: 24px;
   }
 
-  .salud-hero__media--desktop {
-    display: none;
-  }
-
-  .salud-hero__media--mobile {
+  /* El arco se centra y apoya su base en el borde del hero. */
+  .salud-hero__arch {
     position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
-    max-height: 440px;
-    overflow: hidden;
-    clip-path: url('#salud-photo-curve-mobile');
-  }
-
-  .salud-hero__media--mobile img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 58% center;
-  }
-
-  .salud-hero__media--mobile::after {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(12, 41, 57, 0.4), rgba(12, 41, 57, 0) 38%);
-    content: '';
+    inset: auto;
+    width: min(82vw, 380px);
+    aspect-ratio: 0.98;
+    margin: 26px auto 0;
   }
 }
 
