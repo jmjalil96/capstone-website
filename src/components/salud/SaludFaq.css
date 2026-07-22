@@ -1,17 +1,41 @@
 .salud-faq {
   --salud-navy: #0c2939;
   --salud-gold: #e2ab33;
-  --salud-teal-ink: #007265;
-  --salud-border: #d9dfe1;
+  --salud-teal-light: #7fd1c5;
+  --salud-white: #ffffff;
 
-  padding-block: 88px 96px;
-  color: var(--salud-navy);
-  background: #ffffff;
+  color: var(--salud-white);
+  background: var(--salud-white);
   font-family: 'Figtree', sans-serif;
 }
 
-.salud-faq__intro {
-  max-width: 720px;
+.salud-faq__seam {
+  height: clamp(56px, 9vw, 110px);
+  margin-bottom: -1px;
+  background: var(--salud-navy);
+  clip-path: url('#salud-faq-seam');
+}
+
+.salud-faq__body {
+  padding-block: 30px 96px;
+  background: var(--salud-navy);
+}
+
+.salud-faq__grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) 1.4fr;
+  gap: 24px 72px;
+}
+
+.salud-faq__aside {
+  align-self: start;
+}
+
+.salud-faq__head {
+  display: flex;
+  max-width: 620px;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 26px;
 }
 
@@ -19,8 +43,8 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 0 0 16px;
-  color: var(--salud-teal-ink);
+  margin: 0;
+  color: var(--salud-teal-light);
   font: 500 12px/1 'IBM Plex Mono', monospace;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -29,7 +53,6 @@
 .salud-faq__eyebrow::before {
   width: 26px;
   height: 2px;
-  flex: none;
   background: var(--salud-gold);
   content: '';
 }
@@ -40,16 +63,59 @@
   letter-spacing: -0.015em;
 }
 
-.salud-faq__list {
-  max-width: 820px;
+.salud-faq__lede {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.salud-faq__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+}
+
+.salud-faq__cta {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--salud-navy);
+  background: var(--salud-gold);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.salud-faq__cta:hover {
+  transform: translateY(-2px);
+}
+
+.salud-faq__cta:focus-visible {
+  outline: 2px solid var(--salud-gold);
+  outline-offset: 4px;
+}
+
+.salud-faq__note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font: 500 12px/1.5 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
 }
 
 .salud-faq__item {
-  border-top: 1px solid var(--salud-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .salud-faq__item:last-child {
-  border-bottom: 1px solid var(--salud-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .salud-faq__question {
@@ -69,7 +135,7 @@
 }
 
 .salud-faq__question:focus-visible {
-  outline: 2px solid var(--salud-navy);
+  outline: 2px solid var(--salud-gold);
   outline-offset: 4px;
 }
 
@@ -89,7 +155,7 @@
   left: 0;
   width: 16px;
   height: 2px;
-  background: var(--salud-teal-ink);
+  background: var(--salud-gold);
   content: '';
   transition: rotate 200ms ease;
 }
@@ -106,20 +172,52 @@
   max-width: 680px;
   margin: 0;
   padding: 0 2px 24px;
-  color: #44565f;
+  color: rgba(255, 255, 255, 0.72);
   font-size: 16px;
   line-height: 1.6;
 }
 
+.salud-faq__clip-defs {
+  position: absolute;
+}
+
 @media (max-width: 980px) {
-  .salud-faq {
-    padding-block: 72px 80px;
+  .salud-faq__body {
+    padding-block: 24px 72px;
+  }
+
+  .salud-faq__grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Una columna: el aside se disuelve para que el CTA baje tras las
+     preguntas — primero las respuestas, después la acción. */
+  .salud-faq__aside {
+    display: contents;
+  }
+
+  .salud-faq__head {
+    order: 1;
+  }
+
+  .salud-faq__list {
+    order: 2;
+  }
+
+  .salud-faq__cta-group {
+    order: 3;
+    margin-top: 34px;
   }
 }
 
 @media (max-width: 720px) {
-  .salud-faq {
-    padding-block: 48px 64px;
+  .salud-faq__body {
+    padding-block: 18px 56px;
+  }
+
+  .salud-faq__title {
+    font-size: 26px;
   }
 
   .salud-faq__question {
@@ -133,6 +231,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .salud-faq__cta {
+    transition: none;
+  }
+
   .salud-faq__marker::before,
   .salud-faq__marker::after {
     transition: none;
