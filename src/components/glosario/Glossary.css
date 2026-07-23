@@ -1,0 +1,558 @@
+.glossary {
+  --glossary-navy: #0c2939;
+  --glossary-gold: #e2ab33;
+  --glossary-teal-ink: #007265;
+  --glossary-border: #d9dfe1;
+
+  color: var(--glossary-navy);
+  background: #ffffff;
+  font-family: 'Figtree', sans-serif;
+}
+
+/* El mástil: portada de libro, no hero de landing — sin foto y un
+   paso tipográfico por debajo de las páginas de producto. */
+.glossary__mast {
+  color: #ffffff;
+  background: var(--glossary-navy);
+  padding-block: clamp(52px, 6vw, 80px) clamp(44px, 5vw, 64px);
+}
+
+.glossary__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  color: var(--glossary-gold);
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.glossary__eyebrow::before {
+  width: 26px;
+  height: 2px;
+  flex: none;
+  background: var(--glossary-gold);
+  content: '';
+}
+
+.glossary__title {
+  max-width: 760px;
+  margin: 0 0 20px;
+  font: 700 clamp(30px, 3.6vw, 46px) / 1.08 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.glossary__lede {
+  max-width: 620px;
+  margin: 0 0 26px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.62;
+}
+
+/* La honestidad de la casa, en voz de máquina de escribir. */
+.glossary__mast-note {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font: 500 12px/1.7 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* La costura: los mismos rieles grises del sitio; el motivo de esta
+   página es un libro abierto. */
+.glossary__seam {
+  display: flex;
+  align-items: center;
+  padding-block: 40px 0;
+}
+
+.glossary__seam::before,
+.glossary__seam::after {
+  height: 2px;
+  flex: 1;
+  background: var(--glossary-border);
+  content: '';
+}
+
+.glossary__seam svg {
+  width: 160px;
+  height: 40px;
+  flex: none;
+}
+
+.glossary__trace {
+  fill: none;
+  stroke: var(--glossary-gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tres subtrazos que se dibujan a la vez; 80 cubre el más largo. */
+@media (prefers-reduced-motion: no-preference) {
+  .glossary__trace {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    transition: stroke-dashoffset 1100ms ease 150ms;
+  }
+
+  .glossary__seam.is-live .glossary__trace {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Fichas de salto para pantallas sin columna de índice. */
+.glossary__chips {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 26px;
+}
+
+.glossary__chip {
+  padding: 8px 14px;
+  border: 1px solid var(--glossary-border);
+  border-radius: 999px;
+  color: #44565f;
+  font: 500 11px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.glossary__chip:hover {
+  border-color: var(--glossary-gold);
+  color: var(--glossary-navy);
+}
+
+.glossary__chip:focus-visible {
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 2px;
+}
+
+/* El cuerpo: índice de pulgar + entradas. */
+.glossary__layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0 72px;
+  padding-block: 34px 96px;
+}
+
+.glossary__rail {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+
+.glossary__rail-label {
+  margin: 0 0 12px;
+  color: #8a969d;
+  font: 500 11px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.glossary__rail-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* La piedra clave marca el grupo activo — la misma seña que usa el
+   nav del home. El hueco está siempre reservado: nada salta. */
+.glossary__rail-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 8px;
+  color: #5b6b74;
+  font: 500 12px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.glossary__rail-link::before {
+  width: 14px;
+  height: 10.5px;
+  flex: none;
+  background: transparent;
+  content: '';
+  mask: var(--keystone-mask) center / contain no-repeat;
+  transition: background-color 160ms ease;
+}
+
+.glossary__rail-link:hover {
+  color: var(--glossary-navy);
+}
+
+.glossary__rail-link[aria-current='true'] {
+  color: var(--glossary-navy);
+  font-weight: 700;
+}
+
+.glossary__rail-link[aria-current='true']::before {
+  background: var(--glossary-gold);
+}
+
+.glossary__rail-link:focus-visible {
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 2px;
+}
+
+.glossary__rail-note {
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--glossary-border);
+  color: #5b6b74;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.glossary__rail-note a {
+  color: var(--glossary-teal-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* El buscador: mono, discreto, arriba de las entradas. Todo el
+   contenido sigue en el DOM — el filtro solo recorta lo visible. */
+.glossary__search {
+  margin-bottom: 6px;
+}
+
+.glossary__search input {
+  width: 100%;
+  max-width: 380px;
+  padding: 11px 14px;
+  border: 1px solid var(--glossary-border);
+  border-radius: 4px;
+  color: var(--glossary-navy);
+  background: #ffffff;
+  font: 500 13px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.glossary__search input::placeholder {
+  color: #8a969d;
+}
+
+.glossary__search input:focus-visible {
+  border-color: var(--glossary-gold);
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 1px;
+}
+
+.glossary__empty {
+  margin: 26px 0 0;
+  color: #44565f;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.glossary__empty a {
+  color: var(--glossary-teal-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Grupos: la regla dorada del kit precede al título, y el icono del
+   ramo — el mismo kit de los libros mayores — ancla cada grupo. */
+.glossary__group {
+  scroll-margin-top: 24px;
+  margin-top: 40px;
+}
+
+.glossary__group + .glossary__group {
+  margin-top: 56px;
+}
+
+.glossary__group-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 6px;
+  font: 700 clamp(22px, 2.2vw, 26px) / 1.15 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.glossary__group-title::before {
+  width: 26px;
+  height: 2px;
+  flex: none;
+  background: var(--glossary-gold);
+  content: '';
+}
+
+.glossary__group-ico {
+  flex: none;
+}
+
+.glossary__group-ico svg {
+  width: 23px;
+  height: 23px;
+  color: var(--glossary-teal-ink);
+}
+
+.glossary__group-lede {
+  margin: 0 0 10px;
+  padding-left: 73px;
+  color: #5b6b74;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* La fila de diccionario, ahora plegable: término y esencia siempre a
+   la vista; el despliegue trae la explicación completa. */
+.glossary__entry {
+  border-top: 1px solid var(--glossary-border);
+  scroll-margin-top: 28px;
+}
+
+.glossary__summary {
+  display: grid;
+  grid-template-columns: 240px 1fr 16px;
+  align-items: baseline;
+  gap: 6px 44px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.glossary__summary::-webkit-details-marker {
+  display: none;
+}
+
+.glossary__summary:hover .glossary__term {
+  color: var(--glossary-teal-ink);
+}
+
+.glossary__summary:focus-visible {
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 3px;
+}
+
+.glossary__term {
+  margin: 0;
+  font: 700 18px/1.3 'Bricolage Grotesque', sans-serif;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  transition: color 160ms ease;
+}
+
+/* Llegar por ancla enciende la piedra clave junto al término. */
+.glossary__entry:target .glossary__term::before {
+  display: inline-block;
+  width: 15px;
+  height: 11px;
+  margin-right: 9px;
+  background: var(--glossary-gold);
+  content: '';
+  mask: var(--keystone-mask) center / contain no-repeat;
+}
+
+/* La esencia: la definición de una línea que hace legible la página
+   cerrada — y el candidato a fragmento destacado. */
+.glossary__brief {
+  max-width: 640px;
+  margin: 0;
+  color: #44565f;
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+/* El marcador de despliegue: la cruz que se vuelve guion — la misma
+   seña del acordeón de las FAQ. */
+.glossary__marker {
+  position: relative;
+  align-self: center;
+  width: 14px;
+  height: 14px;
+}
+
+.glossary__marker::before,
+.glossary__marker::after {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  background: var(--glossary-gold);
+  content: '';
+  transition: rotate 200ms ease;
+}
+
+.glossary__marker::after {
+  rotate: 90deg;
+}
+
+.glossary__entry[open] .glossary__marker::after {
+  rotate: 0deg;
+}
+
+/* El despliegue se alinea bajo la esencia, no bajo el término. */
+.glossary__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 60px 22px 284px;
+}
+
+.glossary__def {
+  max-width: 640px;
+  margin: 0;
+  color: #44565f;
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+/* El ejemplo aterriza el concepto: filete dorado, sin números. */
+.glossary__example {
+  max-width: 620px;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--glossary-gold);
+  color: #5b6b74;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.glossary__example::before {
+  display: block;
+  margin-bottom: 3px;
+  color: #8a969d;
+  content: 'En la práctica';
+  font: 500 10.5px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.glossary__refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 0;
+  color: #5b6b74;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.glossary__refs a {
+  color: var(--glossary-teal-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.glossary__refs a:hover {
+  color: var(--glossary-navy);
+}
+
+.glossary__refs a:focus-visible {
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 2px;
+}
+
+.glossary__cta {
+  white-space: nowrap;
+}
+
+.glossary__cta span {
+  display: inline-block;
+  transition: translate 160ms ease;
+}
+
+.glossary__cta:hover span {
+  translate: 3px 0;
+}
+
+@media (max-width: 980px) {
+  .glossary__seam {
+    padding-block: 30px 0;
+  }
+
+  .glossary__chips {
+    display: flex;
+  }
+
+  .glossary__layout {
+    display: block;
+    padding-block: 26px 72px;
+  }
+
+  .glossary__rail {
+    display: none;
+  }
+
+  .glossary__group + .glossary__group {
+    margin-top: 48px;
+  }
+
+  .glossary__summary {
+    grid-template-columns: 190px 1fr 16px;
+    gap: 6px 32px;
+  }
+
+  .glossary__detail {
+    padding: 0 0 20px 222px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* En una columna la esencia corre bajo el término, a todo lo ancho. */
+  .glossary__summary {
+    grid-template-columns: 1fr 16px;
+    gap: 6px 12px;
+    padding: 18px 0;
+  }
+
+  .glossary__term {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .glossary__marker {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .glossary__brief {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    font-size: 15px;
+  }
+
+  .glossary__detail {
+    padding: 0 0 18px;
+  }
+
+  .glossary__group-lede {
+    padding-left: 0;
+  }
+
+  .glossary__group-title::before {
+    display: none;
+  }
+
+  .glossary__def {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glossary__trace,
+  .glossary__rail-link,
+  .glossary__rail-link::before,
+  .glossary__term,
+  .glossary__marker::before,
+  .glossary__marker::after,
+  .glossary__cta span {
+    transition: none;
+  }
+}

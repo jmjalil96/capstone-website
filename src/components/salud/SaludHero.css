@@ -1,0 +1,81 @@
+/* Solo la composición del arco: la banda, la columna de contenido y los
+   botones viven en LandingHero.css. */
+
+/* La ventana-arco: borde derecho alineado con el shell (mismo cálculo
+   que su padding-inline), base plana sobre el borde del hero. */
+.salud-hero__arch {
+  position: absolute;
+  z-index: 1;
+  top: clamp(64px, 8vw, 96px);
+  bottom: 0;
+  right: max(var(--gutter), calc((100vw - 1280px) / 2));
+  width: min(38vw, 520px);
+  pointer-events: none;
+}
+
+/* La piedra clave corona el arco, a caballo del borde — ~10% del ancho
+   del arco, como en el logo. */
+.salud-hero__keystone {
+  position: absolute;
+  z-index: 2;
+  top: -17px;
+  left: 50%;
+  width: 48px;
+  translate: -50% 0;
+  fill: var(--hero-gold);
+}
+
+/* Radio "infinito" en las esquinas superiores = medio punto exacto
+   mientras la altura supere la mitad del ancho (siempre, aquí). */
+.salud-hero__window {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 999px 999px 0 0;
+}
+
+.salud-hero__window img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 32%;
+}
+
+/* La foto respira al cargar: de 1.06 a 1, seis segundos. */
+@media (prefers-reduced-motion: no-preference) {
+  .salud-hero__window img {
+    animation: salud-hero-drift 6s ease-out both;
+  }
+}
+
+@keyframes salud-hero-drift {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .salud-hero__arch {
+    top: 56px;
+    width: min(34vw, 400px);
+  }
+
+  .salud-hero__keystone {
+    width: 38px;
+    top: -14px;
+  }
+}
+
+@media (max-width: 720px) {
+  /* El arco se centra y apoya su base en el borde del hero. */
+  .salud-hero__arch {
+    position: relative;
+    inset: auto;
+    width: min(82vw, 380px);
+    aspect-ratio: 0.98;
+    margin: 26px auto 0;
+  }
+}

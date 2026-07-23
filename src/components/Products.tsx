@@ -11,6 +11,8 @@ type Coverage = {
   icon: ReactNode
   name: string
   detail: string
+  /* Con landing propia: el ítem se vuelve enlace a esa página. */
+  href?: string
 }
 
 type CardData = {
@@ -136,15 +138,31 @@ const cards: CardData[] = [
         icon: icons.salud,
         name: 'Asistencia médica',
         detail: 'Consultas, medicinas y hospitalización',
+        href: '/seguro-de-salud/',
       },
-      { icon: icons.vida, name: 'Vida', detail: 'El futuro de los tuyos, protegido' },
+      {
+        icon: icons.vida,
+        name: 'Vida',
+        detail: 'El futuro de los tuyos, protegido',
+        href: '/seguro-de-vida/',
+      },
       {
         icon: icons.persona,
         name: 'Accidentes personales',
         detail: 'Respaldo económico ante imprevistos',
       },
-      { icon: icons.auto, name: 'Vehículos', detail: 'Tu auto ante choques, robo o daños' },
-      { icon: icons.hogar, name: 'Hogar', detail: 'Tu casa y todo lo que hay en ella' },
+      {
+        icon: icons.auto,
+        name: 'Vehículos',
+        detail: 'Tu auto ante choques, robo o daños',
+        href: '/seguro-vehicular/',
+      },
+      {
+        icon: icons.hogar,
+        name: 'Hogar',
+        detail: 'Tu casa y todo lo que hay en ella',
+        href: '/seguro-de-hogar/',
+      },
     ],
     moreLabel: '¿Viaje u otra cobertura? Pregúntanos',
     ctaLabel: 'Cotiza aquí',
@@ -160,22 +178,31 @@ const cards: CardData[] = [
         icon: icons.incendio,
         name: 'Incendio y aliadas',
         detail: 'Tus activos, incluso ante desastres naturales',
+        href: '/seguros-para-empresas/',
       },
       {
         icon: icons.riesgos,
         name: 'Ramos técnicos',
         detail: 'Maquinaria, montaje y equipo electrónico',
+        href: '/seguros-para-empresas/',
       },
-      { icon: icons.flota, name: 'Transporte', detail: 'Tu mercadería por tierra, mar o aire' },
+      {
+        icon: icons.flota,
+        name: 'Transporte',
+        detail: 'Tu mercadería por tierra, mar o aire',
+        href: '/seguros-para-empresas/',
+      },
       {
         icon: icons.responsabilidad,
         name: 'Responsabilidad civil',
         detail: 'Respaldo ante daños a terceros',
+        href: '/seguros-para-empresas/',
       },
       {
         icon: icons.caucion,
         name: 'Fianzas',
         detail: 'Cumplimiento de contrato y anticipos',
+        href: '/seguros-para-empresas/',
       },
     ],
     moreLabel: '¿Flota vehicular u otro riesgo? Pregúntanos',
@@ -234,17 +261,35 @@ function CoverCard({ card }: { card: CardData }) {
         <div className="cover-card__face cover-card__back" inert={!isFlipped}>
           <p className="cover-card__eyebrow">{card.title}</p>
           <ul className="cover-card__list">
-            {card.coverages.map((coverage) => (
-              <li className="cover-card__item" key={coverage.name}>
-                <span className="cover-card__ico" aria-hidden="true">
-                  {coverage.icon}
-                </span>
-                <span className="cover-card__text">
-                  <span className="cover-card__what">{coverage.name}</span>
-                  <span className="cover-card__how">{coverage.detail}</span>
-                </span>
-              </li>
-            ))}
+            {card.coverages.map((coverage) => {
+              const body = (
+                <>
+                  <span className="cover-card__ico" aria-hidden="true">
+                    {coverage.icon}
+                  </span>
+                  <span className="cover-card__text">
+                    <span className="cover-card__what">
+                      {coverage.name}
+                      {coverage.href && (
+                        <span className="cover-card__go" aria-hidden="true">
+                          →
+                        </span>
+                      )}
+                    </span>
+                    <span className="cover-card__how">{coverage.detail}</span>
+                  </span>
+                </>
+              )
+              return coverage.href ? (
+                <li className="cover-card__item cover-card__item--link" key={coverage.name}>
+                  <a href={coverage.href}>{body}</a>
+                </li>
+              ) : (
+                <li className="cover-card__item" key={coverage.name}>
+                  {body}
+                </li>
+              )
+            })}
             <li className="cover-card__item cover-card__more">
               <a href="#quote">
                 <span className="cover-card__ico" aria-hidden="true">

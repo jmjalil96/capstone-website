@@ -2,22 +2,35 @@ import { useEffect, useRef, useState } from 'react'
 import { CapstoneLogo } from './CapstoneLogo'
 import './Header.css'
 
-const navigationItems = [
+const homeNavigationItems = [
   { href: '#coverage', label: 'Seguros' },
   { href: '#process', label: 'Cómo trabajamos' },
   { href: '#quote', label: 'Cotización' },
 ]
 
-function Header() {
+/* En una landing, las secciones del home viven en "/"; la cotización
+   es la propia de la página. */
+const landingNavigationItems = [
+  { href: '/#coverage', label: 'Seguros' },
+  { href: '/#process', label: 'Cómo trabajamos' },
+  { href: '#quote', label: 'Cotización' },
+]
+
+function Header({ isLanding = false }: { isLanding?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeHref, setActiveHref] = useState('')
   const menuButtonRef = useRef<HTMLButtonElement>(null)
 
+  const navigationItems = isLanding ? landingNavigationItems : homeNavigationItems
+
   const closeMenu = () => setIsMenuOpen(false)
 
   /* Scrollspy: la piedra clave sigue el scroll, no solo el clic. La
-     franja central del viewport decide qué sección "es" en cada momento. */
+     franja central del viewport decide qué sección "es" en cada momento.
+     En una landing no corre: sus objetivos no existen y la piedra
+     quedaría encendida sin hero que la apague. */
   useEffect(() => {
+    if (isLanding) return
     const sections = ['coverage', 'process', 'quote']
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
@@ -36,10 +49,10 @@ function Header() {
     sections.forEach((el) => spy.observe(el))
     if (hero) spy.observe(hero)
     return () => spy.disconnect()
-  }, [])
+  }, [isLanding])
 
   const handleNavClick = (href: string) => {
-    setActiveHref(href)
+    if (!isLanding) setActiveHref(href)
     closeMenu()
   }
 
@@ -70,7 +83,10 @@ function Header() {
             </a>
           </span>
 
-          <a className="utility-bar__link utility-bar__portal" href="#acceso">
+          <a
+            className="utility-bar__link utility-bar__portal"
+            href={isLanding ? '/#acceso' : '#acceso'}
+          >
             Acceso
           </a>
         </div>
@@ -78,7 +94,7 @@ function Header() {
 
       <div className="primary-header">
         <div className="shell primary-header__inner">
-          <a className="brand" href="#top" aria-label="Capstone — inicio">
+          <a className="brand" href={isLanding ? '/' : '#top'} aria-label="Capstone — inicio">
             <CapstoneLogo className="brand__logo" />
           </a>
 

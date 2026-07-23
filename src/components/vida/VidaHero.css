@@ -1,0 +1,75 @@
+/* Solo la composición del anillo: la banda, la columna de contenido y
+   los botones viven en LandingHero.css. */
+
+/* La órbita: círculo alineado al riel del shell, centrado en la banda. */
+.vida-hero__orbit {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: max(var(--gutter), calc((100vw - 1280px) / 2));
+  width: min(34vw, 440px);
+  aspect-ratio: 1;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+/* El aro: la otra generación — mismo tamaño, un paso atrás y abajo. */
+.vida-hero__ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--hero-gold);
+  border-radius: 50%;
+  translate: -30px 30px;
+}
+
+.vida-hero__circle {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.vida-hero__circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 38%;
+}
+
+/* La foto respira al cargar: de 1.06 a 1, seis segundos. */
+@media (prefers-reduced-motion: no-preference) {
+  .vida-hero__circle img {
+    animation: vida-hero-drift 6s ease-out both;
+  }
+}
+
+@keyframes vida-hero-drift {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .vida-hero__orbit {
+    width: min(32vw, 340px);
+  }
+
+  .vida-hero__ring {
+    translate: -22px 22px;
+  }
+}
+
+@media (max-width: 720px) {
+  /* El anillo baja del costado y se centra bajo el contenido. */
+  .vida-hero__orbit {
+    position: relative;
+    inset: auto;
+    width: min(68vw, 320px);
+    margin: 30px auto 46px;
+    translate: none;
+  }
+}

@@ -1,0 +1,131 @@
+/* Solo la composición de "la ruta": la banda, la columna de contenido
+   y los botones viven en LandingHero.css. */
+
+.vehicular-hero__road {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 auto;
+  width: min(44vw, 600px);
+  pointer-events: none;
+}
+
+/* El carril: panel a toda altura inclinado como una vía que entra en
+   escena. La imagen se contra-inclina para quedar derecha. */
+/* Sangra 120px a la derecha: el filo derecho también se inclina con el
+   skew, y sin el sangrado dejaría una cuña navy junto al borde. */
+.vehicular-hero__panel {
+  position: absolute;
+  inset: 0 -120px 0 0;
+  overflow: hidden;
+  transform: skewX(-8deg);
+  transform-origin: top;
+}
+
+.vehicular-hero__panel img {
+  position: absolute;
+  top: 0;
+  left: -80px;
+  width: calc(100% + 160px);
+  height: 100%;
+  object-fit: cover;
+  object-position: 20% 62%;
+  transform: skewX(8deg);
+}
+
+/* La señalización: línea central discontinua sobre el filo del carril. */
+.vehicular-hero__line {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 14px;
+  width: 5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--hero-gold) 0 30px,
+    transparent 30px 54px
+  );
+}
+
+/* La línea se pinta de arriba hacia abajo; la foto avanza de costado. */
+@media (prefers-reduced-motion: no-preference) {
+  .vehicular-hero__line {
+    animation: vehicular-line-draw 1100ms ease-out both;
+  }
+
+  .vehicular-hero__panel img {
+    animation: vehicular-hero-pan 6s ease-out both;
+  }
+}
+
+@keyframes vehicular-line-draw {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes vehicular-hero-pan {
+  from {
+    object-position: 28% 62%;
+  }
+
+  to {
+    object-position: 20% 62%;
+  }
+}
+
+@media (max-width: 980px) {
+  .vehicular-hero__road {
+    width: min(40vw, 460px);
+  }
+}
+
+@media (max-width: 720px) {
+  /* La vía gira: banda a lo ancho con la línea central en horizontal,
+     apoyada en el borde inferior del hero. */
+  .vehicular-hero__road {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: min(64vw, 320px);
+    margin-top: 26px;
+  }
+
+  .vehicular-hero__panel {
+    inset: 0;
+    transform: none;
+  }
+
+  .vehicular-hero__panel img {
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
+
+  .vehicular-hero__line {
+    inset: 14px 0 auto;
+    width: auto;
+    height: 5px;
+    background: repeating-linear-gradient(
+      to right,
+      var(--hero-gold) 0 30px,
+      transparent 30px 54px
+    );
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+  @keyframes vehicular-line-draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+      clip-path: inset(0);
+    }
+  }
+}
