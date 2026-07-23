@@ -140,7 +140,12 @@ const cards: CardData[] = [
         detail: 'Consultas, medicinas y hospitalización',
         href: '/seguro-de-salud/',
       },
-      { icon: icons.vida, name: 'Vida', detail: 'El futuro de los tuyos, protegido' },
+      {
+        icon: icons.vida,
+        name: 'Vida',
+        detail: 'El futuro de los tuyos, protegido',
+        href: '/seguro-de-vida/',
+      },
       {
         icon: icons.persona,
         name: 'Accidentes personales',

@@ -12,4 +12,8 @@
     <loc>https://capstone.com.ec/seguro-vehicular/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://capstone.com.ec/seguro-de-vida/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

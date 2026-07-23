@@ -18,6 +18,7 @@ export default defineConfig({
         main: resolve(import.meta.dirname, 'index.html'),
         'seguro-de-salud': resolve(import.meta.dirname, 'seguro-de-salud/index.html'),
         'seguro-vehicular': resolve(import.meta.dirname, 'seguro-vehicular/index.html'),
+        'seguro-de-vida': resolve(import.meta.dirname, 'seguro-de-vida/index.html'),
       },
     },
   },
