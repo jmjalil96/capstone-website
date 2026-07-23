@@ -157,7 +157,12 @@ const cards: CardData[] = [
         detail: 'Tu auto ante choques, robo o daños',
         href: '/seguro-vehicular/',
       },
-      { icon: icons.hogar, name: 'Hogar', detail: 'Tu casa y todo lo que hay en ella' },
+      {
+        icon: icons.hogar,
+        name: 'Hogar',
+        detail: 'Tu casa y todo lo que hay en ella',
+        href: '/seguro-de-hogar/',
+      },
     ],
     moreLabel: '¿Viaje u otra cobertura? Pregúntanos',
     ctaLabel: 'Cotiza aquí',

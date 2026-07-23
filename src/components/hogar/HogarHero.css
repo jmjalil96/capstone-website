@@ -1,0 +1,79 @@
+/* Solo la composición del gablete: la banda, la columna de contenido y
+   los botones viven en LandingHero.css. */
+
+/* La casa: borde derecho alineado con el shell, base plana sobre el
+   borde del hero — como el arco de salud, en clave de techo. */
+.hogar-hero__casa {
+  position: absolute;
+  z-index: 1;
+  top: clamp(56px, 7vw, 84px);
+  bottom: 0;
+  right: max(var(--gutter), calc((100vw - 1280px) / 2));
+  width: min(36vw, 470px);
+  pointer-events: none;
+}
+
+/* La cumbrera dorada: se dibuja fuera del recorte para que el trazo
+   no quede a la mitad. non-scaling-stroke mantiene su grosor. */
+.hogar-hero__roofline {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--hero-gold);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* El gablete: rectángulo con techo a dos aguas. */
+.hogar-hero__window {
+  height: 100%;
+  overflow: hidden;
+  clip-path: polygon(0 22%, 50% 0, 100% 22%, 100% 100%, 0 100%);
+}
+
+.hogar-hero__window img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 45%;
+}
+
+/* La foto respira al cargar: de 1.06 a 1, seis segundos. */
+@media (prefers-reduced-motion: no-preference) {
+  .hogar-hero__window img {
+    animation: hogar-hero-drift 6s ease-out both;
+  }
+}
+
+@keyframes hogar-hero-drift {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .hogar-hero__casa {
+    top: 48px;
+    width: min(33vw, 400px);
+  }
+}
+
+@media (max-width: 720px) {
+  /* La casa se centra y apoya su base en el borde del hero. */
+  .hogar-hero__casa {
+    position: relative;
+    inset: auto;
+    width: min(80vw, 360px);
+    aspect-ratio: 0.95;
+    margin: 26px auto 0;
+  }
+}

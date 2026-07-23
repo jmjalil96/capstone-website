@@ -88,6 +88,9 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
               <li>
                 <a href="/seguro-de-vida/">Seguro de vida</a>
               </li>
+              <li>
+                <a href="/seguro-de-hogar/">Seguro de hogar</a>
+              </li>
             </ul>
           </nav>
 
