@@ -48,38 +48,6 @@ function Glossary() {
     return () => observer.disconnect()
   }, [])
 
-  /* Scrollspy del índice: la franja central del viewport decide qué
-     grupo "es" — la misma mecánica que el nav del home. */
-  useEffect(() => {
-    const sections = glossaryGroups
-      .map((group) => document.getElementById(group.id))
-      .filter((el): el is HTMLElement => el !== null)
-
-    const spy = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveGroup(entry.target.id)
-        })
-      },
-      { rootMargin: '-20% 0px -70% 0px' },
-    )
-    sections.forEach((el) => spy.observe(el))
-    return () => spy.disconnect()
-  }, [])
-
-  /* Llegar por ancla — desde una FAQ de landing o un "ver también" —
-     despliega la entrada además de resaltarla. */
-  useEffect(() => {
-    const openFromHash = () => {
-      const id = window.location.hash.slice(1)
-      const el = id ? document.getElementById(id) : null
-      if (el instanceof HTMLDetailsElement) el.open = true
-    }
-    openFromHash()
-    window.addEventListener('hashchange', openFromHash)
-    return () => window.removeEventListener('hashchange', openFromHash)
-  }, [])
-
   /* El filtro recorta grupos y entradas; sin texto, muestra todo. */
   const needle = fold(query.trim())
   const visibleGroups = useMemo(() => {
@@ -93,6 +61,39 @@ function Glossary() {
       }))
       .filter((group) => group.terms.length > 0)
   }, [needle])
+
+  /* Scrollspy del índice: la franja central del viewport decide qué
+     grupo "es" — la misma mecánica que el nav del home. Se re-suscribe
+     cuando el filtro monta o desmonta grupos: los nodos son nuevos. */
+  useEffect(() => {
+    const sections = visibleGroups
+      .map((group) => document.getElementById(group.id))
+      .filter((el): el is HTMLElement => el !== null)
+
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveGroup(entry.target.id)
+        })
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    )
+    sections.forEach((el) => spy.observe(el))
+    return () => spy.disconnect()
+  }, [visibleGroups])
+
+  /* Llegar por ancla — desde una FAQ de landing o un "ver también" —
+     despliega la entrada además de resaltarla. */
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = window.location.hash.slice(1)
+      const el = id ? document.getElementById(id) : null
+      if (el instanceof HTMLDetailsElement) el.open = true
+    }
+    openFromHash()
+    window.addEventListener('hashchange', openFromHash)
+    return () => window.removeEventListener('hashchange', openFromHash)
+  }, [])
 
   return (
     <div className="glossary">
