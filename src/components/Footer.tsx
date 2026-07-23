@@ -82,6 +82,9 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
               <li>
                 <a href="/seguro-de-salud/">Seguro de salud</a>
               </li>
+              <li>
+                <a href="/seguro-vehicular/">Seguro vehicular</a>
+              </li>
             </ul>
           </nav>
 

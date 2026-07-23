@@ -146,7 +146,12 @@ const cards: CardData[] = [
         name: 'Accidentes personales',
         detail: 'Respaldo económico ante imprevistos',
       },
-      { icon: icons.auto, name: 'Vehículos', detail: 'Tu auto ante choques, robo o daños' },
+      {
+        icon: icons.auto,
+        name: 'Vehículos',
+        detail: 'Tu auto ante choques, robo o daños',
+        href: '/seguro-vehicular/',
+      },
       { icon: icons.hogar, name: 'Hogar', detail: 'Tu casa y todo lo que hay en ella' },
     ],
     moreLabel: '¿Viaje u otra cobertura? Pregúntanos',
