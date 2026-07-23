@@ -42,9 +42,9 @@
   align-items: center;
   gap: 70px;
   padding-right: 70px;
-  /* ~22 nombres por pista (antes 6): duración proporcional para
+  /* 22 nombres por pista (antes 6): duración proporcional para
      mantener la misma velocidad de desplazamiento en px/s. */
-  animation: footer-marquee 220s linear infinite;
+  animation: footer-marquee 230s linear infinite;
 }
 
 .site-footer__strip:hover .site-footer__track {

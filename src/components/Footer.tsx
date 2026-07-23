@@ -24,6 +24,7 @@ const insurers = [
   'BMI',
   'Pan American Life',
   'BUPA',
+  'Best Doctors',
   'Vaz Seguros',
   'Saludsa',
   'Asisken',

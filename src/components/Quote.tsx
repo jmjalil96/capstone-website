@@ -3,7 +3,7 @@ import type { FormEvent, KeyboardEvent } from 'react'
 import { ArchMark } from './CapstoneLogo'
 import './Quote.css'
 
-const insurables = ['mi salud', 'mi familia', 'mi auto', 'mi casa', 'mi empresa', 'otra cosa']
+const insurables = ['mi salud', 'mi familia', 'mi vida', 'mi auto', 'mi casa', 'mi empresa', 'otra cosa']
 
 /* Web app de Apps Script: anota el lead en la hoja y avisa por correo.
    El POST va sin header JSON — como text/plain es una petición simple,
@@ -13,8 +13,12 @@ const LEADS_URL =
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-function Quote() {
-  const [what, setWhat] = useState(insurables[0])
+/* Cada landing preselecciona su opción (defaultWhat); sin prop, el
+   formulario abre en la primera — el home queda igual que siempre. */
+function Quote({ defaultWhat }: { defaultWhat?: string } = {}) {
+  const [what, setWhat] = useState(
+    defaultWhat && insurables.includes(defaultWhat) ? defaultWhat : insurables[0],
+  )
   const [isOpen, setIsOpen] = useState(false)
   const [status, setStatus] = useState<Status>('idle')
   const [sentName, setSentName] = useState('')
