@@ -24,4 +24,8 @@
     <loc>https://capstone.com.ec/seguros-para-empresas/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://capstone.com.ec/glosario/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

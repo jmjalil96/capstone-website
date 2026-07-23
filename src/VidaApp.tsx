@@ -68,8 +68,14 @@ const vidaQuestions = [
   },
   {
     question: '¿Quiénes pueden ser mis beneficiarios?',
-    answer:
-      'Tú los eliges — tu familia, tu pareja o quien decidas — y puedes actualizarlos cuando tu vida cambie. Te ayudamos a dejarlos bien definidos para que el pago nunca se complique.',
+    answer: (
+      <>
+        Tú los eliges — tu familia, tu pareja o quien decidas — y puedes actualizarlos cuando tu
+        vida cambie. Te ayudamos a dejarlos bien definidos para que el pago nunca se complique. Más
+        sobre <a href="/glosario/#beneficiario">tomador, asegurado y beneficiario</a> en nuestro
+        glosario.
+      </>
+    ),
   },
   {
     question: '¿El seguro de vida sirve solo si fallezco?',

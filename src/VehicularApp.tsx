@@ -71,8 +71,14 @@ const vehicularQuestions = [
   },
   {
     question: '¿Qué es el deducible?',
-    answer:
-      'Es la parte del daño que asumes tú antes de que responda la aseguradora, y cambia de un plan a otro. Antes de contratar te mostramos cómo funciona en cada opción, para que no haya sorpresas.',
+    answer: (
+      <>
+        Es la parte del daño que asumes tú antes de que responda la aseguradora, y cambia de un
+        plan a otro. Antes de contratar te mostramos cómo funciona en cada opción, para que no haya
+        sorpresas. Lo explicamos a fondo en{' '}
+        <a href="/glosario/#deducible">nuestro glosario de seguros</a>.
+      </>
+    ),
   },
   {
     question: '¿Aseguran motos y flotas?',

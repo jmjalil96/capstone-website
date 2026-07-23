@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react'
 import './LandingFaq.css'
 
 export type LandingFaqQuestion = {
   question: string
-  answer: string
+  /* Admite JSX para enlazar términos al glosario dentro de la respuesta. */
+  answer: ReactNode
 }
 
 type LandingFaqProps = {

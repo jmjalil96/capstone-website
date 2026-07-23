@@ -110,6 +110,9 @@ function Footer({ isLanding = false }: { isLanding?: boolean }) {
                 <a href="#quote">Cotización</a>
               </li>
               <li>
+                <a href="/glosario/">Glosario</a>
+              </li>
+              <li>
                 <a href={`${homePrefix}#acceso`}>Acceso</a>
               </li>
             </ul>

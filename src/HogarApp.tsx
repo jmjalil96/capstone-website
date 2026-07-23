@@ -71,8 +71,14 @@ const hogarQuestions = [
   },
   {
     question: '¿Por qué valor aseguro mi casa?',
-    answer:
-      'Depende del plan: en general se asegura por lo que costaría reconstruirla o reponer lo que hay dentro, no por su precio de venta. Te ayudamos a definir bien los valores para que no pagues de más ni te quedes corto.',
+    answer: (
+      <>
+        Depende del plan: en general se asegura por lo que costaría reconstruirla o reponer lo que
+        hay dentro, no por su precio de venta. Te ayudamos a definir bien los valores para que no
+        pagues de más ni te quedes corto. Más sobre el{' '}
+        <a href="/glosario/#valor-asegurado">valor asegurado en nuestro glosario</a>.
+      </>
+    ),
   },
   {
     question: '¿Aseguran departamentos alquilados?',
