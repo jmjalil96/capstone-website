@@ -20,6 +20,7 @@ export default defineConfig({
         'seguro-vehicular': resolve(import.meta.dirname, 'seguro-vehicular/index.html'),
         'seguro-de-vida': resolve(import.meta.dirname, 'seguro-de-vida/index.html'),
         'seguro-de-hogar': resolve(import.meta.dirname, 'seguro-de-hogar/index.html'),
+        'seguros-para-empresas': resolve(import.meta.dirname, 'seguros-para-empresas/index.html'),
       },
     },
   },

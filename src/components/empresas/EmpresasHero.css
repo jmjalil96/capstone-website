@@ -1,0 +1,99 @@
+/* Solo la composición del perfil urbano: la banda, la columna de
+   contenido y los botones viven en LandingHero.css. */
+
+.empresas-hero__skyline {
+  position: absolute;
+  z-index: 1;
+  top: clamp(56px, 7vw, 88px);
+  bottom: 0;
+  right: max(var(--gutter), calc((100vw - 1280px) / 2));
+  display: flex;
+  width: min(40vw, 520px);
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.empresas-hero__block {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Manzanas que crecen hacia la derecha; la base queda plana. */
+.empresas-hero__block--a {
+  height: 66%;
+}
+
+.empresas-hero__block--b {
+  height: 83%;
+}
+
+.empresas-hero__block--c {
+  height: 100%;
+}
+
+.empresas-hero__block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cada bloque, su franja de la foto. */
+.empresas-hero__block--a img {
+  object-position: 10% 40%;
+}
+
+.empresas-hero__block--b img {
+  object-position: 50% 40%;
+}
+
+.empresas-hero__block--c img {
+  object-position: 74% 40%;
+}
+
+/* El perfil se levanta al cargar, bloque a bloque. */
+@media (prefers-reduced-motion: no-preference) {
+  .empresas-hero__block {
+    animation: empresas-block-rise 700ms ease-out both;
+  }
+
+  .empresas-hero__block--b {
+    animation-delay: 120ms;
+  }
+
+  .empresas-hero__block--c {
+    animation-delay: 240ms;
+  }
+}
+
+@keyframes empresas-block-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .empresas-hero__skyline {
+    top: 48px;
+    width: min(36vw, 420px);
+    gap: 8px;
+  }
+}
+
+@media (max-width: 720px) {
+  /* El perfil se centra y apoya su base en el borde del hero. */
+  .empresas-hero__skyline {
+    position: relative;
+    inset: auto;
+    width: min(86vw, 420px);
+    height: min(60vw, 300px);
+    margin: 26px auto 0;
+  }
+}
