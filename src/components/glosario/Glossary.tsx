@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { coverageIcons } from '../landing/coverageIcons'
 import { glossaryGroups } from './glossaryData'
 import './Glossary.css'
 
@@ -13,14 +14,23 @@ const glossarySeam = (
   </svg>
 )
 
+/* Para buscar sin pelear con las tildes: "poliza" encuentra "póliza". */
+const fold = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, "")
+
 /* La página de referencia: mástil navy de portada, costura con el
    libro, y el cuerpo en dos columnas — índice de pulgar fijo a la
    izquierda (la piedra clave marca el grupo activo) y las entradas
-   como filas de diccionario: término a la izquierda, definición a la
-   derecha. Los ids de las entradas son las anclas públicas. */
+   como filas de diccionario plegables: término y esencia siempre a la
+   vista; el despliegue trae la explicación, el ejemplo y los enlaces.
+   Los ids de las entradas son las anclas públicas. */
 function Glossary() {
   const seamRef = useRef<HTMLDivElement>(null)
   const [activeGroup, setActiveGroup] = useState(glossaryGroups[0].id)
+  const [query, setQuery] = useState('')
 
   /* El libro se dibuja una sola vez al entrar en vista. */
   useEffect(() => {
@@ -56,6 +66,33 @@ function Glossary() {
     sections.forEach((el) => spy.observe(el))
     return () => spy.disconnect()
   }, [])
+
+  /* Llegar por ancla — desde una FAQ de landing o un "ver también" —
+     despliega la entrada además de resaltarla. */
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = window.location.hash.slice(1)
+      const el = id ? document.getElementById(id) : null
+      if (el instanceof HTMLDetailsElement) el.open = true
+    }
+    openFromHash()
+    window.addEventListener('hashchange', openFromHash)
+    return () => window.removeEventListener('hashchange', openFromHash)
+  }, [])
+
+  /* El filtro recorta grupos y entradas; sin texto, muestra todo. */
+  const needle = fold(query.trim())
+  const visibleGroups = useMemo(() => {
+    if (!needle) return glossaryGroups
+    return glossaryGroups
+      .map((group) => ({
+        ...group,
+        terms: group.terms.filter((item) =>
+          fold(`${item.term} ${item.brief} ${item.def}`).includes(needle),
+        ),
+      }))
+      .filter((group) => group.terms.length > 0)
+  }, [needle])
 
   return (
     <div className="glossary">
@@ -115,7 +152,17 @@ function Glossary() {
           </nav>
 
           <div className="glossary__groups">
-            {glossaryGroups.map((group) => (
+            <div className="glossary__search">
+              <input
+                type="search"
+                value={query}
+                placeholder="Busca un término…"
+                aria-label="Buscar en el glosario"
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </div>
+
+            {visibleGroups.map((group) => (
               <section
                 className="glossary__group"
                 id={group.id}
@@ -123,15 +170,23 @@ function Glossary() {
                 aria-labelledby={`${group.id}-title`}
               >
                 <h2 className="glossary__group-title" id={`${group.id}-title`}>
+                  <span className="glossary__group-ico" aria-hidden="true">
+                    {coverageIcons[group.icon]}
+                  </span>
                   {group.label}
                 </h2>
                 <p className="glossary__group-lede">{group.lede}</p>
 
                 {group.terms.map((item) => (
-                  <article className="glossary__entry" id={item.id} key={item.id}>
-                    <h3 className="glossary__term">{item.term}</h3>
-                    <div className="glossary__body">
+                  <details className="glossary__entry" id={item.id} key={item.id}>
+                    <summary className="glossary__summary">
+                      <h3 className="glossary__term">{item.term}</h3>
+                      <p className="glossary__brief">{item.brief}</p>
+                      <span className="glossary__marker" aria-hidden="true" />
+                    </summary>
+                    <div className="glossary__detail">
                       <p className="glossary__def">{item.def}</p>
+                      {item.example && <p className="glossary__example">{item.example}</p>}
                       {(item.see || item.cta) && (
                         <p className="glossary__refs">
                           {item.see && (
@@ -153,10 +208,18 @@ function Glossary() {
                         </p>
                       )}
                     </div>
-                  </article>
+                  </details>
                 ))}
               </section>
             ))}
+
+            {visibleGroups.length === 0 && (
+              <p className="glossary__empty">
+                Ningún término coincide con «{query.trim()}».{' '}
+                <a href="https://wa.me/message/XM5YAG5TH4IEA1">Escríbenos por WhatsApp</a> y te lo
+                explicamos.
+              </p>
+            )}
           </div>
         </div>
       </div>

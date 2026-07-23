@@ -126,4 +126,13 @@ export const coverageIcons = {
       <path d="M16.8 13.5a5.2 5.2 0 0 1 3.4 5.1" />
     </>,
   ),
+  casa: strokeIcon(
+    <>
+      <path d="M4.5 11.2 12 4.8l7.5 6.4" />
+      <path d="M6.5 10.2v9.3h11v-9.3" />
+      <path d="M10.3 19.5v-4.6h3.4v4.6" />
+    </>,
+  ),
 }
+
+export type CoverageIconKey = keyof typeof coverageIcons

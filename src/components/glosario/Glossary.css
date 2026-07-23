@@ -220,10 +220,53 @@
   text-underline-offset: 3px;
 }
 
-/* Grupos: la regla dorada del kit precede al título — el eyebrow del
-   sitio, aplicado al índice del libro. */
+/* El buscador: mono, discreto, arriba de las entradas. Todo el
+   contenido sigue en el DOM — el filtro solo recorta lo visible. */
+.glossary__search {
+  margin-bottom: 6px;
+}
+
+.glossary__search input {
+  width: 100%;
+  max-width: 380px;
+  padding: 11px 14px;
+  border: 1px solid var(--glossary-border);
+  border-radius: 4px;
+  color: var(--glossary-navy);
+  background: #ffffff;
+  font: 500 13px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.glossary__search input::placeholder {
+  color: #8a969d;
+}
+
+.glossary__search input:focus-visible {
+  border-color: var(--glossary-gold);
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 1px;
+}
+
+.glossary__empty {
+  margin: 26px 0 0;
+  color: #44565f;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.glossary__empty a {
+  color: var(--glossary-teal-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Grupos: la regla dorada del kit precede al título, y el icono del
+   ramo — el mismo kit de los libros mayores — ancla cada grupo. */
 .glossary__group {
   scroll-margin-top: 24px;
+  margin-top: 40px;
 }
 
 .glossary__group + .glossary__group {
@@ -233,7 +276,7 @@
 .glossary__group-title {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin: 0 0 6px;
   font: 700 clamp(22px, 2.2vw, 26px) / 1.15 'Bricolage Grotesque', sans-serif;
   letter-spacing: -0.015em;
@@ -247,30 +290,60 @@
   content: '';
 }
 
+.glossary__group-ico {
+  flex: none;
+}
+
+.glossary__group-ico svg {
+  width: 23px;
+  height: 23px;
+  color: var(--glossary-teal-ink);
+}
+
 .glossary__group-lede {
   margin: 0 0 10px;
-  padding-left: 40px;
+  padding-left: 73px;
   color: #5b6b74;
   font-size: 15px;
   line-height: 1.5;
 }
 
-/* La fila de diccionario: palabra guía a la izquierda, definición a
-   la derecha — el libro mayor del sitio, leído como referencia. */
+/* La fila de diccionario, ahora plegable: término y esencia siempre a
+   la vista; el despliegue trae la explicación completa. */
 .glossary__entry {
-  display: grid;
-  grid-template-columns: minmax(180px, 240px) 1fr;
-  gap: 6px 48px;
-  padding: 22px 0;
   border-top: 1px solid var(--glossary-border);
   scroll-margin-top: 28px;
 }
 
+.glossary__summary {
+  display: grid;
+  grid-template-columns: 240px 1fr 16px;
+  align-items: baseline;
+  gap: 6px 44px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.glossary__summary::-webkit-details-marker {
+  display: none;
+}
+
+.glossary__summary:hover .glossary__term {
+  color: var(--glossary-teal-ink);
+}
+
+.glossary__summary:focus-visible {
+  outline: 2px solid var(--glossary-gold);
+  outline-offset: 3px;
+}
+
 .glossary__term {
   margin: 0;
-  font: 700 19px/1.3 'Bricolage Grotesque', sans-serif;
+  font: 700 18px/1.3 'Bricolage Grotesque', sans-serif;
   letter-spacing: -0.01em;
   text-wrap: balance;
+  transition: color 160ms ease;
 }
 
 /* Llegar por ancla enciende la piedra clave junto al término. */
@@ -284,18 +357,80 @@
   mask: var(--keystone-mask) center / contain no-repeat;
 }
 
-.glossary__body {
+/* La esencia: la definición de una línea que hace legible la página
+   cerrada — y el candidato a fragmento destacado. */
+.glossary__brief {
+  max-width: 640px;
+  margin: 0;
+  color: #44565f;
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+/* El marcador de despliegue: la cruz que se vuelve guion — la misma
+   seña del acordeón de las FAQ. */
+.glossary__marker {
+  position: relative;
+  align-self: center;
+  width: 14px;
+  height: 14px;
+}
+
+.glossary__marker::before,
+.glossary__marker::after {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  background: var(--glossary-gold);
+  content: '';
+  transition: rotate 200ms ease;
+}
+
+.glossary__marker::after {
+  rotate: 90deg;
+}
+
+.glossary__entry[open] .glossary__marker::after {
+  rotate: 0deg;
+}
+
+/* El despliegue se alinea bajo la esencia, no bajo el término. */
+.glossary__detail {
   display: flex;
-  max-width: 660px;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding: 0 60px 22px 284px;
 }
 
 .glossary__def {
+  max-width: 640px;
   margin: 0;
   color: #44565f;
   font-size: 15.5px;
   line-height: 1.62;
+}
+
+/* El ejemplo aterriza el concepto: filete dorado, sin números. */
+.glossary__example {
+  max-width: 620px;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--glossary-gold);
+  color: #5b6b74;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.glossary__example::before {
+  display: block;
+  margin-bottom: 3px;
+  color: #8a969d;
+  content: 'En la práctica';
+  font: 500 10.5px/1 'IBM Plex Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .glossary__refs {
@@ -359,17 +494,42 @@
     margin-top: 48px;
   }
 
-  .glossary__entry {
-    grid-template-columns: minmax(160px, 200px) 1fr;
+  .glossary__summary {
+    grid-template-columns: 190px 1fr 16px;
     gap: 6px 32px;
+  }
+
+  .glossary__detail {
+    padding: 0 0 20px 222px;
   }
 }
 
 @media (max-width: 640px) {
-  .glossary__entry {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  /* En una columna la esencia corre bajo el término, a todo lo ancho. */
+  .glossary__summary {
+    grid-template-columns: 1fr 16px;
+    gap: 6px 12px;
     padding: 18px 0;
+  }
+
+  .glossary__term {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .glossary__marker {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .glossary__brief {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    font-size: 15px;
+  }
+
+  .glossary__detail {
+    padding: 0 0 18px;
   }
 
   .glossary__group-lede {
@@ -389,6 +549,9 @@
   .glossary__trace,
   .glossary__rail-link,
   .glossary__rail-link::before,
+  .glossary__term,
+  .glossary__marker::before,
+  .glossary__marker::after,
   .glossary__cta span {
     transition: none;
   }

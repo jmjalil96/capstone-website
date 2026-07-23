@@ -1,8 +1,12 @@
+import type { CoverageIconKey } from '../landing/coverageIcons'
+
 /* El contenido del glosario: seis grupos por ramo, cada término con su
    ancla estable (el id es la URL pública /glosario/#id — no renombrar
-   sin redirigir). Las definiciones dan el concepto en voz de asesor;
-   los detalles (montos, plazos, porcentajes) son de cada póliza y aquí
-   no se inventan. `see` cruza términos; `cta` enruta al ramo. */
+   sin redirigir). Dos niveles por entrada: `brief` es la esencia
+   siempre visible (y el candidato a featured snippet); `def` la
+   continúa al desplegar — no la repite. `example` aterriza los
+   términos difíciles sin montos ni plazos: los detalles son de cada
+   póliza y aquí no se inventan. `see` cruza términos; `cta` enruta. */
 
 export type GlossaryLink = {
   label: string
@@ -12,7 +16,9 @@ export type GlossaryLink = {
 export type GlossaryTerm = {
   id: string
   term: string
+  brief: string
   def: string
+  example?: string
   see?: GlossaryLink[]
   cta?: GlossaryLink
 }
@@ -21,6 +27,7 @@ export type GlossaryGroup = {
   id: string
   label: string
   lede: string
+  icon: CoverageIconKey
   terms: GlossaryTerm[]
 }
 
@@ -29,23 +36,27 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'fundamentos',
     label: 'Fundamentos',
     lede: 'El idioma que comparten todas las pólizas, del ramo que sean.',
+    icon: 'documento',
     terms: [
       {
         id: 'broker-de-seguros',
         term: 'Broker de seguros',
-        def: 'También llamado asesor productor de seguros: un intermediario independiente que trabaja de tu lado, no para una sola aseguradora. Compara los planes del mercado, negocia condiciones y te acompaña en reclamos, renovaciones y cada cambio de tu póliza.',
+        brief: 'Tu asesor independiente: trabaja de tu lado, no para una sola aseguradora.',
+        def: 'Compara los planes de varias aseguradoras, negocia condiciones y te acompaña en reclamos, renovaciones y cada cambio de tu póliza. En Ecuador también se le llama asesor productor de seguros — y su trabajo es que tú decidas informado.',
         cta: { label: 'Así trabajamos', href: '/#process' },
       },
       {
         id: 'aseguradora',
         term: 'Aseguradora',
-        def: 'La compañía que asume el riesgo: emite la póliza, cobra la prima y paga la indemnización cuando ocurre un siniestro cubierto. Nosotros te ayudamos a compararlas; ellas son quienes responden cuando algo pasa.',
+        brief: 'La compañía que asume el riesgo y paga cuando algo pasa.',
+        def: 'Emite la póliza, cobra la prima y paga la indemnización cuando ocurre un siniestro cubierto. El broker te asesora; la aseguradora es quien responde.',
         see: [{ label: 'póliza', href: '#poliza' }],
       },
       {
         id: 'poliza',
         term: 'Póliza',
-        def: 'El contrato de tu seguro: define qué está cubierto, por cuánto, con qué exclusiones y bajo qué condiciones. Es el documento que manda — por eso te lo explicamos en claro antes de que firmes, no después.',
+        brief: 'El contrato que fija qué cubre tu seguro y bajo qué condiciones.',
+        def: 'Define qué está cubierto, por cuánto, con qué exclusiones y bajo qué condiciones. Es el documento que manda — léela con alguien que te la traduzca antes de firmar.',
         see: [
           { label: 'cobertura', href: '#cobertura' },
           { label: 'exclusiones', href: '#exclusiones' },
@@ -54,7 +65,8 @@ export const glossaryGroups: GlossaryGroup[] = [
       {
         id: 'prima',
         term: 'Prima',
-        def: 'El precio de tu seguro: lo que pagas por mantener la cobertura activa durante la vigencia de la póliza. Depende, entre otras cosas, del riesgo, del valor asegurado y del deducible que elijas — por eso la misma cobertura puede costar distinto en cada aseguradora.',
+        brief: 'El precio de tu seguro: lo que pagas por estar cubierto.',
+        def: 'Puede pagarse mensual o anual según el plan, y depende del riesgo, del valor asegurado y del deducible que elijas — por eso la misma cobertura puede costar distinto en cada aseguradora.',
         see: [
           { label: 'deducible', href: '#deducible' },
           { label: 'valor asegurado', href: '#valor-asegurado' },
@@ -63,53 +75,68 @@ export const glossaryGroups: GlossaryGroup[] = [
       {
         id: 'deducible',
         term: 'Deducible',
-        def: 'La parte de una pérdida que asumes tú antes de que la aseguradora pague el resto. Cada plan lo define a su manera — un monto fijo, un porcentaje o una combinación — y suele moverse en sentido contrario a la prima: a mayor deducible, prima más baja. Antes de contratar te mostramos cómo funciona en cada opción, para que no haya sorpresas en el reclamo.',
+        brief: 'La parte de una pérdida que pagas tú; la aseguradora cubre el resto.',
+        def: 'Cada plan lo define a su manera — un monto fijo, un porcentaje o una combinación — y suele moverse en sentido contrario a la prima: a mayor deducible, prima más baja.',
+        example:
+          'Chocas y el arreglo tiene un costo: tú asumes el deducible y la aseguradora paga lo demás.',
         see: [{ label: 'prima', href: '#prima' }],
         cta: { label: 'Cotiza tu vehículo', href: '/seguro-vehicular/' },
       },
       {
         id: 'cobertura',
         term: 'Cobertura',
-        def: 'Lo que tu seguro sí ampara: los eventos y gastos que la póliza se compromete a pagar, y hasta qué límites. Dos planes con el mismo nombre pueden cubrir cosas distintas — comparar coberturas, no solo precios, es la mitad de nuestro trabajo.',
+        brief: 'Lo que tu seguro sí ampara, y hasta qué límite.',
+        def: 'Cada cobertura tiene sus condiciones, y dos planes con el mismo nombre pueden amparar cosas distintas — por eso se comparan coberturas, no solo precios.',
         see: [{ label: 'exclusiones', href: '#exclusiones' }],
       },
       {
         id: 'exclusiones',
         term: 'Exclusiones',
-        def: 'Lo que tu póliza no cubre. Todas las pólizas las tienen; la diferencia está en conocerlas antes de firmar y no en medio de un reclamo. Señalártelas es parte de nuestra asesoría.',
+        brief: 'Lo que tu póliza no cubre.',
+        def: 'Todas las pólizas las tienen; la diferencia está en conocerlas antes de firmar y no en medio de un reclamo.',
       },
       {
         id: 'valor-asegurado',
         term: 'Valor asegurado',
-        def: 'También llamado suma asegurada: el monto máximo que la aseguradora pagaría por una pérdida cubierta. Definirlo bien importa — un valor muy bajo te deja corto al momento del siniestro, y uno muy alto te hace pagar prima de más. Te ayudamos a fijarlo con criterio según el bien que aseguras.',
+        brief: 'El máximo que la aseguradora pagaría por una pérdida cubierta.',
+        def: 'También se le llama suma asegurada. Un valor muy bajo te deja corto al momento del siniestro; uno muy alto te hace pagar prima de más.',
+        example:
+          'Aseguras tu casa por lo que costaría reconstruirla, no por lo que pedirías al venderla.',
         cta: { label: 'Asegura tu casa', href: '/seguro-de-hogar/' },
       },
       {
         id: 'beneficiario',
         term: 'Asegurado, tomador y beneficiario',
-        def: 'Tres roles que pueden coincidir en la misma persona o no: el tomador contrata la póliza y la paga, el asegurado es quien está protegido, y el beneficiario es quien recibe la indemnización. En un seguro de vida tú eliges a tus beneficiarios y puedes actualizarlos cuando tu vida cambie.',
+        brief: 'Quién contrata, quién está protegido y quién recibe el pago.',
+        def: 'El tomador contrata la póliza y la paga, el asegurado es quien está protegido, y el beneficiario recibe la indemnización. Pueden ser la misma persona — o no. En vida, tú eliges a tus beneficiarios y puedes actualizarlos cuando tu vida cambie.',
+        example:
+          'Contratas un seguro de vida: tú eres tomador y asegurado, y tus hijos, los beneficiarios que recibirían el pago.',
         cta: { label: 'Cotiza tu seguro de vida', href: '/seguro-de-vida/' },
       },
       {
         id: 'siniestro',
         term: 'Siniestro',
-        def: 'El evento que activa tu seguro: el choque, el robo, la enfermedad, el incendio. Cuando ocurre, nos avisas primero a nosotros: te decimos qué documentar y armamos el reclamo contigo.',
+        brief: 'El evento que activa tu seguro: el choque, el robo, la enfermedad.',
+        def: 'Cuando ocurre, nos avisas primero a nosotros: te decimos qué documentar y armamos el reclamo contigo.',
         see: [{ label: 'reclamo', href: '#reclamo' }],
       },
       {
         id: 'reclamo',
         term: 'Reclamo',
-        def: 'El trámite para que la aseguradora responda después de un siniestro: documentación, aviso formal y seguimiento hasta la reparación o el pago. Como tu broker, lo llevamos contigo de principio a fin — es la parte del trabajo donde más se nota tener un asesor.',
+        brief: 'El trámite para que la aseguradora pague tras un siniestro.',
+        def: 'Documentación, aviso formal a la aseguradora y seguimiento hasta la reparación o el pago. Es la parte del proceso donde más se nota tener un asesor de tu lado.',
       },
       {
         id: 'endoso',
         term: 'Endoso',
-        def: 'Una modificación a tu póliza vigente sin necesidad de contratar una nueva: cambiar un beneficiario, incluir un bien, ajustar un valor. Nos pides el cambio y nosotros lo gestionamos con la aseguradora.',
+        brief: 'Un cambio a tu póliza vigente, sin contratar una nueva.',
+        def: 'Cambiar un beneficiario, incluir un bien, ajustar un valor: la póliza se actualiza sin empezar de cero. Nos pides el cambio y lo gestionamos con la aseguradora.',
       },
       {
         id: 'renovacion',
         term: 'Renovación',
-        def: 'Las pólizas se contratan por períodos; al vencer, toca renovar. Para nosotros es más que un trámite: revisamos cómo se comportó tu plan y volvemos a cotizar el mercado para confirmar que sigues en la mejor opción.',
+        brief: 'El cierre de un período de tu póliza — y el momento de recotizar.',
+        def: 'Al vencer el período, el plan se renueva. Es el mejor momento para revisar cómo se comportó y volver a comparar el mercado antes de continuar.',
       },
     ],
   },
@@ -117,37 +144,49 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'salud',
     label: 'Salud',
     lede: 'Los términos que verás al comparar planes de salud.',
+    icon: 'corazon',
     terms: [
       {
         id: 'copago',
         term: 'Copago',
-        def: 'La parte de un gasto médico que pagas tú al usar un servicio cubierto; el plan asume el resto. Cada aseguradora define sus copagos por tipo de servicio — es uno de los números que comparamos por ti al cotizar.',
+        brief: 'La parte de un gasto médico que pagas tú al usar el plan.',
+        def: 'El plan asume el resto del gasto. Cada aseguradora define sus copagos por tipo de servicio, y cambian de un plan a otro.',
+        example: 'Vas a consulta: tú pagas tu parte en ventanilla y el plan cubre lo demás.',
         cta: { label: 'Cotiza tu seguro de salud', href: '/seguro-de-salud/' },
       },
       {
         id: 'reembolso',
         term: 'Reembolso',
-        def: 'Cuando pagas una atención médica y luego la aseguradora te devuelve la parte cubierta, previa presentación del reclamo. Te ayudamos a armar bien la carpeta para que el reembolso no se trabe.',
+        brief: 'Pagas la atención y la aseguradora te devuelve lo cubierto.',
+        def: 'Aplica cuando te atiendes y pagas primero. La clave es la carpeta: facturas, pedidos y resultados completos hacen que el reembolso fluya.',
+        example:
+          'Pagas el examen, guardas la factura, presentas el reclamo y te devuelven la parte cubierta.',
       },
       {
         id: 'red-de-prestadores',
         term: 'Red de prestadores',
-        def: 'Los médicos, clínicas y hospitales en convenio con tu plan. Atenderte dentro de la red suele simplificar pagos y trámites; fuera de ella, el plan define otras condiciones. Cada aseguradora arma su propia red — revísala antes de elegir.',
+        brief: 'Los médicos, clínicas y hospitales en convenio con tu plan.',
+        def: 'Atenderte dentro de la red suele simplificar pagos y trámites; fuera de ella, el plan define otras condiciones. Cada aseguradora arma la suya — revísala antes de elegir.',
       },
       {
         id: 'preexistencias',
         term: 'Preexistencias',
-        def: 'Condiciones de salud que ya tenías antes de contratar el plan. Cada aseguradora define cómo las evalúa y qué tratamiento les da, y por eso conviene declararlas siempre: un plan bien elegido con la información completa vale más que una sorpresa en el reclamo.',
+        brief: 'Condiciones de salud que ya tenías antes de contratar.',
+        def: 'Cada aseguradora define cómo las evalúa y qué tratamiento les da. Conviene declararlas siempre: la información completa hoy evita un reclamo negado mañana.',
       },
       {
         id: 'periodo-de-carencia',
         term: 'Período de carencia',
-        def: 'Un tiempo inicial, contado desde que contratas, durante el cual ciertas coberturas todavía no aplican. Qué coberturas y por cuánto tiempo lo define cada plan — te lo mostramos antes de que firmes.',
+        brief: 'El tiempo inicial en que ciertas coberturas aún no aplican.',
+        def: 'Qué coberturas esperan y por cuánto tiempo lo define cada plan.',
+        example:
+          'Contratas hoy, pero algunas coberturas se activan recién después del tiempo que fija tu plan.',
       },
       {
         id: 'medicina-prepagada',
         term: 'Medicina prepagada y seguro de salud',
-        def: 'En Ecuador conviven dos figuras que se parecen pero no son lo mismo: las empresas de medicina prepagada y los seguros de salud de las aseguradoras. Para ti el objetivo es el mismo — proteger tu salud — pero cambian la figura legal y las reglas de cada una. Nosotros cotizamos con ambas, para que compares planes y no etiquetas.',
+        brief: 'Dos figuras distintas en Ecuador, con el mismo objetivo: tu salud.',
+        def: 'Las empresas de medicina prepagada y las aseguradoras de salud se rigen por reglas propias, aunque para ti el efecto se parezca. Nosotros cotizamos con ambas, para que compares planes y no etiquetas.',
         cta: { label: 'Cotiza tu seguro de salud', href: '/seguro-de-salud/' },
       },
     ],
@@ -156,34 +195,42 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'vehicular',
     label: 'Vehicular',
     lede: 'Lo que aparece en toda póliza de autos.',
+    icon: 'auto',
     terms: [
       {
         id: 'responsabilidad-civil',
         term: 'Responsabilidad civil',
-        def: 'La cobertura que responde por los daños que causes a terceros — personas o bienes. La verás en pólizas vehiculares, de hogar y empresariales: es la parte de tu seguro que protege tu patrimonio cuando el afectado es otro.',
+        brief: 'Cubre los daños que causes a otros — personas o bienes.',
+        def: 'Está presente en pólizas vehiculares, de hogar y empresariales: es la parte de tu seguro que protege tu patrimonio cuando el afectado es otro.',
         cta: { label: 'Cotiza tu vehículo', href: '/seguro-vehicular/' },
       },
       {
         id: 'perdida-total',
         term: 'Pérdida total',
-        def: 'Cuando el daño o el robo del vehículo es de tal magnitud que, según las condiciones de la póliza, ya no procede repararlo, y la aseguradora indemniza tomando como referencia el valor asegurado. Cómo se declara y cómo se liquida lo fija cada póliza — otra razón para leerla contigo antes.',
+        brief: 'Cuando ya no procede reparar y la aseguradora indemniza.',
+        def: 'Cómo se declara y cómo se liquida lo fija cada póliza.',
+        example:
+          'Tras un choque fuerte, en lugar de reparar, la aseguradora indemniza tomando como referencia el valor asegurado.',
         see: [{ label: 'valor asegurado', href: '#valor-asegurado' }],
       },
       {
         id: 'robo-parcial',
         term: 'Robo parcial',
-        def: 'El robo de partes, piezas o accesorios sin que se lleven el vehículo completo: espejos, llantas, el radio. Que esté cubierto — y con qué condiciones — depende del plan; te lo señalamos al comparar.',
+        brief: 'Te roban partes o accesorios, no el vehículo completo.',
+        def: 'Espejos, llantas, el radio. Que esté cubierto — y con qué condiciones — depende del plan.',
       },
       {
         id: 'avaluo',
         term: 'Avalúo',
-        def: 'El valor estimado de tu vehículo, que sirve de referencia para asegurarlo y para liquidar una pérdida. Mantenerlo bien fijado evita pagar prima por un valor irreal o quedarte corto en la indemnización.',
+        brief: 'El valor de tu vehículo, la referencia para asegurar e indemnizar.',
+        def: 'Mantenerlo bien fijado evita pagar prima por un valor irreal o quedarte corto en la indemnización.',
         see: [{ label: 'valor asegurado', href: '#valor-asegurado' }],
       },
       {
         id: 'sppat',
         term: 'SPPAT',
-        def: 'El sistema público ecuatoriano que ampara a las víctimas de accidentes de tránsito, vinculado a la matriculación vehicular. Es independiente de un seguro vehicular privado y no protege tu vehículo: cubre a las personas afectadas. Tu seguro privado empieza donde el SPPAT termina — pregúntanos y te lo explicamos con tu caso.',
+        brief: 'El amparo público para víctimas de accidentes de tránsito.',
+        def: 'Está vinculado a la matriculación vehicular y es independiente de cualquier seguro privado: ampara a las personas afectadas, no a tu vehículo. Tu seguro empieza donde el SPPAT termina.',
         cta: { label: 'Cotiza tu vehículo', href: '/seguro-vehicular/' },
       },
     ],
@@ -192,27 +239,32 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'vida',
     label: 'Vida',
     lede: 'Para leer un plan de vida sin abogado al lado.',
+    icon: 'persona',
     terms: [
       {
         id: 'invalidez-total-y-permanente',
         term: 'Invalidez total y permanente',
-        def: 'Una cobertura que te respalda económicamente si un accidente o una enfermedad te impide volver a generar ingresos de forma permanente. Cada plan define cómo se califica y qué paga — es de las coberturas que más vale entender antes de firmar.',
+        brief: 'Respaldo económico si ya no puedes volver a generar ingresos.',
+        def: 'Cada plan define cómo se califica la invalidez y qué paga — es de las coberturas que más vale entender antes de firmar.',
         cta: { label: 'Cotiza tu seguro de vida', href: '/seguro-de-vida/' },
       },
       {
         id: 'enfermedades-graves',
         term: 'Enfermedades graves',
-        def: 'Un apoyo económico si recibes uno de los diagnósticos mayores definidos en la póliza. La lista de enfermedades y las condiciones del pago varían de un plan a otro — comparamos esa letra por ti.',
+        brief: 'Apoyo económico ante un diagnóstico mayor.',
+        def: 'La lista de diagnósticos y las condiciones del pago varían de un plan a otro — esa es la letra que hay que leer antes de elegir.',
       },
       {
         id: 'vida-con-ahorro',
         term: 'Vida con ahorro',
-        def: 'Planes que combinan la protección de un seguro de vida con un componente que acumula un fondo a tu favor. Cada aseguradora estructura el suyo distinto; te mostramos qué parte protege y qué parte ahorra, para que decidas con claridad.',
+        brief: 'Protección que además acumula un fondo a tu favor.',
+        def: 'Una parte protege a los tuyos; otra construye un ahorro. Cada aseguradora estructura el suyo distinto.',
       },
       {
         id: 'vida-grupo',
         term: 'Vida grupo',
-        def: 'La póliza que una empresa contrata para proteger a su equipo, generalmente con condiciones que ninguno conseguiría por separado. Es uno de los beneficios más valorados por los colaboradores — y lo cotizamos para equipos de todo tamaño.',
+        brief: 'La póliza que una empresa contrata para su equipo.',
+        def: 'Suele lograr condiciones que ninguno conseguiría por separado, y es uno de los beneficios más valorados por los colaboradores.',
         cta: { label: 'Seguros para tu empresa', href: '/seguros-para-empresas/' },
       },
     ],
@@ -221,23 +273,29 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'hogar',
     label: 'Hogar',
     lede: 'Tu casa, en el idioma de las pólizas.',
+    icon: 'casa',
     terms: [
       {
         id: 'continente-y-contenido',
         term: 'Continente y contenido',
-        def: 'El continente es la estructura de tu casa; el contenido, lo que hay dentro: muebles, equipos, electrodomésticos. Puedes asegurar uno, otro o ambos — hay planes para propietarios y también para inquilinos que solo quieren proteger sus cosas.',
+        brief: 'La estructura de tu casa, y lo que hay dentro.',
+        def: 'Puedes asegurar uno, otro o ambos — hay planes para propietarios y para inquilinos que solo quieren proteger sus cosas.',
+        example:
+          'Una tubería rota daña la pared y el televisor: la pared es continente; el televisor, contenido.',
         cta: { label: 'Asegura tu casa', href: '/seguro-de-hogar/' },
       },
       {
         id: 'riesgos-catastroficos',
         term: 'Riesgos catastróficos',
-        def: 'Terremoto, inundación y otros eventos de la naturaleza. En un país sísmico como el nuestro es de las primeras coberturas que revisamos en una póliza de hogar — junto con el valor de reconstrucción que la respalda.',
+        brief: 'Terremoto, inundación y otros eventos de la naturaleza.',
+        def: 'En un país sísmico como el nuestro, es de las primeras coberturas que se revisan en una póliza de hogar — junto con el valor de reconstrucción que la respalda.',
         see: [{ label: 'valor asegurado', href: '#valor-asegurado' }],
       },
       {
         id: 'responsabilidad-civil-familiar',
         term: 'Responsabilidad civil familiar',
-        def: 'La cobertura que responde por daños involuntarios que tú o tu familia causen a terceros en la vida diaria — desde una fuga de agua que afecta al vecino hasta un accidente doméstico. Es el lado de tu seguro de hogar que mira hacia afuera.',
+        brief: 'Daños involuntarios de tu familia a terceros.',
+        def: 'Desde una fuga de agua que afecta al vecino hasta un accidente doméstico: es el lado de tu seguro de hogar que mira hacia afuera.',
         see: [{ label: 'responsabilidad civil', href: '#responsabilidad-civil' }],
       },
     ],
@@ -246,27 +304,36 @@ export const glossaryGroups: GlossaryGroup[] = [
     id: 'empresas',
     label: 'Empresas',
     lede: 'El vocabulario de un programa corporativo.',
+    icon: 'equipo',
     terms: [
       {
         id: 'ramos-tecnicos',
         term: 'Ramos técnicos',
-        def: 'La familia de coberturas para los fierros de tu operación: maquinaria, montaje, equipo electrónico. Cada uno es un ramo con su propia póliza y condiciones — se arman según lo que tu empresa realmente usa.',
+        brief: 'Las coberturas para la maquinaria y los equipos de tu operación.',
+        def: 'Maquinaria, montaje, equipo electrónico: cada uno es un ramo con su propia póliza y condiciones, y se arman según lo que tu operación realmente usa.',
         cta: { label: 'Seguros para tu empresa', href: '/seguros-para-empresas/' },
       },
       {
         id: 'fianzas',
         term: 'Fianzas',
-        def: 'Garantías que respaldan tus compromisos contractuales frente a un tercero: cumplimiento de contrato, buen uso del anticipo. Son comunes al contratar con el Estado o con grandes empresas; te ayudamos a emitirlas a tiempo para que no frenen tu contrato.',
+        brief: 'Garantías que respaldan tus compromisos contractuales.',
+        def: 'Cumplimiento de contrato, buen uso del anticipo: son comunes al contratar con el Estado o con grandes empresas.',
+        example:
+          'Firmas un contrato con anticipo: la fianza le garantiza al contratante el buen uso de ese dinero.',
       },
       {
         id: 'transporte-de-mercaderia',
         term: 'Transporte de mercadería',
-        def: 'La cobertura de tu carga mientras viaja — por tierra, mar o aire, según la póliza. Importaciones, exportaciones o distribución local: se estructura según tu ruta y tu mercadería.',
+        brief: 'Tu carga cubierta mientras viaja.',
+        def: 'Por tierra, mar o aire, según la póliza. Importaciones, exportaciones o distribución local — se estructura según tu ruta y tu mercadería.',
       },
       {
         id: 'lucro-cesante',
         term: 'Lucro cesante',
-        def: 'La cobertura que compensa los ingresos que tu empresa deja de percibir cuando un siniestro cubierto detiene la operación. Se contrata junto a ramos como incendio, y sus condiciones las fija cada póliza — pero puede ser la diferencia entre una pausa y un cierre.',
+        brief: 'Compensa ingresos que pierdes si un siniestro detiene tu operación.',
+        def: 'Se contrata junto a ramos como incendio, y puede ser la diferencia entre una pausa y un cierre.',
+        example:
+          'Un incendio detiene tu planta por un tiempo: además del daño físico, la póliza compensa la operación detenida.',
         cta: { label: 'Seguros para tu empresa', href: '/seguros-para-empresas/' },
       },
     ],
