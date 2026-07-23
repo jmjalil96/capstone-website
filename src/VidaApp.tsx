@@ -96,7 +96,7 @@ function VidaApp() {
           lede="Cada aseguradora arma sus planes distinto. Comparamos coberturas, beneficios y precios por ti, para que protejas a los tuyos con el plan que va con tu momento de vida."
           items={vidaCoverages}
           seam={vidaSeam}
-          carriersLabel="Cotizamos tu seguro de vida con"
+          carriersLabel="Cotizamos tu seguro de vida con nuestras aseguradoras aliadas"
           carriers={generalCarriers}
           note="¿Vida individual, en pareja o para tu equipo? Pregúntanos al cotizar."
         />

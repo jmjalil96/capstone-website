@@ -94,7 +94,7 @@ function EmpresasApp() {
           lede="Cada operación es distinta. Comparamos coberturas y precios por ramo y armamos el programa que va con tu empresa — no un paquete genérico."
           items={empresasCoverages}
           seam={empresasSeam}
-          carriersLabel="Cotizamos tu empresa con"
+          carriersLabel="Cotizamos tu empresa con nuestras aseguradoras aliadas"
           carriers={generalCarriers}
           note="¿Flota vehicular, crédito u otro riesgo? Pregúntanos al cotizar."
         />

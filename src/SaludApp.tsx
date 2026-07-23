@@ -90,7 +90,7 @@ function SaludApp() {
           lede="Cada aseguradora arma sus planes distinto. Comparamos coberturas, deducibles y precios por ti, para armar el plan que va con tu caso — no el que le conviene a una sola compañía."
           items={saludCoverages}
           seam={saludSeam}
-          carriersLabel="Cotizamos tu salud con"
+          carriersLabel="Cotizamos tu salud con nuestras aseguradoras aliadas"
           carriers={saludCarriers}
           note="¿Buscas algo puntual — ambulatorio, dental, visión? Pregúntanos al cotizar."
         />

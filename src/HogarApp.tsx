@@ -94,7 +94,7 @@ function HogarApp() {
           lede="Cada aseguradora arma sus planes distinto. Comparamos coberturas, deducibles y precios por ti, para proteger tu casa y lo que hay dentro — sin pagar por lo que no necesitas."
           items={hogarCoverages}
           seam={hogarSeam}
-          carriersLabel="Cotizamos tu hogar con"
+          carriersLabel="Cotizamos tu hogar con nuestras aseguradoras aliadas"
           carriers={generalCarriers}
           note="¿Departamento alquilado o casa de descanso? Pregúntanos al cotizar."
         />

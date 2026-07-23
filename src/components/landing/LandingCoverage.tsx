@@ -17,6 +17,8 @@ type LandingCoverageProps = {
   /* El motivo de la costura (un svg 160×40 con .landing-coverage__trace):
      cada ramo dibuja el suyo entre los mismos rieles grises. */
   seam: ReactNode
+  /* La frase completa del cierre ("Cotizamos X con nuestras aseguradoras
+     aliadas"); note es su línea de apoyo — la invitación del ramo. */
   carriersLabel: string
   carriers: string[]
   note: string
@@ -86,21 +88,22 @@ function LandingCoverage({
           ))}
         </ul>
 
-        {/* La fila que cierra el libro mayor: la prueba de "comparamos
-            por ti" son las aseguradoras con las que cotizamos. */}
+        {/* El cierre del libro mayor: la frase del broker con su piedra
+            clave, y las aliadas como colofón — evidencia en voz baja. */}
         <div className="landing-coverage__carriers">
-          <p className="landing-coverage__carriers-label">{carriersLabel}</p>
+          <div className="landing-coverage__carriers-lockup">
+            <KeystoneMark className="landing-coverage__carriers-key" />
+            <p className="landing-coverage__carriers-label">{carriersLabel}</p>
+            <p className="landing-coverage__carriers-note">{note}</p>
+          </div>
           <ul className="landing-coverage__carriers-row" aria-label="Aseguradoras aliadas">
             {carriers.map((name) => (
               <li className="landing-coverage__carrier" key={name}>
-                <KeystoneMark className="landing-coverage__mark" />
-                <span className="landing-coverage__carrier-name">{name}</span>
+                {name}
               </li>
             ))}
           </ul>
         </div>
-
-        <p className="landing-coverage__note">{note}</p>
       </div>
     </section>
   )

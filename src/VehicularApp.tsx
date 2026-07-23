@@ -94,7 +94,7 @@ function VehicularApp() {
           lede="Cada aseguradora arma su producto vehicular distinto. Comparamos coberturas, deducibles y precios por ti, para que elijas informado — no a ciegas."
           items={vehicularCoverages}
           seam={vehicularSeam}
-          carriersLabel="Cotizamos tu vehículo con"
+          carriersLabel="Cotizamos tu vehículo con nuestras aseguradoras aliadas"
           carriers={generalCarriers}
           note="¿Moto, camioneta de trabajo o flota? Pregúntanos al cotizar."
         />
